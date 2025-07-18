@@ -172,64 +172,63 @@
     .about-tile p:last-child {
       margin-bottom: 0;
     }
-    /* Tiles Section */
-    .tiles-section {
+    /* Roles & Responsibilities Tiles Section (Now like Skills Section) */
+    .roles-tiles-section {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
       padding: 1rem;
-      max-width: 1100px;
+      max-width: 900px;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.3);
       animation: fadeIn 2s cubic-bezier(.4,0,.2,1);
     }
-    .tiles-section h2 {
-      text-align: center;
-      font-size: 2.1rem;
-      letter-spacing: 1px;
-      color: var(--highlight);
-    }
-    .tiles-container {
+    .roles-tiles-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1.2rem;
       justify-content: center;
       margin-top: 1.5rem;
     }
-    .tile {
+    .role-tile {
       background: var(--card-bg);
       border-radius: 14px;
       box-shadow: var(--card-glow);
-      width: 320px;
+      width: 240px;
       min-height: 210px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      padding: 1.2rem 1.2rem 1rem 1.2rem;
+      align-items: center;
+      padding: 1.2rem 1rem 1rem 1rem;
       position: relative;
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
       border: 1.5px solid transparent;
     }
-    .tile:hover {
-      transform: translateY(-10px) scale(1.045) rotate(-0.7deg);
-      box-shadow: 0 10px 38px #00e6e6cc;
+    .role-tile:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 10px 32px #00e6e6cc;
       border-color: var(--border);
       z-index: 2;
     }
-    .tile-title {
-      font-size: 1.18rem;
+    .role-title {
+      font-size: 1.15rem;
       font-weight: bold;
       color: var(--highlight);
       margin-bottom: 0.6rem;
       letter-spacing: 1px;
-      text-align: left;
+      text-align: center;
     }
-    .tile-desc {
+    .role-desc {
       font-size: 1rem;
       color: var(--text-muted);
-      text-align: left;
-      margin-bottom: 0.3rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: none;}
     }
     /* Animated Data Flows */
     .data-flow {
@@ -312,12 +311,6 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    /* Fade-in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(40px);}
-      to { opacity: 1; transform: none;}
-    }
-
     /* Stylish Footer Centered & Responsive */
     footer {
       width: 100vw;
@@ -379,21 +372,17 @@
     }
     /* Responsive Design */
     @media (max-width: 1200px) {
-      .tiles-section { max-width: 98vw; }
+      .skills-tiles-section, .roles-tiles-section { max-width: 98vw; }
     }
     @media (max-width: 1000px) {
-      .skills-tiles-section { max-width: 98vw; }
-      .skills-tiles-container { gap: 1rem; }
-      .skill-tile { width: 92vw; max-width: 350px; }
+      .skills-tiles-section, .roles-tiles-section { max-width: 98vw; }
+      .skills-tiles-container, .roles-tiles-container { gap: 1rem; }
+      .skill-tile, .role-tile { width: 92vw; max-width: 350px; }
       .about-tile { max-width: 95vw; }
-      .tiles-section { max-width: 98vw; }
-      .tile { width: 98vw; max-width: 380px; }
     }
     @media (max-width: 650px) {
       .about-tile-section { margin: 1.2rem 0; }
-      .about-tile,
-      .skills-tiles-section,
-      .tiles-section {
+      .about-tile, .skills-tiles-section, .roles-tiles-section {
         max-width: 98vw;
         padding: 1.1rem 0.7rem 1rem 0.7rem;
       }
@@ -401,19 +390,16 @@
         width: 110px; height: 110px;
       }
       h1 { font-size: 1.45rem;}
-      .skill-tile { width: 98vw; max-width: 360px; }
-      .tile { width: 98vw; max-width: 400px; }
+      .skill-tile, .role-tile { width: 98vw; max-width: 360px; }
       .footer-contact a { font-size: 1.13rem; padding: 7px 10px;}
       footer { font-size: 1rem; padding: 1.1rem 0 0.7rem 0;}
     }
     @media (max-width: 400px) {
-      .about-tile, .skills-tiles-section, .tiles-section {
+      .about-tile, .skills-tiles-section, .roles-tiles-section {
         padding-left: 0.15rem;
         padding-right: 0.15rem;
       }
-      .about-tile-section,
-      .skills-tiles-section,
-      .tiles-section {
+      .about-tile-section, .skills-tiles-section, .roles-tiles-section {
         margin-left: 0; margin-right: 0;
       }
       .footer-contact { gap: 10px;}
@@ -472,118 +458,110 @@
     </div>
   </section>
 
-  <!-- Roles & Responsibilities Section -->
-  <section class="tiles-section">
-    <h2>Roles &amp; Responsibilities</h2>
-    <div class="tiles-container">
-      <!-- Production Support & Operations -->
-      <div class="tile">
+  <!-- Roles & Responsibilities Section redesigned like Skills Section -->
+  <section class="roles-tiles-section">
+    <h2 style="text-align:center;">Roles &amp; Responsibilities</h2>
+    <div class="roles-tiles-container">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Production Support &amp; Operations</div>
-        <div class="tile-desc">
+        <div class="role-title">Production Support &amp; Operations</div>
+        <div class="role-desc">
           Provided end-to-end production support for 90,000+ scheduled jobs, meeting SLAs in high-volume environments.<br>
           Proactively monitored critical batch flows, detected failures, and ensured prompt resolution.<br>
           Diagnosed abends, errors, and system anomalies in real-time, collaborating with teams to restore services.<br>
           Managed incident queues, prioritized tasks, and coordinated with stakeholders for effective resolution.
         </div>
       </div>
-      <!-- Issue Resolution & Root Cause Analysis -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Issue Resolution &amp; Root Cause Analysis</div>
-        <div class="tile-desc">
+        <div class="role-title">Issue Resolution &amp; Root Cause Analysis</div>
+        <div class="role-desc">
           Conducted thorough root cause analysis for recurring issues and documented findings.<br>
           Managed urgent change requests, ensuring data consistency and compliance.<br>
           Addressed conversion issues during migrations/updates, minimizing business risks.
         </div>
       </div>
-      <!-- DataStage Job Development & Enhancements -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">DataStage Job Development &amp; Enhancements</div>
-        <div class="tile-desc">
+        <div class="role-title">DataStage Job Development &amp; Enhancements</div>
+        <div class="role-desc">
           Designed robust DataStage jobs per mapping documents and requirements.<br>
           Engineered jobs leveraging a wide range of DataStage stages for performance and reusability.<br>
           Enhanced and tuned jobs based on analysis and DBA recommendations.<br>
           Led deployments across all lifecycle environments for seamless transitions.
         </div>
       </div>
-      <!-- Data Extraction & Integration -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Data Extraction &amp; Integration</div>
-        <div class="tile-desc">
+        <div class="role-title">Data Extraction &amp; Integration</div>
+        <div class="role-desc">
           Extracted, transformed, and loaded data from diverse sources (databases, Excel, CSV, flat files).<br>
           Orchestrated complex data flows, ensuring integrity and accuracy.<br>
           Supported data import/export activities, integrating with downstream platforms.
         </div>
       </div>
-      <!-- Documentation & Knowledge Management -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Documentation &amp; Knowledge Management</div>
-        <div class="tile-desc">
+        <div class="role-title">Documentation &amp; Knowledge Management</div>
+        <div class="role-desc">
           Authored comprehensive technical specifications, logic descriptions, and mappings.<br>
           Maintained job inventory, schedules, and table definitions.<br>
           Developed user guides and quick-reference materials for team and business users.
         </div>
       </div>
-      <!-- Testing & Quality Assurance -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Testing &amp; Quality Assurance</div>
-        <div class="tile-desc">
+        <div class="role-title">Testing &amp; Quality Assurance</div>
+        <div class="role-desc">
           Defined and executed system, integration, and UAT test plans.<br>
           Logged and tracked defects, supported remediation, and ensured deployment readiness.
         </div>
       </div>
-      <!-- Client & Stakeholder Engagement -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Client &amp; Stakeholder Engagement</div>
-        <div class="tile-desc">
+        <div class="role-title">Client &amp; Stakeholder Engagement</div>
+        <div class="role-desc">
           Acted as primary contact for client incidents and service requests.<br>
           Conducted regular meetings with stakeholders to review incidents and enhancements.<br>
           Contributed to automation and improvement initiatives.
         </div>
       </div>
-      <!-- Deployment & Change Management -->
-      <div class="tile">
+      <div class="role-tile">
         <div class="data-flow">
           <div class="data-ball"></div>
           <div class="data-ball"></div>
           <div class="data-ball"></div>
         </div>
-        <div class="tile-title">Deployment &amp; Change Management</div>
-        <div class="tile-desc">
+        <div class="role-title">Deployment &amp; Change Management</div>
+        <div class="role-desc">
           Managed deployment activities including code migration, scheduling, and cutover.<br>
           Coordinated with cross-functional teams for smooth rollout of new/enhanced jobs with minimal disruption.
         </div>
