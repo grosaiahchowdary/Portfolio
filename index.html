@@ -7,12 +7,30 @@
   <!-- Font Awesome CDN for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
-    body {
+    :root {
+      --main-bg: linear-gradient(107deg, #2c3e50 0%, #00e6e6 100%);
+      --card-bg: rgba(44, 62, 80, 0.95);
+      --card-glow: 0 4px 18px rgba(0,0,0,0.18);
+      --highlight: #f9ca24;
+      --link: #00e6e6;
+      --text: #fff;
+      --text-muted: #e1e1e1;
+      --border: #00e6e6;
+      --footer-bg: rgba(44,62,80,0.94);
+    }
+    html, body {
+      margin: 0; padding: 0;
+      min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #2c3e50, #bdc3c7);
-      margin: 0;
-      padding: 0;
-      color: #fff;
+      background: var(--main-bg);
+      color: var(--text);
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
       text-align: center;
@@ -27,11 +45,12 @@
       border-radius: 50%;
       border: 4px solid #fff;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
       margin-bottom: 1rem;
     }
     header img:hover {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(-3deg);
+      filter: brightness(1.12) drop-shadow(0 0 10px #00e6e6cc);
     }
     .header-details {
       margin-bottom: 1rem;
@@ -40,17 +59,25 @@
       margin: 0.5rem 0 0 0;
       font-size: 2.5rem;
       letter-spacing: 1px;
+      font-family: inherit;
+      font-weight: bold;
+      background: linear-gradient(92deg,#f9ca24 40%, #fff 60%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
     .role {
       font-size: 1.4rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
-      color: #f9ca24;
+      color: var(--highlight);
+      letter-spacing: 1.2px;
     }
     .location {
       font-size: 1.1rem;
       letter-spacing: 0.5px;
-      color: #e1e1e1;
+      color: var(--text-muted);
       margin-bottom: 0.7rem;
     }
     .contact-info {
@@ -60,39 +87,55 @@
       gap: 18px;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
     }
     .contact-info a {
-      color: #00e6e6;
+      color: var(--link);
       text-decoration: none;
-      transition: text-decoration 0.2s, color 0.2s;
+      transition: text-shadow 0.2s, color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 1.25rem;
+      background: rgba(44,62,80,0.16);
+      padding: 8px 12px;
+      border-radius: 50px;
+      border: 1.5px solid transparent;
     }
     .contact-info a:hover {
-      text-decoration: underline;
-      color: #f9ca24;
+      text-shadow: 0 0 8px #00e6e6bb;
+      color: var(--highlight);
+      border-color: var(--border);
+      background: rgba(0,230,230,0.07);
+      transform: translateY(-2px) scale(1.08);
     }
-
-    /* Stylish About Tile */
+    header p {
+      margin-top: 1.2rem;
+      color: #fffcea;
+      font-size: 1.11rem;
+      letter-spacing: 0.25px;
+    }
+    /* About Tile */
     .about-tile-section {
       display: flex;
       justify-content: center;
       margin: 2.2rem 0;
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 1.3s cubic-bezier(.4,0,.2,1);
     }
     .about-tile {
-      background: linear-gradient(135deg, rgba(44,62,80,0.96) 70%, #00e6e6 100%);
+      background: linear-gradient(135deg, var(--card-bg) 80%, #00e6e6 100%);
       border-radius: 16px;
       box-shadow: 0 6px 32px rgba(0,0,0,0.18);
       max-width: 700px;
+      width: 100%;
       padding: 2rem 2rem 1.5rem 2rem;
       color: #fff;
       position: relative;
       overflow: hidden;
-      border: 1.5px solid #00e6e6;
+      border: 1.5px solid var(--border);
       transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+      z-index: 1;
+      backdrop-filter: blur(0.5px);
     }
     .about-tile::before {
       content: "";
@@ -106,7 +149,7 @@
     }
     .about-tile h2 {
       margin-top: 0;
-      color: #f9ca24;
+      color: var(--highlight);
       font-size: 2rem;
       letter-spacing: 1px;
       z-index: 1;
@@ -124,13 +167,11 @@
     }
     .about-tile li {
       margin-bottom: 0.5rem;
-      color: #e1e1e1;
+      color: var(--text-muted);
     }
     .about-tile p:last-child {
       margin-bottom: 0;
     }
-    /* End About Tile */
-
     /* Tiles Section */
     .tiles-section {
       background-color: rgba(255, 255, 255, 0.1);
@@ -139,10 +180,13 @@
       max-width: 1100px;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.3);
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 2s cubic-bezier(.4,0,.2,1);
     }
     .tiles-section h2 {
       text-align: center;
+      font-size: 2.1rem;
+      letter-spacing: 1px;
+      color: var(--highlight);
     }
     .tiles-container {
       display: flex;
@@ -152,9 +196,9 @@
       margin-top: 1.5rem;
     }
     .tile {
-      background: rgba(44, 62, 80, 0.95);
+      background: var(--card-bg);
       border-radius: 14px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      box-shadow: var(--card-glow);
       width: 320px;
       min-height: 210px;
       display: flex;
@@ -165,23 +209,25 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+      border: 1.5px solid transparent;
     }
     .tile:hover {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      transform: translateY(-10px) scale(1.045) rotate(-0.7deg);
+      box-shadow: 0 10px 38px #00e6e6cc;
+      border-color: var(--border);
       z-index: 2;
     }
     .tile-title {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: bold;
-      color: #f9ca24;
+      color: var(--highlight);
       margin-bottom: 0.6rem;
       letter-spacing: 1px;
       text-align: left;
     }
     .tile-desc {
       font-size: 1rem;
-      color: #e1e1e1;
+      color: var(--text-muted);
       text-align: left;
       margin-bottom: 0.3rem;
     }
@@ -197,7 +243,7 @@
     .data-ball {
       width: 14px;
       height: 14px;
-      background: #00e6e6;
+      background: var(--link);
       border-radius: 50%;
       margin-right: 2px;
       opacity: 0.85;
@@ -221,7 +267,7 @@
       max-width: 900px;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.3);
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 2s cubic-bezier(.4,0,.2,1);
     }
     .skills-tiles-container {
       display: flex;
@@ -231,9 +277,9 @@
       margin-top: 1.5rem;
     }
     .skill-tile {
-      background: rgba(44, 62, 80, 0.95);
+      background: var(--card-bg);
       border-radius: 14px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      box-shadow: var(--card-glow);
       width: 240px;
       min-height: 210px;
       display: flex;
@@ -244,57 +290,107 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+      border: 1.5px solid transparent;
     }
     .skill-tile:hover {
       transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      box-shadow: 0 10px 32px #00e6e6cc;
+      border-color: var(--border);
       z-index: 2;
     }
     .skill-title {
       font-size: 1.15rem;
       font-weight: bold;
-      color: #f9ca24;
+      color: var(--highlight);
       margin-bottom: 0.6rem;
       letter-spacing: 1px;
       text-align: center;
     }
     .skill-desc {
       font-size: 1rem;
-      color: #e1e1e1;
+      color: var(--text-muted);
       text-align: center;
       margin-bottom: 1.5rem;
     }
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: none;}
+    }
+
+    /* Stylish Footer Centered & Responsive */
+    footer {
+      width: 100vw;
+      margin-top: auto;
+      background: var(--footer-bg);
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
+      padding: 1.5rem 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      position: relative;
+      z-index: 2;
+      min-height: 85px;
+      font-size: 1.08rem;
+    }
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 0.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .footer-contact a {
+      color: var(--link);
+      text-decoration: none;
+      font-size: 1.21rem;
+      background: rgba(44,62,80,0.14);
+      padding: 8px 11px;
+      border-radius: 50px;
+      margin: 0 4px;
+      border: 1.5px solid transparent;
+      transition: color 0.2s, border 0.2s, background 0.2s, transform 0.18s;
+      display: inline-flex;
+      align-items: center;
+    }
+    .footer-contact a:hover {
+      color: var(--highlight);
+      background: rgba(0,230,230,0.09);
+      border-color: var(--border);
+      transform: scale(1.11) translateY(-2px);
+      text-shadow: 0 0 6px #00e6e6cc;
+    }
+    .footer-heart {
+      color: #f75a5a;
+      font-size: 1.12em;
+      vertical-align: middle;
+      margin: 0 4px;
+      animation: beat 1.2s infinite alternate;
+      display: inline-block;
+    }
+    @keyframes beat {
+      from { transform: scale(1);}
+      to { transform: scale(1.18);}
+    }
+    /* Responsive Design */
     @media (max-width: 1200px) {
-      .tiles-section {
-        max-width: 98vw;
-      }
+      .tiles-section { max-width: 98vw; }
     }
     @media (max-width: 1000px) {
-      .skills-tiles-section {
-        max-width: 98vw;
-      }
-      .skills-tiles-container {
-        gap: 1rem;
-      }
-      .skill-tile {
-        width: 92vw;
-        max-width: 350px;
-      }
-      .about-tile {
-        max-width: 95vw;
-      }
-      .tiles-section {
-        max-width: 98vw;
-      }
-      .tile {
-        width: 98vw;
-        max-width: 380px;
-      }
+      .skills-tiles-section { max-width: 98vw; }
+      .skills-tiles-container { gap: 1rem; }
+      .skill-tile { width: 92vw; max-width: 350px; }
+      .about-tile { max-width: 95vw; }
+      .tiles-section { max-width: 98vw; }
+      .tile { width: 98vw; max-width: 380px; }
     }
     @media (max-width: 650px) {
-      .about-tile-section {
-        margin: 1.2rem 0;
-      }
+      .about-tile-section { margin: 1.2rem 0; }
       .about-tile,
       .skills-tiles-section,
       .tiles-section {
@@ -302,20 +398,25 @@
         padding: 1.1rem 0.7rem 1rem 0.7rem;
       }
       header img {
-        width: 120px;
-        height: 120px;
+        width: 110px; height: 110px;
       }
-      h1 {
-        font-size: 2rem;
+      h1 { font-size: 1.45rem;}
+      .skill-tile { width: 98vw; max-width: 360px; }
+      .tile { width: 98vw; max-width: 400px; }
+      .footer-contact a { font-size: 1.13rem; padding: 7px 10px;}
+      footer { font-size: 1rem; padding: 1.1rem 0 0.7rem 0;}
+    }
+    @media (max-width: 400px) {
+      .about-tile, .skills-tiles-section, .tiles-section {
+        padding-left: 0.15rem;
+        padding-right: 0.15rem;
       }
-      .skill-tile {
-        width: 98vw;
-        max-width: 360px;
+      .about-tile-section,
+      .skills-tiles-section,
+      .tiles-section {
+        margin-left: 0; margin-right: 0;
       }
-      .tile {
-        width: 98vw;
-        max-width: 400px;
-      }
+      .footer-contact { gap: 10px;}
     }
   </style>
 </head>
@@ -346,7 +447,7 @@
     <div class="about-tile">
       <h2>About Me</h2>
       <p>
-        I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on a range of data engineering projects, delivering robust solutions for diverse business needs.
+        I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked with various enterprise datasets, helping businesses unlock the value of their data.
       </p>
       <ul>
         <li>
@@ -594,14 +695,14 @@
   </section>
   <footer>
     <div>
-      &copy; 2025 Rosaiah Chowdary &mdash; Data Engineer &amp; ETL Specialist
+      &copy; 2025 <b>Rosaiah Chowdary</b> &mdash; Data Engineer &amp; ETL Specialist
     </div>
     <div class="footer-contact">
       <a href="mailto:gummalla.ds@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
       <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
-    <div style="margin-top:0.5rem; font-size: 0.95em;">
-      Built with &hearts; and passion for data.
+    <div style="margin-top:0.4rem; font-size: 0.97em;">
+      Built with <span class="footer-heart">&hearts;</span> and passion for data.
     </div>
   </footer>
 </body>
