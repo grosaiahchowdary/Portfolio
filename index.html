@@ -64,7 +64,7 @@
       text-decoration: underline;
       color: #f9ca24;
     }
-    .skills, .about {
+    .about, .skills-tiles-section {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
       padding: 1rem;
@@ -83,6 +83,79 @@
     }
     .about h2 {
       margin-top: 0;
+    }
+    /* Tiles Section */
+    .skills-tiles-section {
+      max-width: 900px;
+    }
+    .skills-tiles-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .skill-tile {
+      background: rgba(44, 62, 80, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      width: 240px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem 1rem 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .skill-tile:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      z-index: 2;
+    }
+    .skill-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #f9ca24;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .skill-desc {
+      font-size: 1rem;
+      color: #e1e1e1;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    /* Animated Data Flows */
+    .data-flow {
+      width: 70px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.3rem auto;
+    }
+    .data-ball {
+      width: 14px;
+      height: 14px;
+      background: #00e6e6;
+      border-radius: 50%;
+      margin-right: 2px;
+      opacity: 0.85;
+      animation: dataFlowMove 1.2s infinite cubic-bezier(.5,0,.5,1);
+    }
+    .data-ball:nth-child(2) { animation-delay: 0.2s; }
+    .data-ball:nth-child(3) { animation-delay: 0.4s; }
+    .data-ball:nth-child(4) { animation-delay: 0.6s; }
+    .data-ball:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes dataFlowMove {
+      0% { transform: translateY(0) scale(1); opacity: 0.85; }
+      40% { transform: translateY(-7px) scale(1.2); opacity: 1; }
+      60% { transform: translateY(7px) scale(0.8); opacity: 0.55; }
+      100% { transform: translateY(0) scale(1); opacity: 0.85; }
     }
     footer {
       background-color: rgba(44, 62, 80, 0.95);
@@ -109,9 +182,21 @@
       text-decoration: underline;
       color: #f9ca24;
     }
+    @media (max-width: 1000px) {
+      .skills-tiles-section {
+        max-width: 98vw;
+      }
+      .skills-tiles-container {
+        gap: 1rem;
+      }
+      .skill-tile {
+        width: 92vw;
+        max-width: 350px;
+      }
+    }
     @media (max-width: 650px) {
-      .skills, .about {
-        max-width: 96vw;
+      .about, .skills-tiles-section {
+        max-width: 98vw;
       }
       header img {
         width: 120px;
@@ -119,6 +204,10 @@
       }
       h1 {
         font-size: 2rem;
+      }
+      .skill-tile {
+        width: 98vw;
+        max-width: 360px;
       }
     }
   </style>
@@ -167,18 +256,106 @@
       My goal is to leverage my technical and consulting skills to enable organizations to gain actionable insights from their data, drive efficiency, and support business growth.
     </p>
   </section>
-  <section class="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>ETL Development &amp; Support</li>
-      <li>IBM DataStage</li>
-      <li>SQL &amp; PL/SQL</li>
-      <li>Python for Data Engineering</li>
-      <li>Data Warehousing</li>
-      <li>Apache Kafka, MQ</li>
-      <li>Cloud (AWS, GCP)</li>
-      <li>Git, Jenkins, CI/CD</li>
-    </ul>
+  <section class="skills-tiles-section">
+    <h2 style="text-align:center;">Skills</h2>
+    <div class="skills-tiles-container">
+      <!-- Skill Tile 1 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">ETL Development &amp; Support</div>
+        <div class="skill-desc">
+          Designing, building, and managing Extract, Transform, Load processes to ensure clean, consistent, and reliable data movement across systems.
+        </div>
+      </div>
+      <!-- Skill Tile 2 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">IBM DataStage</div>
+        <div class="skill-desc">
+          Advanced expertise in DataStage for scalable ETL job design, parallel processing, tuning, and operational support.
+        </div>
+      </div>
+      <!-- Skill Tile 3 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">SQL &amp; PL/SQL</div>
+        <div class="skill-desc">
+          Writing optimized queries, stored procedures, and scripts for data extraction, transformation, and performance tuning.
+        </div>
+      </div>
+      <!-- Skill Tile 4 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Python for Data Engineering</div>
+        <div class="skill-desc">
+          Automating data workflows, scripting ETL logic, and building custom data solutions using Python.
+        </div>
+      </div>
+      <!-- Skill Tile 5 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Data Warehousing</div>
+        <div class="skill-desc">
+          Designing and implementing data models, warehouses, and marts for analytical and reporting solutions.
+        </div>
+      </div>
+      <!-- Skill Tile 6 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Apache Kafka, MQ</div>
+        <div class="skill-desc">
+          Integrating real-time data streams and messaging solutions for event-driven architectures and batch processing.
+        </div>
+      </div>
+      <!-- Skill Tile 7 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Cloud (AWS, GCP)</div>
+        <div class="skill-desc">
+          Implementing and migrating data solutions to cloud platforms, leveraging managed services for storage, computation, and orchestration.
+        </div>
+      </div>
+      <!-- Skill Tile 8 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Git, Jenkins, CI/CD</div>
+        <div class="skill-desc">
+          Managing source control, automating deployments, and ensuring robust, repeatable data engineering processes.
+        </div>
+      </div>
+    </div>
   </section>
   <footer>
     <div>
