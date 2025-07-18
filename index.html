@@ -132,6 +132,88 @@
     /* End About Tile */
 
     /* Tiles Section */
+    .tiles-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 2rem auto;
+      padding: 1rem;
+      max-width: 1100px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+    }
+    .tiles-section h2 {
+      text-align: center;
+    }
+    .tiles-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .tile {
+      background: rgba(44, 62, 80, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      width: 320px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.2rem 1.2rem 1rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .tile:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      z-index: 2;
+    }
+    .tile-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #f9ca24;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+    .tile-desc {
+      font-size: 1rem;
+      color: #e1e1e1;
+      text-align: left;
+      margin-bottom: 0.3rem;
+    }
+    /* Animated Data Flows */
+    .data-flow {
+      width: 70px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 0.3rem;
+    }
+    .data-ball {
+      width: 14px;
+      height: 14px;
+      background: #00e6e6;
+      border-radius: 50%;
+      margin-right: 2px;
+      opacity: 0.85;
+      animation: dataFlowMove 1.2s infinite cubic-bezier(.5,0,.5,1);
+    }
+    .data-ball:nth-child(2) { animation-delay: 0.2s; }
+    .data-ball:nth-child(3) { animation-delay: 0.4s; }
+    .data-ball:nth-child(4) { animation-delay: 0.6s; }
+    .data-ball:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes dataFlowMove {
+      0% { transform: translateY(0) scale(1); opacity: 0.85; }
+      40% { transform: translateY(-7px) scale(1.2); opacity: 1; }
+      60% { transform: translateY(7px) scale(0.8); opacity: 0.55; }
+      100% { transform: translateY(0) scale(1); opacity: 0.85; }
+    }
+    /* Skills Section */
     .skills-tiles-section {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
@@ -182,66 +264,10 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    /* Animated Data Flows */
-    .data-flow {
-      width: 70px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.3rem auto;
-    }
-    .data-ball {
-      width: 14px;
-      height: 14px;
-      background: #00e6e6;
-      border-radius: 50%;
-      margin-right: 2px;
-      opacity: 0.85;
-      animation: dataFlowMove 1.2s infinite cubic-bezier(.5,0,.5,1);
-    }
-    .data-ball:nth-child(2) { animation-delay: 0.2s; }
-    .data-ball:nth-child(3) { animation-delay: 0.4s; }
-    .data-ball:nth-child(4) { animation-delay: 0.6s; }
-    .data-ball:nth-child(5) { animation-delay: 0.8s; }
-    @keyframes dataFlowMove {
-      0% { transform: translateY(0) scale(1); opacity: 0.85; }
-      40% { transform: translateY(-7px) scale(1.2); opacity: 1; }
-      60% { transform: translateY(7px) scale(0.8); opacity: 0.55; }
-      100% { transform: translateY(0) scale(1); opacity: 0.85; }
-    }
-    footer {
-      background-color: rgba(44, 62, 80, 0.95);
-      text-align: center;
-      color: #d4d9df;
-      padding: 1.2rem 1rem 1rem 1rem;
-      font-size: 1rem;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      margin-top: 2rem;
-      letter-spacing: 0.5px;
-    }
-    .footer-contact {
-      margin-top: 0.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-    }
-    .footer-contact a {
-      color: #00e6e6;
-      text-decoration: none;
-      transition: text-decoration 0.2s, color 0.2s;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 1.07em;
-    }
-    .footer-contact a:hover {
-      text-decoration: underline;
-      color: #f9ca24;
+    @media (max-width: 1200px) {
+      .tiles-section {
+        max-width: 98vw;
+      }
     }
     @media (max-width: 1000px) {
       .skills-tiles-section {
@@ -257,13 +283,21 @@
       .about-tile {
         max-width: 95vw;
       }
+      .tiles-section {
+        max-width: 98vw;
+      }
+      .tile {
+        width: 98vw;
+        max-width: 380px;
+      }
     }
     @media (max-width: 650px) {
       .about-tile-section {
         margin: 1.2rem 0;
       }
       .about-tile,
-      .skills-tiles-section {
+      .skills-tiles-section,
+      .tiles-section {
         max-width: 98vw;
         padding: 1.1rem 0.7rem 1rem 0.7rem;
       }
@@ -277,6 +311,10 @@
       .skill-tile {
         width: 98vw;
         max-width: 360px;
+      }
+      .tile {
+        width: 98vw;
+        max-width: 400px;
       }
     }
   </style>
@@ -333,6 +371,126 @@
     </div>
   </section>
 
+  <!-- Roles & Responsibilities Section -->
+  <section class="tiles-section">
+    <h2>Roles &amp; Responsibilities</h2>
+    <div class="tiles-container">
+      <!-- Production Support & Operations -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Production Support &amp; Operations</div>
+        <div class="tile-desc">
+          Provided end-to-end production support for 90,000+ scheduled jobs, meeting SLAs in high-volume environments.<br>
+          Proactively monitored critical batch flows, detected failures, and ensured prompt resolution.<br>
+          Diagnosed abends, errors, and system anomalies in real-time, collaborating with teams to restore services.<br>
+          Managed incident queues, prioritized tasks, and coordinated with stakeholders for effective resolution.
+        </div>
+      </div>
+      <!-- Issue Resolution & Root Cause Analysis -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Issue Resolution &amp; Root Cause Analysis</div>
+        <div class="tile-desc">
+          Conducted thorough root cause analysis for recurring issues and documented findings.<br>
+          Managed urgent change requests, ensuring data consistency and compliance.<br>
+          Addressed conversion issues during migrations/updates, minimizing business risks.
+        </div>
+      </div>
+      <!-- DataStage Job Development & Enhancements -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">DataStage Job Development &amp; Enhancements</div>
+        <div class="tile-desc">
+          Designed robust DataStage jobs per mapping documents and requirements.<br>
+          Engineered jobs leveraging a wide range of DataStage stages for performance and reusability.<br>
+          Enhanced and tuned jobs based on analysis and DBA recommendations.<br>
+          Led deployments across all lifecycle environments for seamless transitions.
+        </div>
+      </div>
+      <!-- Data Extraction & Integration -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Data Extraction &amp; Integration</div>
+        <div class="tile-desc">
+          Extracted, transformed, and loaded data from diverse sources (databases, Excel, CSV, flat files).<br>
+          Orchestrated complex data flows, ensuring integrity and accuracy.<br>
+          Supported data import/export activities, integrating with downstream platforms.
+        </div>
+      </div>
+      <!-- Documentation & Knowledge Management -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Documentation &amp; Knowledge Management</div>
+        <div class="tile-desc">
+          Authored comprehensive technical specifications, logic descriptions, and mappings.<br>
+          Maintained job inventory, schedules, and table definitions.<br>
+          Developed user guides and quick-reference materials for team and business users.
+        </div>
+      </div>
+      <!-- Testing & Quality Assurance -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Testing &amp; Quality Assurance</div>
+        <div class="tile-desc">
+          Defined and executed system, integration, and UAT test plans.<br>
+          Logged and tracked defects, supported remediation, and ensured deployment readiness.
+        </div>
+      </div>
+      <!-- Client & Stakeholder Engagement -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Client &amp; Stakeholder Engagement</div>
+        <div class="tile-desc">
+          Acted as primary contact for client incidents and service requests.<br>
+          Conducted regular meetings with stakeholders to review incidents and enhancements.<br>
+          Contributed to automation and improvement initiatives.
+        </div>
+      </div>
+      <!-- Deployment & Change Management -->
+      <div class="tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="tile-title">Deployment &amp; Change Management</div>
+        <div class="tile-desc">
+          Managed deployment activities including code migration, scheduling, and cutover.<br>
+          Coordinated with cross-functional teams for smooth rollout of new/enhanced jobs with minimal disruption.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
   <section class="skills-tiles-section">
     <h2 style="text-align:center;">Skills</h2>
     <div class="skills-tiles-container">
