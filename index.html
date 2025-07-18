@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rosaiah Chowdary | Data Engineer</title>
+  <!-- Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,40 +55,91 @@
     }
     .contact-info {
       margin-top: 0.5rem;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
     }
     .contact-info a {
       color: #00e6e6;
       text-decoration: none;
       transition: text-decoration 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.25rem;
     }
     .contact-info a:hover {
       text-decoration: underline;
       color: #f9ca24;
     }
-    .about, .skills-tiles-section {
+
+    /* Stylish About Tile */
+    .about-tile-section {
+      display: flex;
+      justify-content: center;
+      margin: 2.2rem 0;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .about-tile {
+      background: linear-gradient(135deg, rgba(44,62,80,0.96) 70%, #00e6e6 100%);
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+      max-width: 700px;
+      padding: 2rem 2rem 1.5rem 2rem;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid #00e6e6;
+      transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .about-tile::before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 170px;
+      height: 170px;
+      background: radial-gradient(circle, #00e6e655 60%, transparent 100%);
+      z-index: 0;
+    }
+    .about-tile h2 {
+      margin-top: 0;
+      color: #f9ca24;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      z-index: 1;
+      position: relative;
+    }
+    .about-tile p,
+    .about-tile ul {
+      font-size: 1.09rem;
+      z-index: 1;
+      position: relative;
+    }
+    .about-tile ul {
+      padding-left: 24px;
+      margin-bottom: 1.1rem;
+    }
+    .about-tile li {
+      margin-bottom: 0.5rem;
+      color: #e1e1e1;
+    }
+    .about-tile p:last-child {
+      margin-bottom: 0;
+    }
+    /* End About Tile */
+
+    /* Tiles Section */
+    .skills-tiles-section {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
       padding: 1rem;
-      max-width: 600px;
+      max-width: 900px;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.3);
       animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    .about h2 {
-      margin-top: 0;
-    }
-    /* Tiles Section */
-    .skills-tiles-section {
-      max-width: 900px;
     }
     .skills-tiles-container {
       display: flex;
@@ -171,12 +224,20 @@
     }
     .footer-contact {
       margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
     }
     .footer-contact a {
       color: #00e6e6;
       text-decoration: none;
       transition: text-decoration 0.2s, color 0.2s;
       font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.07em;
     }
     .footer-contact a:hover {
       text-decoration: underline;
@@ -193,10 +254,18 @@
         width: 92vw;
         max-width: 350px;
       }
+      .about-tile {
+        max-width: 95vw;
+      }
     }
     @media (max-width: 650px) {
-      .about, .skills-tiles-section {
+      .about-tile-section {
+        margin: 1.2rem 0;
+      }
+      .about-tile,
+      .skills-tiles-section {
         max-width: 98vw;
+        padding: 1.1rem 0.7rem 1rem 0.7rem;
       }
       header img {
         width: 120px;
@@ -220,9 +289,12 @@
       <div class="role">Data Engineer &amp; ETL DataStage Consultant</div>
       <div class="location">Hyderabad, India &nbsp;|&nbsp; Open to Remote &amp; On-site Roles</div>
       <div class="contact-info">
-        <span>Email: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></span>
-        &nbsp;|&nbsp;
-        <span>LinkedIn: <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">rosaiahchowdary</a></span>
+        <a href="mailto:gummalla.ds@gmail.com" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
       </div>
     </div>
     <p>
@@ -230,32 +302,37 @@
       Passionate about building robust, scalable data pipelines and enabling data-driven decision making.
     </p>
   </header>
-  <section class="about">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on multiple complex projects across various industries, delivering robust ETL pipelines and ensuring seamless data flow between heterogeneous systems.
-    </p>
-    <ul>
-      <li>
-        In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.
-      </li>
-      <li>
-        Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.
-      </li>
-      <li>
-        Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.
-      </li>
-      <li>
-        Strong problem-solving skills with a focus on data quality, governance, and automation.
-      </li>
-      <li>
-        Contributed to the modernization of legacy ETL processes and migration to cloud-based data platforms.
-      </li>
-    </ul>
-    <p>
-      My goal is to leverage my technical and consulting skills to enable organizations to gain actionable insights from their data, drive efficiency, and support business growth.
-    </p>
+  
+  <!-- Stylish About Me Tile Section -->
+  <section class="about-tile-section">
+    <div class="about-tile">
+      <h2>About Me</h2>
+      <p>
+        I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on a range of data engineering projects, delivering robust solutions for diverse business needs.
+      </p>
+      <ul>
+        <li>
+          In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.
+        </li>
+        <li>
+          Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.
+        </li>
+        <li>
+          Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.
+        </li>
+        <li>
+          Strong problem-solving skills with a focus on data quality, governance, and automation.
+        </li>
+        <li>
+          Contributed to the modernization of legacy ETL processes and migration to cloud-based data platforms.
+        </li>
+      </ul>
+      <p>
+        My goal is to leverage my technical and consulting skills to enable organizations to gain actionable insights from their data, drive efficiency, and support business growth.
+      </p>
+    </div>
   </section>
+
   <section class="skills-tiles-section">
     <h2 style="text-align:center;">Skills</h2>
     <div class="skills-tiles-container">
@@ -362,9 +439,8 @@
       &copy; 2025 Rosaiah Chowdary &mdash; Data Engineer &amp; ETL Specialist
     </div>
     <div class="footer-contact">
-      Contact: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a>
-      &nbsp;|&nbsp;
-      <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">LinkedIn</a>
+      <a href="mailto:gummalla.ds@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
     <div style="margin-top:0.5rem; font-size: 0.95em;">
       Built with &hearts; and passion for data.
