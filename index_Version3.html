@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rosaiah Chowdary | Data Engineer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #2c3e50, #bdc3c7);
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem 1rem;
+      background-color: rgba(44, 62, 80, 0.92);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    header img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    header img:hover {
+      transform: scale(1.1);
+    }
+    .header-details {
+      margin-bottom: 1rem;
+    }
+    h1 {
+      margin: 0.5rem 0 0 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    .role {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #f9ca24;
+    }
+    .location {
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: #e1e1e1;
+      margin-bottom: 0.7rem;
+    }
+    .contact-info {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .contact-info a {
+      color: #00e6e6;
+      text-decoration: none;
+      transition: text-decoration 0.2s, color 0.2s;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+      color: #f9ca24;
+    }
+    .about, .skills-tiles-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 2rem auto;
+      padding: 1rem;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+    .about h2 {
+      margin-top: 0;
+    }
+    /* Tiles Section */
+    .skills-tiles-section {
+      max-width: 900px;
+    }
+    .skills-tiles-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .skill-tile {
+      background: rgba(44, 62, 80, 0.95);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      width: 240px;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem 1rem 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .skill-tile:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.22);
+      z-index: 2;
+    }
+    .skill-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #f9ca24;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .skill-desc {
+      font-size: 1rem;
+      color: #e1e1e1;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    /* Animated Data Flows */
+    .data-flow {
+      width: 70px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.3rem auto;
+    }
+    .data-ball {
+      width: 14px;
+      height: 14px;
+      background: #00e6e6;
+      border-radius: 50%;
+      margin-right: 2px;
+      opacity: 0.85;
+      animation: dataFlowMove 1.2s infinite cubic-bezier(.5,0,.5,1);
+    }
+    .data-ball:nth-child(2) { animation-delay: 0.2s; }
+    .data-ball:nth-child(3) { animation-delay: 0.4s; }
+    .data-ball:nth-child(4) { animation-delay: 0.6s; }
+    .data-ball:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes dataFlowMove {
+      0% { transform: translateY(0) scale(1); opacity: 0.85; }
+      40% { transform: translateY(-7px) scale(1.2); opacity: 1; }
+      60% { transform: translateY(7px) scale(0.8); opacity: 0.55; }
+      100% { transform: translateY(0) scale(1); opacity: 0.85; }
+    }
+    footer {
+      background-color: rgba(44, 62, 80, 0.95);
+      text-align: center;
+      color: #d4d9df;
+      padding: 1.2rem 1rem 1rem 1rem;
+      font-size: 1rem;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      margin-top: 2rem;
+      letter-spacing: 0.5px;
+    }
+    .footer-contact {
+      margin-top: 0.5rem;
+    }
+    .footer-contact a {
+      color: #00e6e6;
+      text-decoration: none;
+      transition: text-decoration 0.2s, color 0.2s;
+      font-weight: bold;
+    }
+    .footer-contact a:hover {
+      text-decoration: underline;
+      color: #f9ca24;
+    }
+    @media (max-width: 1000px) {
+      .skills-tiles-section {
+        max-width: 98vw;
+      }
+      .skills-tiles-container {
+        gap: 1rem;
+      }
+      .skill-tile {
+        width: 92vw;
+        max-width: 350px;
+      }
+    }
+    @media (max-width: 650px) {
+      .about, .skills-tiles-section {
+        max-width: 98vw;
+      }
+      header img {
+        width: 120px;
+        height: 120px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .skill-tile {
+        width: 98vw;
+        max-width: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="photo.jpg" alt="Rosaiah Chowdary" />
+    <div class="header-details">
+      <h1>Rosaiah Chowdary</h1>
+      <div class="role">Data Engineer &amp; ETL DataStage Consultant</div>
+      <div class="location">Hyderabad, India &nbsp;|&nbsp; Open to Remote &amp; On-site Roles</div>
+      <div class="contact-info">
+        <span>Email: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></span>
+        &nbsp;|&nbsp;
+        <span>LinkedIn: <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">rosaiahchowdary</a></span>
+      </div>
+    </div>
+    <p>
+      Data Engineer | ETL | SQL | Python | Cloud <br>
+      Passionate about building robust, scalable data pipelines and enabling data-driven decision making.
+    </p>
+  </header>
+  <section class="about">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on multiple complex projects across various industries, delivering robust ETL pipelines and ensuring seamless data flow between heterogeneous systems.
+    </p>
+    <ul>
+      <li>
+        In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.
+      </li>
+      <li>
+        Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.
+      </li>
+      <li>
+        Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.
+      </li>
+      <li>
+        Strong problem-solving skills with a focus on data quality, governance, and automation.
+      </li>
+      <li>
+        Contributed to the modernization of legacy ETL processes and migration to cloud-based data platforms.
+      </li>
+    </ul>
+    <p>
+      My goal is to leverage my technical and consulting skills to enable organizations to gain actionable insights from their data, drive efficiency, and support business growth.
+    </p>
+  </section>
+  <section class="skills-tiles-section">
+    <h2 style="text-align:center;">Skills</h2>
+    <div class="skills-tiles-container">
+      <!-- Skill Tile 1 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">ETL Development &amp; Support</div>
+        <div class="skill-desc">
+          Designing, building, and managing Extract, Transform, Load processes to ensure clean, consistent, and reliable data movement across systems.
+        </div>
+      </div>
+      <!-- Skill Tile 2 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">IBM DataStage</div>
+        <div class="skill-desc">
+          Advanced expertise in DataStage for scalable ETL job design, parallel processing, tuning, and operational support.
+        </div>
+      </div>
+      <!-- Skill Tile 3 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">SQL &amp; PL/SQL</div>
+        <div class="skill-desc">
+          Writing optimized queries, stored procedures, and scripts for data extraction, transformation, and performance tuning.
+        </div>
+      </div>
+      <!-- Skill Tile 4 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Python for Data Engineering</div>
+        <div class="skill-desc">
+          Automating data workflows, scripting ETL logic, and building custom data solutions using Python.
+        </div>
+      </div>
+      <!-- Skill Tile 5 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Data Warehousing</div>
+        <div class="skill-desc">
+          Designing and implementing data models, warehouses, and marts for analytical and reporting solutions.
+        </div>
+      </div>
+      <!-- Skill Tile 6 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Apache Kafka, MQ</div>
+        <div class="skill-desc">
+          Integrating real-time data streams and messaging solutions for event-driven architectures and batch processing.
+        </div>
+      </div>
+      <!-- Skill Tile 7 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Cloud (AWS, GCP)</div>
+        <div class="skill-desc">
+          Implementing and migrating data solutions to cloud platforms, leveraging managed services for storage, computation, and orchestration.
+        </div>
+      </div>
+      <!-- Skill Tile 8 -->
+      <div class="skill-tile">
+        <div class="data-flow">
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+          <div class="data-ball"></div>
+        </div>
+        <div class="skill-title">Git, Jenkins, CI/CD</div>
+        <div class="skill-desc">
+          Managing source control, automating deployments, and ensuring robust, repeatable data engineering processes.
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>
+      &copy; 2025 Rosaiah Chowdary &mdash; Data Engineer &amp; ETL Specialist
+    </div>
+    <div class="footer-contact">
+      Contact: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a>
+      &nbsp;|&nbsp;
+      <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">LinkedIn</a>
+    </div>
+    <div style="margin-top:0.5rem; font-size: 0.95em;">
+      Built with &hearts; and passion for data.
+    </div>
+  </footer>
+</body>
+</html>
