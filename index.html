@@ -14,7 +14,10 @@
     }
     header {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 1rem 1rem;
+      background-color: rgba(44, 62, 80, 0.92);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: relative;
     }
     header img {
       width: 160px;
@@ -23,18 +26,45 @@
       border: 4px solid #fff;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
+      margin-bottom: 1rem;
     }
     header img:hover {
       transform: scale(1.1);
     }
+    .header-details {
+      margin-bottom: 1rem;
+    }
     h1 {
-      margin-top: 1rem;
+      margin: 0.5rem 0 0 0;
       font-size: 2.5rem;
+      letter-spacing: 1px;
     }
-    p {
-      font-size: 1.2rem;
+    .role {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #f9ca24;
     }
-    .skills {
+    .location {
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: #e1e1e1;
+      margin-bottom: 0.7rem;
+    }
+    .contact-info {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .contact-info a {
+      color: #00e6e6;
+      text-decoration: none;
+      transition: text-decoration 0.2s, color 0.2s;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+      color: #f9ca24;
+    }
+    .skills, .about {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 2rem auto;
       padding: 1rem;
@@ -51,20 +81,98 @@
       list-style-type: square;
       padding-left: 20px;
     }
+    .about h2 {
+      margin-top: 0;
+    }
+    footer {
+      background-color: rgba(44, 62, 80, 0.95);
+      text-align: center;
+      color: #d4d9df;
+      padding: 1.2rem 1rem 1rem 1rem;
+      font-size: 1rem;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      margin-top: 2rem;
+      letter-spacing: 0.5px;
+    }
+    .footer-contact {
+      margin-top: 0.5rem;
+    }
+    .footer-contact a {
+      color: #00e6e6;
+      text-decoration: none;
+      transition: text-decoration 0.2s, color 0.2s;
+      font-weight: bold;
+    }
+    .footer-contact a:hover {
+      text-decoration: underline;
+      color: #f9ca24;
+    }
+    @media (max-width: 650px) {
+      .skills, .about {
+        max-width: 96vw;
+      }
+      header img {
+        width: 120px;
+        height: 120px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <img src="photo.jpg" alt="Rosaiah Chowdary" />
-    <h1>Rosaiah Chowdary</h1>
-    <p>Data Engineer | ETL | SQL | Python | Cloud</p>
+    <div class="header-details">
+      <h1>Rosaiah Chowdary</h1>
+      <div class="role">Data Engineer &amp; ETL DataStage Consultant</div>
+      <div class="location">Hyderabad, India &nbsp;|&nbsp; Open to Remote &amp; On-site Roles</div>
+      <div class="contact-info">
+        <span>Email: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></span>
+        &nbsp;|&nbsp;
+        <span>LinkedIn: <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">rosaiahchowdary</a></span>
+      </div>
+    </div>
+    <p>
+      Data Engineer | ETL | SQL | Python | Cloud <br>
+      Passionate about building robust, scalable data pipelines and enabling data-driven decision making.
+    </p>
   </header>
+  <section class="about">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on multiple complex projects across various industries, delivering robust ETL pipelines and ensuring seamless data flow between heterogeneous systems.
+    </p>
+    <ul>
+      <li>
+        In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.
+      </li>
+      <li>
+        Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.
+      </li>
+      <li>
+        Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.
+      </li>
+      <li>
+        Strong problem-solving skills with a focus on data quality, governance, and automation.
+      </li>
+      <li>
+        Contributed to the modernization of legacy ETL processes and migration to cloud-based data platforms.
+      </li>
+    </ul>
+    <p>
+      My goal is to leverage my technical and consulting skills to enable organizations to gain actionable insights from their data, drive efficiency, and support business growth.
+    </p>
+  </section>
   <section class="skills">
     <h2>Skills</h2>
     <ul>
-      <li>ETL Development & Support</li>
+      <li>ETL Development &amp; Support</li>
       <li>IBM DataStage</li>
-      <li>SQL & PL/SQL</li>
+      <li>SQL &amp; PL/SQL</li>
       <li>Python for Data Engineering</li>
       <li>Data Warehousing</li>
       <li>Apache Kafka, MQ</li>
@@ -72,5 +180,18 @@
       <li>Git, Jenkins, CI/CD</li>
     </ul>
   </section>
+  <footer>
+    <div>
+      &copy; 2025 Rosaiah Chowdary &mdash; Data Engineer &amp; ETL Specialist
+    </div>
+    <div class="footer-contact">
+      Contact: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a>
+      &nbsp;|&nbsp;
+      <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">LinkedIn</a>
+    </div>
+    <div style="margin-top:0.5rem; font-size: 0.95em;">
+      Built with &hearts; and passion for data.
+    </div>
+  </footer>
 </body>
 </html>
