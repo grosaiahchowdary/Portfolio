@@ -2,7 +2,9 @@ body {
   font-family: Inter, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #fafafa;
+  /* Use a wooden texture image called background.jpg or your preferred tile */
+  background: url('background.jpg') repeat #b7853c;
+  background-size: 400px 400px;
 }
 .hanger-bar {
   display: flex;
@@ -72,12 +74,13 @@ body {
   box-shadow: 0 2px 8px #b8c7ed;
 }
 .details-panel {
-  background: #f8f8f8;
+  background: #f8f8f8dd;
   border-radius: 6px;
   padding: 13px;
   margin-top: 12px;
   width: 320px;
   display: none;
+  box-shadow: 0 2px 8px #b78b3f25;
 }
 .center-name {
   display: flex;
@@ -91,8 +94,8 @@ body {
   margin-top: 14px;
 }
 .wood-tile {
-  width: 110px;
-  height: 90px;
+  width: 120px;
+  min-height: 90px;
   background: #deb887;
   border-radius: 7px;
   box-shadow: 0 2px 8px #b78b3f;
@@ -104,11 +107,31 @@ body {
   font-size: 15px;
   color: #453725;
   transition: transform 0.12s, box-shadow 0.12s;
+  cursor: pointer;
+  position: relative;
 }
 .wood-tile:hover {
   transform: translateY(-4px) scale(1.04);
   box-shadow: 0 6px 20px #b78b3f88;
   background: #eecb93;
+}
+.wood-tile .explanation {
+  display: none;
+  font-size: 13px;
+  margin-top: 7px;
+  padding: 7px 6px;
+  color: #473a1a;
+  background: #f6e1b8;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px #b78b3f55;
+  animation: expand 0.17s cubic-bezier(.67,.11,1,.68);
+}
+.wood-tile .explanation.show {
+  display: block;
+}
+@keyframes expand {
+  0% { opacity: 0; transform: scaleY(0.8);}
+  100% { opacity: 1; transform: scaleY(1);}
 }
 .side-tile {
   margin-top: 26px;
@@ -116,6 +139,7 @@ body {
   height: 80px;
   font-size: 15px;
   background: #deb887cc;
+  cursor: default;
 }
 @media (max-width: 900px) {
   .main-horizontal { flex-direction: column; gap: 30px; align-items: center; }
