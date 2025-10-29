@@ -1,56 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Rosaiah Chowdary — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
-<script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rosaiah Chowdary — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script defer src="script.js"></script>
 </head>
 <body>
-<main class="main-layout" role="main">
-<aside aria-labelledby="photo-heading" class="photo-section">
-  <div class="profile-header">
-    <img alt="Rosaiah Chowdary" class="profile-photo" src="1000099595.jpeg" loading="lazy" />
-    <div class="profile-info">
-      <div class="designation">Data Engineer & ETL Specialist</div>
-      <div class="location">📍 Hyderabad, India</div>
-      <div class="contact-icons">
-        <a href="mailto:example@email.com" target="_blank" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        <a href="https://linkedin.com/in/rosaiah" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="clock" aria-hidden="true">--:--:--</div>
     </div>
-  </div>
-  <h1 class="name-below">Rosaiah Chowdary</h1>
-  <nav aria-label="Profile sections" class="button-group" role="tablist">
-    <button aria-controls="about" aria-selected="false" class="highlight-btn" id="about-btn" role="tab">About Me</button>
-    <button aria-controls="skills" aria-selected="false" class="highlight-btn" id="skills-btn" role="tab">Skills</button>
-    <button aria-controls="roles" aria-selected="false" class="highlight-btn" id="roles-btn" role="tab">Roles</button>
-  </nav>
-</aside>
+  </header>
 
-<section class="center-column">
-<header class="name-header">
-<h1 class="name">Rosaiah Chowdary</h1>
-</header>
-<article id="about" class="details-panel" hidden role="tabpanel">
-<h3>About Me</h3>
-<p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions.</p>
-</article>
-<article id="skills" class="details-panel" hidden role="tabpanel">
-<h3>Skills</h3>
-<p>ETL, DataStage, SQL, Python, Cloud, CI/CD</p>
-</article>
-<article id="roles" class="details-panel" hidden role="tabpanel">
-<h3>Roles & Responsibilities</h3>
-<p>Production Support, RCA, Development, Testing</p>
-</article>
-</section>
-</main>
-<footer class="site-footer" role="contentinfo">
-<small>© Rosaiah Chowdary — Data Engineering & ETL Specialist</small>
-</footer>
+  <main class="container">
+    <section class="profile-area">
+      <div class="profile-left">
+        <img src="1000099595.jpeg" alt="Rosaiah Chowdary" class="photo">
+        <div class="name-and-contacts">
+          <h1 class="name">Rosaiah Chowdary</h1>
+          <div class="contacts">
+            <a href="mailto:gummalla.ds@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-right">
+        <div class="designation">Data Engineer &amp; ETL Specialist</div>
+        <div class="location">📍 Hyderabad, India</div>
+      </div>
+    </section>
+
+    <nav class="tabs" role="tablist" aria-label="Profile sections">
+      <button role="tab" class="tab-btn" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
+      <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
+      <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
+    </nav>
+
+    <section class="panels">
+      <article id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
+        <h2>About Me</h2>
+        <p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
+        <ul>
+          <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
+          <li>Delivered end-to-end data warehousing and migration projects</li>
+          <li>Integrated data from relational DBs, files, and cloud</li>
+          <li>Problem-solving focus: data quality, governance, automation</li>
+          <li>Modernized legacy ETL &amp; migration to cloud</li>
+        </ul>
+      </article>
+
+      <article id="panel-roles" class="panel" role="tabpanel" aria-labelledby="tab-roles" hidden>
+        <h2>Roles &amp; Responsibilities</h2>
+        <div class="tiles">
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Production Support &amp; Operations</div>
+            <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Issue Resolution &amp; RCA</div>
+            <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">DataStage Job Development</div>
+            <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality and speed.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Data Extraction &amp; Integration</div>
+            <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Documentation &amp; KM</div>
+            <div class="tile-body">Developed technical specifications, transformation/logic documentation, and user guides for efficient knowledge management.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Testing &amp; Quality Assurance</div>
+            <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Client &amp; Stakeholder Engagement</div>
+            <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Deployment &amp; Change Management</div>
+            <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams.</div>
+          </div>
+        </div>
+      </article>
+
+      <article id="panel-skills" class="panel" role="tabpanel" aria-labelledby="tab-skills" hidden>
+        <h2>Skills</h2>
+        <div class="tiles">
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">ETL Development &amp; Support</div>
+            <div class="tile-body">Designing, building, and managing Extract, Transform, Load (ETL) processes for reliable movement of data across systems. Ensuring high-quality and timely data delivery with minimal errors.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">IBM DataStage</div>
+            <div class="tile-body">Advanced skill in IBM DataStage, including scalable ETL job design, parallel processing, job tuning, troubleshooting, and ongoing operational support for data integration.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">SQL &amp; PL/SQL</div>
+            <div class="tile-body">Writing and optimizing queries, stored procedures, and data transformation scripts for secure, high-performance and accurate data processing in relational databases.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Python for Data Eng.</div>
+            <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Data Warehousing</div>
+            <div class="tile-body">Designing robust data models, developing data warehouses and data marts for business analytics, and supporting large-scale analytical workloads.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Apache Kafka &amp; MQ</div>
+            <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven, scalable architectures and fast data pipelines.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Cloud (AWS, GCP)</div>
+            <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
+          </div>
+
+          <div class="tile" tabindex="0" aria-expanded="false">
+            <div class="tile-title">Git, Jenkins, CI/CD</div>
+            <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with modern DevOps tools like Git and Jenkins.</div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© Rosaiah Chowdary — Data Engineering &amp; ETL Specialist</small>
+  </footer>
 </body>
 </html>

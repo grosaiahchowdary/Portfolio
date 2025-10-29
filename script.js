@@ -1,5 +1,6 @@
-// Responsive tab and clock behavior
+// script.js - tabs, clock and tile expand behavior
 document.addEventListener('DOMContentLoaded', function(){
+  // Clock
   function updateClock(){
     const d = new Date();
     const hh = String(d.getHours()).padStart(2,'0');
@@ -11,15 +12,36 @@ document.addEventListener('DOMContentLoaded', function(){
   updateClock();
   setInterval(updateClock, 1000);
 
-  const tabs = document.querySelectorAll('.highlight-btn');
-  const panels = document.querySelectorAll('.details-panel');
+  // Tabs
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
   function showPanel(id){
-    panels.forEach(p => p.hidden = p.id !== id);
-    tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id));
+    panels.forEach(p => {
+      if(p.id === id) p.hidden = false;
+      else p.hidden = true;
+    });
+    tabButtons.forEach(b => b.setAttribute('aria-selected', b.getAttribute('aria-controls') === id));
   }
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => showPanel(tab.getAttribute('aria-controls')));
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => showPanel(btn.getAttribute('aria-controls')));
+    btn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
   });
-  const aboutBtn = document.getElementById('about-btn');
-  if(aboutBtn) aboutBtn.click();
+  // default
+  const defaultBtn = document.getElementById('tab-about');
+  if(defaultBtn) defaultBtn.click();
+
+  // Tiles expand/collapse
+  document.querySelectorAll('.tile').forEach(tile => {
+    tile.setAttribute('role','button');
+    tile.addEventListener('click', () => {
+      const expanded = tile.getAttribute('aria-expanded') === 'true';
+      tile.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    tile.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tile.click(); }
+      if(e.key === 'Escape') tile.setAttribute('aria-expanded','false');
+    });
+  });
 });
