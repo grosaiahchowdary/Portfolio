@@ -1,4 +1,4 @@
-/* Creative automotive redesign - left nav + hanger + moving vehicles */
+/* Final creative automotive redesign with restored content, IST clock, and visitor counter */
 :root{
   --bg1: #071029;
   --bg2: linear-gradient(180deg,#071029 0%, #04253a 60%);
@@ -7,16 +7,18 @@
   --muted: #9fb7c9;
   --card: rgba(255,255,255,0.03);
   --glass: rgba(255,255,255,0.04);
-  --glass-2: rgba(255,255,255,0.02);
   --radius: 12px;
   --nav-w: 86px;
+  --glow: 0 0 12px rgba(0,194,255,0.35), 0 0 24px rgba(255,207,51,0.12);
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;}
 body{
   background: var(--bg2);
   color:#eaf6ff;
   min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 /* Left nav */
@@ -42,20 +44,32 @@ body{
   position:fixed;left:calc(var(--nav-w) + 28px);right:28px;top:18px;height:64px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:999px;padding:8px 18px;display:flex;align-items:center;gap:14px;z-index:35;backdrop-filter: blur(6px);
   box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
-.hanger-left,.hanger-right{font-weight:700;color:var(--muted);width:160px}
+.hanger-left,.hanger-right{font-weight:700;color:var(--muted);width:160px;display:flex;align-items:center;gap:8px}
 .hanger-tabs{display:flex;gap:10px;margin:auto}
 .hanger-tab{background:transparent;border:1px solid transparent;padding:10px 16px;border-radius:999px;font-weight:800;color:var(--muted);cursor:pointer;transition:all .15s}
 .hanger-tab.active{background:linear-gradient(90deg, rgba(0,194,255,0.12), rgba(255,207,51,0.06)); color:var(--accent2); transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,0.45)}
 
 /* main content area */
 .main{margin-left:calc(var(--nav-w) + 48px);padding:120px 48px 140px 48px;max-width:1200px}
-.panel{min-height:80vh;padding:40px;background:transparent;border-radius:10px;margin-bottom:40px;display:none}
+.panel{min-height:80vh;padding:28px;background:transparent;border-radius:10px;margin-bottom:40px;display:none}
 .panel.active{display:block}
 .lead{color:var(--muted);font-size:18px;margin-top:8px}
 h1{font-size:40px;margin:0 0 8px 0}
 .accent{color:var(--accent2)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
 .card{background:var(--card);padding:18px;border-radius:12px;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,0.45);font-weight:700}
+
+/* About header */
+.about-header{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+.profile-photo{width:140px;height:140px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+.about-meta h1{margin:0;font-size:28px}
+.role{color:var(--accent2);font-weight:700;margin-top:6px}
+.location{color:var(--muted);margin-top:6px}
+.contact-icons{display:flex;gap:10px;margin-top:10px}
+.icon{width:22px;height:22px;display:inline-block;fill:currentColor;opacity:0.95}
+
+/* about tile */
+.about-tile{background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
 
 /* vehicle layer */
 .vehicle-layer{
@@ -64,6 +78,15 @@ h1{font-size:40px;margin:0 0 8px 0}
 .vehicle{position:absolute;height:72px;will-change:transform,opacity;opacity:0.95;filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));transition:transform .08s linear}
 .vehicle.v2{height:92px;opacity:0.95}
 .vehicle.v3{height:56px;opacity:0.9}
+
+/* footer */
+footer{position:fixed;left:calc(var(--nav-w) + 28px);right:28px;bottom:18px;height:56px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:999px;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);z-index:35;backdrop-filter: blur(6px);box-shadow:0 -6px 24px rgba(0,0,0,0.45)}
+.footer-left{font-weight:600}
+.footer-right{font-weight:700}
+
+/* glow text for clock and visitor counter */
+.glow-text{color:var(--accent);text-shadow:0 0 8px rgba(0,194,255,0.25);animation:glow 2.4s infinite}
+@keyframes glow{0%{text-shadow:0 0 6px rgba(0,194,255,0.18)}50%{text-shadow:0 0 14px rgba(255,207,51,0.28)}100%{text-shadow:0 0 6px rgba(0,194,255,0.18)}}
 
 /* responsive */
 @media (max-width:900px){
@@ -78,10 +101,9 @@ h1{font-size:40px;margin:0 0 8px 0}
   .vehicle{display:none}
 }
 
-/* subtle floating effect for vehicles */
-@keyframes floaty {
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
+/* subtle floating for vehicles */
+@keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 .vehicle{animation: floaty 3.6s ease-in-out infinite}
+
+/* small polish */
+.card h3{margin:0 0 8px 0}
