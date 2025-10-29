@@ -1,184 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Portfolio Design Basic Layout</title>
-    <style>
-        body { font-family: Inter, Arial, sans-serif; margin: 0; padding: 0; }
-        .hanger-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #eee;
-            height: 60px;
-            position: relative;
-        }
-        .hanger-end {
-            width: 18px; height: 60px; background: #b78b3f;
-        }
-        .hanger-flower {
-            width: 180px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            color: #646464;
-        }
-        .main-horizontal {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: center;
-            margin-top: 15px;
-            gap: 80px;
-        }
-        .photo-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .section-label { font-size: 16px; font-weight: 600; margin-top: 12px; }
-        .profile-photo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #333; }
-        .button-group { margin-top: 10px; }
-        .highlight-btn {
-            border: none;
-            outline: none;
-            padding: 8px 16px;
-            margin-right: 8px;
-            background: #f0f0f0;
-            color: #444;
-            border-radius: 6px;
-            font-size: 15px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            transition: background 0.2s, color 0.2s;
-        }
-        .highlight-btn.active {
-            background: #2d6cdf;
-            color: #fff;
-            box-shadow: 0 2px 8px #b8c7ed;
-        }
-        .details-panel {
-            background: #f8f8f8;
-            border-radius: 6px;
-            padding: 13px;
-            margin-top: 12px;
-            width: 270px;
-            display: none;
-        }
-        .center-name {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .wood-tile {
-            width: 90px; height: 90px;
-            background: #deb887;
-            border-radius: 7px;
-            box-shadow: 0 2px 8px #b78b3f;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 15px;
-            color: #453725;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rosaiah Chowdary - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer>
+    function showPanel(panel) {
+      document.querySelectorAll('.details-panel').forEach(p => p.style.display = 'none');
+      document.getElementById(panel).style.display = 'block';
+      document.querySelectorAll('.highlight-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(panel + '-btn').classList.add('active');
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      showPanel('about');
+    });
+  </script>
 </head>
 <body>
-    <!-- Hanger Flower Design Bar -->
-    <div class="hanger-bar">
-        <div class="hanger-end"></div>
-        <div class="hanger-flower">
-            Hanger<br>flower design
-        </div>
-        <div class="hanger-end"></div>
+  <!-- Top Hanger Bar -->
+  <div class="hanger-bar">
+    <div class="hanger-end"></div>
+    <div class="hanger-flower">Hanger<br>flower<br>design</div>
+    <div class="hanger-end"></div>
+  </div>
+
+  <div class="main-horizontal">
+    <!-- Left: Photo & About/Skill/Role Buttons -->
+    <div class="photo-section">
+      <img src="1000099595.jpeg" alt="My Photo" class="profile-photo">
+      <div class="section-label">Photo</div>
+      <div class="button-group">
+        <button class="highlight-btn" id="about-btn" onclick="showPanel('about')">About Me</button>
+        <button class="highlight-btn" id="skills-btn" onclick="showPanel('skills')">Skills</button>
+        <button class="highlight-btn" id="roles-btn" onclick="showPanel('roles')">Roles</button>
+      </div>
+      <div class="wood-tile side-tile">
+        Wooden<br>designed<br>tile
+      </div>
     </div>
-    <!-- Main Content Horizontal Alignment -->
-    <div class="main-horizontal">
-        <!-- Photo & About Me -->
-        <div class="photo-section">
-            <span class="section-label">Photo</span>
-            <img src="1000099595.jpeg" alt="Profile Photo" class="profile-photo">
-            <div class="button-group">
-                <button class="highlight-btn" id="btn-about" onclick="showPanel('about')">About me</button>
-                <button class="highlight-btn" id="btn-skills" onclick="showPanel('skills')">Skills</button>
-                <button class="highlight-btn" id="btn-roles" onclick="showPanel('roles')">Roles</button>
-            </div>
-            <div id="about-details" class="details-panel">
-                <h3>About Me</h3>
-                <p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on end-to-end data pipelines, migrations, production support, and performance tuning to enable accurate and timely data delivery.</p>
-                <ul>
-                  <li>In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.</li>
-                  <li>Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.</li>
-                  <li>Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.</li>
-                  <li>Strong problem-solving skills with a focus on data quality, governance, and automation.</li>
-                  <li>Contributed to the modernization of legacy ETL processes and migration to cloud-based data platforms.</li>
-                </ul>
-            </div>
-            <div id="skills-details" class="details-panel">
-                <h3>Skills</h3>
-                <ul>
-                  <li>ETL Development & Support: Designing, building, and managing Extract, Transform, Load processes for reliable data movement.</li>
-                  <li>IBM DataStage: Advanced scalable ETL job design, parallel processing, tuning, and operational support.</li>
-                  <li>SQL & PL/SQL: Writing optimized queries, stored procedures, and scripts for data transformation and performance tuning.</li>
-                  <li>Python for Data Engineering: Automating data workflows and building custom ETL solutions.</li>
-                  <li>Data Warehousing: Designing and implementing models, warehouses, and marts for analytics.</li>
-                  <li>Apache Kafka & MQ: Integrating real-time data streams for event-driven architectures.</li>
-                  <li>Cloud (AWS, GCP): Migrating data solutions to cloud platforms and leveraging managed services.</li>
-                  <li>Git, Jenkins, CI/CD: Managing source control and automating deployments.</li>
-                </ul>
-            </div>
-            <div id="roles-details" class="details-panel">
-                <h3>Roles & Responsibilities</h3>
-                <ul>
-                  <li>Production Support & Operations: Managed 90,000+ scheduled jobs, ensuring high SLAs.</li>
-                  <li>Issue Resolution & RCA: Conducted root cause analysis for critical incidents and change requests.</li>
-                  <li>DataStage Job Development: Designed robust jobs using mapping docs and requirements for optimal performance.</li>
-                  <li>Data Extraction & Integration: Orchestrated complex flows from diverse sources including databases, Excel, CSV, and flat files.</li>
-                  <li>Documentation & Knowledge Management: Developed technical specs, logic docs, and user guides.</li>
-                  <li>Testing & Quality Assurance: Defined and executed system, integration, and UAT test plans.</li>
-                  <li>Client & Stakeholder Engagement: Handled client incidents, regular reviews, and automation initiatives.</li>
-                  <li>Deployment & Change Management: Coordinated code migration, scheduling, and cutover with cross-functional teams.</li>
-                </ul>
-            </div>
+
+    <!-- Center: Name -->
+    <div class="center-name">
+      <h2>Rosaiah Chowdary</h2>
+      <div id="about" class="details-panel">
+        <h3>About Me</h3>
+        <p>
+          I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on end-to-end data pipelines, migrations, production support, and performance tuning to enable accurate and timely data delivery.
+        </p>
+        <ul>
+          <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
+          <li>Delivered end-to-end data warehousing and migration projects</li>
+          <li>Integrated data from relational DBs, files, and cloud</li>
+          <li>Problem-solving focus: data quality, governance, automation</li>
+          <li>Modernized legacy ETL & migration to cloud</li>
+        </ul>
+      </div>
+
+      <div id="skills" class="details-panel">
+        <h3>Skills</h3>
+        <div class="tiles-group">
+          <div class="wood-tile">ETL Development<br>& Support</div>
+          <div class="wood-tile">IBM DataStage</div>
+          <div class="wood-tile">SQL & PL/SQL</div>
+          <div class="wood-tile">Python for Data Eng.</div>
+          <div class="wood-tile">Data Warehousing</div>
+          <div class="wood-tile">Apache Kafka & MQ</div>
+          <div class="wood-tile">Cloud (AWS, GCP)</div>
+          <div class="wood-tile">Git, Jenkins, CI/CD</div>
         </div>
-        <!-- Name -->
-        <div class="center-name">
-            <span class="section-label">My name</span>
-            <div style="font-weight:700; font-size:20px;">Rosaiah Chowdary</div>
+      </div>
+
+      <div id="roles" class="details-panel">
+        <h3>Roles & Responsibilities</h3>
+        <div class="tiles-group">
+          <div class="wood-tile">Production Support</div>
+          <div class="wood-tile">Issue Resolution & RCA</div>
+          <div class="wood-tile">DataStage Dev</div>
+          <div class="wood-tile">Data Extraction & Integration</div>
+          <div class="wood-tile">Documentation & KM</div>
+          <div class="wood-tile">Testing & QA</div>
+          <div class="wood-tile">Client Engagement</div>
+          <div class="wood-tile">Deployment & Change Mgmt</div>
         </div>
-        <!-- Wooden Designed Tile -->
-        <div class="wood-tile">
-            Wooden<br>designed tile
-        </div>
+      </div>
     </div>
-    <script>
-        function showPanel(panelId) {
-            // Remove active class from all buttons
-            document.getElementById('btn-about').classList.remove('active');
-            document.getElementById('btn-skills').classList.remove('active');
-            document.getElementById('btn-roles').classList.remove('active');
-            // Hide all panels
-            document.getElementById('about-details').style.display = 'none';
-            document.getElementById('skills-details').style.display = 'none';
-            document.getElementById('roles-details').style.display = 'none';
-            // Show selected panel and highlight button
-            if(panelId === 'about') {
-                document.getElementById('about-details').style.display = 'block';
-                document.getElementById('btn-about').classList.add('active');
-            } else if(panelId === 'skills') {
-                document.getElementById('skills-details').style.display = 'block';
-                document.getElementById('btn-skills').classList.add('active');
-            } else if(panelId === 'roles') {
-                document.getElementById('roles-details').style.display = 'block';
-                document.getElementById('btn-roles').classList.add('active');
-            }
-        }
-        // Initialize with About Me selected
-        showPanel('about');
-    </script>
+  </div>
 </body>
 </html>
