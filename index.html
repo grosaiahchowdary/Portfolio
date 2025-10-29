@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Rosaiah Chowdary — Portfolio (Walnut)</title>
-<link rel="icon" href="favicon.svg" />
-<link rel="stylesheet" href="style.css"></head><body>
+<title>Rosaiah Chowdary — Portfolio</title>
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head><body>
 <header class="wood-header">
-  <div class="hanger-ornament"><svg viewBox="0 0 200 60" class="ornament" xmlns="http://www.w3.org/2000/svg" role="img"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#d4a373"/><stop offset="1" stop-color="#b88b4a"/></linearGradient></defs><g fill="url(#g)"><path d="M20 30c10-20 30-20 40 0 10-20 30-20 40 0 10-20 30-20 40 0v5c-10-20-30-20-40 0-10-20-30-20-40 0-10-20-30-20-40 0z"/></g></svg></div>
+  <div class="hanger-ornament" aria-hidden="true">
+    <svg viewBox="0 0 200 60" class="ornament" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ornament"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#d4a373"/><stop offset="1" stop-color="#b88b4a"/></linearGradient></defs><g fill="url(#g)"><path d="M20 30c10-20 30-20 40 0 10-20 30-20 40 0 10-20 30-20 40 0v5c-10-20-30-20-40 0-10-20-30-20-40 0-10-20-30-20-40 0z"/></g></svg>
+  </div>
   <div class="wood-bar">
-    <div class="photo-frame"><img src="photo.jpg" alt="photo"></div>
-    <div class="header-center"><div class="name">Rosaiah <span class="accent">Chowdary</span></div><div class="designation">Data Engineer &amp; ETL DataStage Consultant</div></div>
-    <div class="header-right"><div id="ist-clock" class="ist-clock"></div></div>
+    <div class="photo-frame"><img src="photo.jpg" alt="Rosaiah"></div>
+    <div class="header-center">
+      <div class="name">Rosaiah <span class="accent">Chowdary</span></div>
+    </div>
+    <div class="header-right">
+      <div class="designation">Data Engineer &amp; ETL DataStage Consultant</div>
+      <a class="resume-btn" href="Rosaiah_Chowdary_Resume.pdf" download>Download Resume</a>
+      <div id="ist-clock" class="ist-clock" aria-live="polite"></div>
+    </div>
   </div>
   <nav class="radio-nav" role="navigation" aria-label="Sections nav">
     <label class="radio-item"><input type="radio" name="page" value="about" checked><span>About Me</span></label>
@@ -19,33 +28,78 @@
 </header>
 
 <main class="content">
-  <section id="about" class="page visible"><article class="glass-tile"><h2>About Me</h2>
-  <div class="about-grid"><div class="about-photo"><img src="photo.jpg" alt="Rosaiah" /></div>
-  <div class="about-text"><p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on end-to-end data pipelines, migrations, production support, and performance tuning to enable accurate and timely data delivery.</p>
-  <ul><li>In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.</li><li>Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.</li><li>Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.</li></ul></div></div></article></section>
+  <section id="about" class="page visible"><article class="glass-tile">
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-photo"><img src="photo.jpg" alt="Rosaiah about"></div>
+      <div class="about-text">
+        <p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on end-to-end data pipelines, migrations, production support, and performance tuning to enable accurate and timely data delivery.</p>
+        <ul>
+          <li>In-depth expertise in IBM DataStage, including parallel job design, performance tuning, troubleshooting, and administration.</li>
+          <li>Proven track record of collaborating with cross-functional teams to deliver end-to-end data warehousing and migration projects.</li>
+          <li>Experience integrating data from diverse sources such as relational databases, flat files, and cloud platforms.</li>
+        </ul>
+      </div>
+    </div>
+  </article></section>
+
   <section id="skills" class="page"><div class="glass-tile"><h2>Skills</h2><div class="cards">
-  <div class="card tile">IBM DataStage</div><div class="card tile">SQL &amp; PL/SQL</div><div class="card tile">Python for Data Engineering</div><div class="card tile">Kafka &amp; MQ</div></div></div></section>
-  <section id="roles" class="page"><div class="glass-tile"><h2>Roles &amp; Responsibilities</h2><div class="cards"><div class="card tile">Production Support &amp; Operations</div><div class="card tile">Issue Resolution &amp; RCA</div></div></div></section>
-  <section id="contact" class="page"><div class="glass-tile"><h2>Contact</h2><p>Email: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></p><p>LinkedIn: <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">linkedin.com/in/rosaiahchowdary</a></p></div></section>
+    <div class="card tile">IBM DataStage</div><div class="card tile">SQL &amp; PL/SQL</div>
+    <div class="card tile">Python for Data Engineering</div><div class="card tile">Kafka &amp; MQ</div>
+  </div></div></section>
+
+  <section id="roles" class="page"><div class="glass-tile"><h2>Roles &amp; Responsibilities</h2><div class="cards">
+    <div class="card tile">Production Support &amp; Operations</div><div class="card tile">Issue Resolution &amp; RCA</div>
+  </div></div></section>
+
+  <section id="contact" class="page"><div class="glass-tile"><h2>Contact</h2>
+    <p>Email: <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">linkedin.com/in/rosaiahchowdary</a></p>
+  </div></section>
 </main>
 
 <footer class="site-footer"><div>Visitors: <span id="visit-count">—</span></div><div>Built with ❤</div></footer>
 
-<div class="vehicle-layer"><img src="assets/car1.svg" class="vehicle v1" data-speed="0.35"/><img src="assets/car2.svg" class="vehicle v2" data-speed="0.55"/></div>
+<div class="vehicle-layer" aria-hidden="true">
+  <img src="assets/car1.svg" class="vehicle v1" data-speed="0.35" alt="car1"/>
+  <img src="assets/car2.svg" class="vehicle v2" data-speed="0.55" alt="car2"/>
+</div>
 
 <script>
-// radios
+// Smooth page switching + fade
 const radios = document.querySelectorAll('input[name="page"]');
 const pages = document.querySelectorAll('.page');
-function showPage(id){ pages.forEach(p=>{ if(p.id===id){ p.classList.add('visible'); p.classList.remove('hidden'); setTimeout(()=>p.classList.add('active'),20); } else { p.classList.remove('active'); p.classList.add('hidden'); setTimeout(()=>p.classList.remove('visible'),420); } }); history.replaceState(null,'','#'+id); }
-const h = location.hash.replace('#','') || 'about'; document.querySelector(`input[name="page"][value="${h}"]`)?.checked = true; showPage(h); radios.forEach(r=> r.addEventListener('change', ()=> showPage(r.value)));
-// IST clock
-function updateIST(){ try{ const now=new Date(); const opts={hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Asia/Kolkata'}; const f=new Intl.DateTimeFormat('en-GB',opts); document.getElementById('ist-clock').textContent = f.format(now) + ' IST'; }catch(e){ const now=new Date(); const ist=new Date(now.getTime() + (5.5*3600000) - (now.getTimezoneOffset()*60000)); document.getElementById('ist-clock').textContent = ist.toTimeString().split(' ')[0] + ' IST'; } }
+function showPage(id){
+  pages.forEach(p=>{
+    if(p.id===id){
+      p.classList.add('visible'); p.classList.remove('hidden');
+      setTimeout(()=> p.classList.add('active'), 20);
+      p.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      p.classList.remove('active'); p.classList.add('hidden');
+      setTimeout(()=> p.classList.remove('visible'), 420);
+    }
+  });
+  history.replaceState(null,'','#'+id);
+}
+const h = location.hash.replace('#','') || 'about';
+document.querySelector(`input[name="page"][value="${h}"]`)?.checked = true;
+showPage(h);
+radios.forEach(r=> r.addEventListener('change', ()=> showPage(r.value)));
+// IST Clock
+function updateIST(){
+  try{
+    const now = new Date();
+    const opts = {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Asia/Kolkata'};
+    const f = new Intl.DateTimeFormat('en-GB', opts);
+    document.getElementById('ist-clock').textContent = f.format(now) + ' IST';
+  }catch(e){ const now=new Date(); const ist=new Date(now.getTime() + (5.5*3600000) - (now.getTimezoneOffset()*60000)); document.getElementById('ist-clock').textContent = ist.toTimeString().split(' ')[0] + ' IST'; }
+}
 setInterval(updateIST,1000); updateIST();
-// visitor counter
+// Visitor counter using CountAPI
 async function updateVisitor(){ try{ const res = await fetch('https://api.countapi.xyz/hit/rosaiah-portfolio/visits'); const j = await res.json(); document.getElementById('visit-count').textContent = j.value.toLocaleString(); }catch(e){ document.getElementById('visit-count').textContent = '—'; } }
 updateVisitor();
-// vehicles
+// Vehicles movement
 const vehicles = document.querySelectorAll('.vehicle');
 function updateVehicles(){ const s = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1); vehicles.forEach((v,i)=>{ const speed = parseFloat(v.dataset.speed)||0.5; const w = window.innerWidth; const x = ((s * 1400 * speed) % (w + 300)) - 200; const y = 80 + i*40; v.style.transform = `translate3d(${x}px, ${y}px, 0)`; }); }
 window.addEventListener('scroll', ()=> requestAnimationFrame(updateVehicles), {passive:true}); updateVehicles();
