@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rosaiah Chowdary | Data Engineer</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    // Minimal JS to handle nav toggle, section highlighting and profile panel
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.querySelector('.burger');
+      const aside = document.querySelector('.side-nav');
+      const navLinks = document.querySelectorAll('.side-nav a[href^="#"]');
+      const profileToggle = document.querySelector('.profile-toggle');
+      const profilePanel = document.querySelector('.profile-panel');
+
+      burger && burger.addEventListener('click', () => {
+        aside.classList.toggle('open');
+        burger.classList.toggle('open');
+      });
+
+      profileToggle && profileToggle.addEventListener('click', () => {
+        profilePanel.classList.toggle('open');
+      });
+
+      // Smooth scroll & close nav on link click (mobile)
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // close nav on mobile
+          if (aside.classList.contains('open')) {
+            aside.classList.remove('open');
+            burger.classList.remove('open');
+          }
+        });
+      });
+
+      // Update active nav item on scroll
+      const sections = Array.from(document.querySelectorAll('main section[id]'));
+      function updateActive() {
+        const scrollPos = window.scrollY + 120;
+        let currentId = sections[0].id;
+        for (const sec of sections) {
+          if (sec.offsetTop <= scrollPos) currentId = sec.id;
+        }
+        document.querySelectorAll('.side-nav a').forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+        });
+      }
+      updateActive();
+      window.addEventListener('scroll', updateActive);
+    });
+  </script>
+</head>
+<body>
+  <!-- Hanging side navigation -->
+  <button class="burger" aria-label="Toggle menu" title="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="side-nav" aria-label="Main navigation">
+    <div class="nav-top">
+      <button class="profile-toggle" title="Open profile">
+        <img src="photo.jpg" alt="Rosaiah" />
+      </button>
+      <div class="profile-panel" aria-hidden="true">
+        <h3>Rosaiah Chowdary</h3>
+        <p class="small">Data Engineer & ETL DataStage Consultant</p>
+        <p class="small muted">Hyderabad, India • Open to Remote & On-site</p>
+        <div class="quick-contact">
+          <a href="mailto:gummalla.ds@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav-links" role="navigation">
+      <a href="#home" class="nav-link active"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="#about" class="nav-link"><i class="fas fa-user"></i><span>About</span></a>
+      <a href="#roles" class="nav-link"><i class="fas fa-briefcase"></i><span>Roles</span></a>
+      <a href="#skills" class="nav-link"><i class="fas fa-chart-line"></i><span>Skills</span></a>
+      <a href="#contact" class="nav-link"><i class="fas fa-envelope-open"></i><span>Contact</span></a>
+    </nav>
+
+    <div class="nav-bottom">
+      <a href="https://github.com/grosaiahchowdary" target="_blank" title="Github"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </aside>
+
+  <main id="home" class="content">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-profile">
+          <img src="photo.jpg" alt="Rosaiah Chowdary" />
+        </div>
+        <div class="hero-copy">
+          <h1>Rosaiah Chowdary</h1>
+          <div class="subtitle">Data Engineer & ETL DataStage Consultant</div>
+          <p class="lead">
+            Passionate about building robust, scalable data pipelines and enabling data-driven decision making.
+            I specialize in IBM DataStage, ETL design, performance tuning and cloud migrations.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#about">About Me</a>
+            <a class="btn ghost" href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about" class="card">
+      <h2>About Me</h2>
+      <p>
+        I am a passionate Data Engineer and ETL DataStage consultant with hands-on experience designing,
+        developing, and optimizing data integration solutions. I focus on reliability, performance and
+        delivering business outcomes.
+      </p>
+      <ul>
+        <li>Expertise in IBM DataStage: parallel job design, tuning and administration.</li>
+        <li>Building and supporting high-volume batch pipelines (90,000+ scheduled jobs in production).</li>
+        <li>Experience with SQL, PL/SQL, Python automation, Kafka and cloud platforms (AWS, GCP).</li>
+        <li>Strong focus on data quality, governance, and migration modernization.</li>
+      </ul>
+    </section>
+
+    <section id="roles" class="card">
+      <h2>Roles & Responsibilities</h2>
+
+      <div class="grid-tiles">
+        <article class="tile">
+          <h3>Production Support & Operations</h3>
+          <p>Provided end-to-end support for large scheduled job landscapes, monitored SLAs and handled incidents.</p>
+        </article>
+
+        <article class="tile">
+          <h3>Issue Resolution & RCA</h3>
+          <p>Conducted root-cause analysis for recurring issues and managed urgent change requests during migrations.</p>
+        </article>
+
+        <article class="tile">
+          <h3>DataStage Job Development</h3>
+          <p>Designed and tuned DataStage jobs for performance, reusability and maintainability.</p>
+        </article>
+
+        <article class="tile">
+          <h3>Data Extraction & Integration</h3>
+          <p>Integrated data from databases, CSV/Excel and cloud sources, ensuring integrity and orchestration.</p>
+        </article>
+
+        <article class="tile">
+          <h3>Documentation & Knowledge Mgmt</h3>
+          <p>Authored technical specifications, maintained job inventory and created quick-reference guides.</p>
+        </article>
+
+        <article class="tile">
+          <h3>Testing & QA</h3>
+          <p>Defined system/integration/UAT tests, tracked defects and ensured deployment readiness.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="skills" class="card">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <span class="skill">IBM DataStage</span>
+        <span class="skill">ETL & Data Pipelines</span>
+        <span class="skill">SQL / PL-SQL</span>
+        <span class="skill">Python</span>
+        <span class="skill">Apache Kafka / MQ</span>
+        <span class="skill">Cloud (AWS, GCP)</span>
+        <span class="skill">Git / Jenkins / CI-CD</span>
+        <span class="skill">Data Warehousing</span>
+      </div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact</h2>
+      <p>If you'd like to connect for a role or a project, here's the best way to reach me:</p>
+      <ul class="contact-list">
+        <li><strong>Email:</strong> <a href="mailto:gummalla.ds@gmail.com">gummalla.ds@gmail.com</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/rosaiahchowdary/" target="_blank">linkedin.com/in/rosaiahchowdary</a></li>
+      </ul>
+      <div class="footer-note">Built with <span class="heart">&hearts;</span> and a love for data.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>© 2025 <strong>Rosaiah Chowdary</strong> — Data Engineer & ETL Specialist</div>
+  </footer>
+</body>
+</html>
