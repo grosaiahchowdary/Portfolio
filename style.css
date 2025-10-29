@@ -1,80 +1,68 @@
-/* Final creative automotive redesign with restored content, IST clock, and visitor counter */
+/* V2: final UI with 30% photo, glass contact tile, blue pulse, 3D tilt on hover for all tiles */
 :root{
-  --bg1: #071029;
-  --bg2: linear-gradient(180deg,#071029 0%, #04253a 60%);
-  --accent: #00c2ff;
-  --accent2: #ffcf33;
-  --muted: #9fb7c9;
-  --card: rgba(255,255,255,0.03);
-  --glass: rgba(255,255,255,0.04);
-  --radius: 12px;
-  --nav-w: 86px;
-  --glow: 0 0 12px rgba(0,194,255,0.35), 0 0 24px rgba(255,207,51,0.12);
+  --bg1:#071029;
+  --bg2:linear-gradient(180deg,#071029 0%, #04253a 60%);
+  --accent:#00c2ff;
+  --accent2:#ffcf33;
+  --muted:#9fb7c9;
+  --card:rgba(255,255,255,0.03);
+  --glass:rgba(255,255,255,0.04);
+  --nav-w:86px;
+  --blue-glow: 0 0 18px rgba(0,194,255,0.18), 0 0 36px rgba(0,194,255,0.08);
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;}
-body{
-  background: var(--bg2);
-  color:#eaf6ff;
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
+body{background:var(--bg2);color:#eaf6ff;min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* Left nav */
-.left-nav{
-  position:fixed;left:12px;top:12px;bottom:12px;width:var(--nav-w);
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
-  border-radius:16px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-  backdrop-filter: blur(6px);
-  z-index:40;
-}
+.left-nav{position:fixed;left:12px;top:12px;bottom:12px;width:var(--nav-w);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));border-radius:16px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow: 0 8px 30px rgba(0,0,0,0.6);backdrop-filter: blur(6px);z-index:40}
 .left-nav .nav-brand{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#6ef6ff);display:flex;align-items:center;justify-content:center;font-weight:800;color:#012;box-shadow:0 4px 18px rgba(0,0,0,0.4);font-size:18px}
 .left-nav ul{list-style:none;padding:0;margin:6px 0;display:flex;flex-direction:column;gap:10px;width:100%}
-.left-nav .nav-btn{
-  width:100%;height:48px;border-radius:10px;background:transparent;border:none;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;
-  transition: all .18s ease; font-weight:700;
-}
+.left-nav .nav-btn{width:100%;height:48px;border-radius:10px;background:transparent;border:none;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition: all .18s ease; font-weight:700}
 .left-nav .nav-btn.active{background:linear-gradient(90deg, rgba(0,194,255,0.12), rgba(255,207,51,0.06));color:var(--accent2);box-shadow:0 8px 18px rgba(0,0,0,0.5);transform:translateY(-4px)}
 .left-nav .nav-footer{margin-top:auto;font-size:12px;color:rgba(255,255,255,0.28)}
 
 /* hanger top */
-.hanger-top{
-  position:fixed;left:calc(var(--nav-w) + 28px);right:28px;top:18px;height:64px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:999px;padding:8px 18px;display:flex;align-items:center;gap:14px;z-index:35;backdrop-filter: blur(6px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-}
+.hanger-top{position:fixed;left:calc(var(--nav-w) + 28px);right:28px;top:18px;height:64px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:999px;padding:8px 18px;display:flex;align-items:center;gap:14px;z-index:35;backdrop-filter: blur(6px);box-shadow: 0 8px 30px rgba(0,0,0,0.5)}
 .hanger-left,.hanger-right{font-weight:700;color:var(--muted);width:160px;display:flex;align-items:center;gap:8px}
 .hanger-tabs{display:flex;gap:10px;margin:auto}
 .hanger-tab{background:transparent;border:1px solid transparent;padding:10px 16px;border-radius:999px;font-weight:800;color:var(--muted);cursor:pointer;transition:all .15s}
 .hanger-tab.active{background:linear-gradient(90deg, rgba(0,194,255,0.12), rgba(255,207,51,0.06)); color:var(--accent2); transform:translateY(-4px); box-shadow:0 10px 26px rgba(0,0,0,0.45)}
 
-/* main content area */
+/* main */
 .main{margin-left:calc(var(--nav-w) + 48px);padding:120px 48px 140px 48px;max-width:1200px}
 .panel{min-height:80vh;padding:28px;background:transparent;border-radius:10px;margin-bottom:40px;display:none}
 .panel.active{display:block}
 .lead{color:var(--muted);font-size:18px;margin-top:8px}
-h1{font-size:40px;margin:0 0 8px 0}
+h1{font-size:32px;margin:0 0 8px 0}
 .accent{color:var(--accent2)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
 .card{background:var(--card);padding:18px;border-radius:12px;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,0.45);font-weight:700}
 
-/* About header */
-.about-header{display:flex;gap:18px;align-items:center;margin-bottom:18px}
-.profile-photo{width:140px;height:140px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
-.about-meta h1{margin:0;font-size:28px}
-.role{color:var(--accent2);font-weight:700;margin-top:6px}
-.location{color:var(--muted);margin-top:6px}
-.contact-icons{display:flex;gap:10px;margin-top:10px}
-.icon{width:22px;height:22px;display:inline-block;fill:currentColor;opacity:0.95}
+/* about header layout */
+.about-header{display:flex;gap:18px;align-items:flex-start;margin-bottom:18px;flex-wrap:wrap}
+.photo-and-contact{display:flex;flex-direction:column;gap:12px;align-items:center;width:30%}
+.profile-photo{width:100%;height:auto;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
 
-/* about tile */
-.about-tile{background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+/* contact tile (glass style) */
+.contact-tile{width:100%;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(0,194,255,0.08);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.contact-row{display:flex;gap:8px;align-items:center;overflow:hidden}
+.contact-row a{color:var(--accent);text-decoration:none;font-weight:700;font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* about tile (glass) */
+.about-tile{flex:1;min-width:60%;padding:18px;border-radius:12px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+
+/* common tile hover effects (used by .tile) */
+.tile{transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s, border-color .35s;transform-origin:center center;will-change:transform,box-shadow}
+.tile:hover{transform:translateY(-10px) rotateX(3deg) rotateY(2deg) scale(1.02);box-shadow: var(--blue-glow);border-color:rgba(0,194,255,0.18);animation:bluePulse 2.6s infinite;}
+@keyframes bluePulse{0%{box-shadow:0 8px 24px rgba(0,194,255,0.08)}50%{box-shadow:0 18px 48px rgba(0,194,255,0.18)}100%{box-shadow:0 8px 24px rgba(0,194,255,0.08)}}
+
+/* icon sizing */
+.icon{width:22px;height:22px;display:inline-block;fill:currentColor;opacity:0.95}
+.icon.small{width:16px;height:16px}
 
 /* vehicle layer */
-.vehicle-layer{
-  position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:20;overflow:visible;
-}
+.vehicle-layer{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:20;overflow:visible}
 .vehicle{position:absolute;height:72px;will-change:transform,opacity;opacity:0.95;filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));transition:transform .08s linear}
 .vehicle.v2{height:92px;opacity:0.95}
 .vehicle.v3{height:56px;opacity:0.9}
@@ -84,14 +72,13 @@ footer{position:fixed;left:calc(var(--nav-w) + 28px);right:28px;bottom:18px;heig
 .footer-left{font-weight:600}
 .footer-right{font-weight:700}
 
-/* glow text for clock and visitor counter */
+/* glow text */
 .glow-text{color:var(--accent);text-shadow:0 0 8px rgba(0,194,255,0.25);animation:glow 2.4s infinite}
-@keyframes glow{0%{text-shadow:0 0 6px rgba(0,194,255,0.18)}50%{text-shadow:0 0 14px rgba(255,207,51,0.28)}100%{text-shadow:0 0 6px rgba(0,194,255,0.18)}}
+@keyframes glow{0%{text-shadow:0 0 6px rgba(0,194,255,0.18)}50%{text-shadow:0 0 14px rgba(0,194,255,0.28)}100%{text-shadow:0 0 6px rgba(0,194,255,0.18)}}
 
-/* responsive */
+/* responsive tweaks */
 @media (max-width:900px){
-  .left-nav{left:10px;width:68px}
-  .hanger-top{left:calc(68px + 22px);right:14px}
+  .photo-and-contact{width:36%}
   .main{padding:100px 20px 120px 20px;margin-left:calc(68px + 36px)}
 }
 @media (max-width:640px){
@@ -99,11 +86,11 @@ footer{position:fixed;left:calc(var(--nav-w) + 28px);right:28px;bottom:18px;heig
   .hanger-top{left:14px;right:14px;top:12px}
   .main{margin-left:0;padding-top:92px;padding-left:20px;padding-right:20px}
   .vehicle{display:none}
+  .about-header{flex-direction:column;align-items:center}
+  .photo-and-contact{width:100%;flex-direction:row;gap:12px;justify-content:flex-start}
+  .profile-photo{width:30%}
+  .about-tile{min-width:100%}
 }
-
-/* subtle floating for vehicles */
-@keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-.vehicle{animation: floaty 3.6s ease-in-out infinite}
 
 /* small polish */
 .card h3{margin:0 0 8px 0}
