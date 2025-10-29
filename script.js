@@ -1,97 +1,77 @@
-// Lightweight script to manage tabs, accessibility, and tile interactions
+// script.js - behavior for tabs, tiles, and clock
+document.addEventListener('DOMContentLoaded', function(){
+  // clock
+  function updateClock(){
+    const d = new Date();
+    const hh = String(d.getHours()).padStart(2,'0');
+    const mm = String(d.getMinutes()).padStart(2,'0');
+    const ss = String(d.getSeconds()).padStart(2,'0');
+    const el = document.querySelector('.clock');
+    if(el) el.textContent = `${hh}:${mm}:${ss}`;
+  }
+  // create clock element if not present
+  if(!document.querySelector('.clock')){
+    const nameHeader = document.querySelector('.name-header');
+    const clock = document.createElement('div');
+    clock.className = 'clock';
+    clock.setAttribute('aria-hidden','true');
+    clock.textContent = '--:--:--';
+    nameHeader.appendChild(clock);
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const panels = Array.from(document.querySelectorAll('.details-panel'));
-  const buttons = {
-    about: document.getElementById('about-btn'),
-    skills: document.getElementById('skills-btn'),
-    roles: document.getElementById('roles-btn')
-  };
+  // Tab behavior
+  const tabs = document.querySelectorAll('.highlight-btn');
+  const panels = document.querySelectorAll('.details-panel');
 
-  function showPanel(panelId, setFocus = false) {
+  function showPanel(id){
     panels.forEach(p => {
-      if (p.id === panelId) {
-        p.removeAttribute('hidden');
-      } else {
-        p.setAttribute('hidden', '');
-      }
+      if(p.id === id){
+        p.hidden = false;
+      } else p.hidden = true;
     });
-
-    // Update buttons ARIA state and visual active class
-    Object.entries(buttons).forEach(([key, btn]) => {
-      if (key === panelId) {
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-      } else {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-      }
+    tabs.forEach(t => {
+      t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id ? 'true' : 'false');
     });
-
-    if (setFocus) {
-      const firstPanel = document.getElementById(panelId);
-      if (firstPanel) firstPanel.focus();
-    }
+    // focus first tile inside shown panel
+    const activePanel = document.getElementById(id);
+    const firstTile = activePanel ? activePanel.querySelector('.wood-tile') : null;
+    if(firstTile) firstTile.focus();
   }
 
-  // wire buttons
-  buttons.about.addEventListener('click', () => showPanel('about'));
-  buttons.skills.addEventListener('click', () => showPanel('skills'));
-  buttons.roles.addEventListener('click', () => showPanel('roles'));
-
-  // keyboard nav for tablist (Left/Right or Up/Down)
-  const tablist = document.querySelector('.button-group');
-  tablist.addEventListener('keydown', (e) => {
-    const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
-    if (!keys.includes(e.key)) return;
-    e.preventDefault();
-    const btns = Array.from(tablist.querySelectorAll('[role="tab"]'));
-    const currentIndex = btns.findIndex(b => b.classList.contains('active'));
-    let nextIndex = 0;
-    switch (e.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        nextIndex = (currentIndex - 1 + btns.length) % btns.length;
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        nextIndex = (currentIndex + 1) % btns.length;
-        break;
-      case 'Home':
-        nextIndex = 0;
-        break;
-      case 'End':
-        nextIndex = btns.length - 1;
-        break;
-    }
-    btns[nextIndex].focus();
-    btns[nextIndex].click();
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      showPanel(tab.getAttribute('aria-controls'));
+    });
+    tab.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tab.click(); }
+    });
   });
 
-  // Tile expand/collapse, accessible via keyboard (Enter/Space) and click
-  document.querySelectorAll('.wood-tile').forEach(tile => {
-    tile.addEventListener('click', (e) => {
-      toggleTile(tile);
+  // default: show about
+  const aboutBtn = document.getElementById('about-btn');
+  if(aboutBtn) aboutBtn.click();
+
+  // tiles expand/collapse
+  document.querySelectorAll('.tiles-group .wood-tile, .details-panel > .wood-tile').forEach(tile => {
+    tile.setAttribute('role','button');
+    tile.addEventListener('click', () => {
+      const expanded = tile.getAttribute('aria-expanded') === 'true';
+      tile.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      const expl = tile.querySelector('.explanation');
+      if(expl) {
+        expl.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+      }
     });
     tile.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleTile(tile);
-      } else if (e.key === 'Escape') {
-        // collapse on escape
-        if (tile.getAttribute('aria-expanded') === 'true') toggleTile(tile, false);
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tile.click(); }
+      if(e.key === 'Escape') {
+        tile.setAttribute('aria-expanded','false');
+        const expl = tile.querySelector('.explanation');
+        if(expl) expl.setAttribute('aria-hidden','true');
       }
     });
   });
 
-  function toggleTile(tile, force) {
-    const isExpanded = tile.getAttribute('aria-expanded') === 'true';
-    const newState = typeof force === 'boolean' ? force : !isExpanded;
-    tile.setAttribute('aria-expanded', newState ? 'true' : 'false');
-    const expl = tile.querySelector('.explanation');
-    if (expl) expl.setAttribute('aria-hidden', newState ? 'false' : 'true');
-  }
-
-  // Initialize - show about by default
-  showPanel('about');
 });
