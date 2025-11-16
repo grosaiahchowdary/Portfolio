@@ -1,153 +1,251 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rosaiah Chowdary — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rosaiah Chowdary — Data Engineer</title>
+  <meta name="author" content="Rosaiah Chowdary">
+  <meta name="description" content="Portfolio — Data Engineer & ETL Specialist">
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <script defer src="script.js"></script>
+
+  <style>
+    /* --------- Variables & Reset --------- */
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0366d6;
+      --glass: rgba(8,15,30,0.04);
+      --success:#16a34a;
+      --radius:14px;
+      color-scheme: light;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#eef3fb 0%, #f6f8fb 100%);color:#0f172a;padding:28px}
+
+    /* --------- Page container --------- */
+    .site{max-width:1100px;margin:0 auto}
+
+    /* --------- Header --------- */
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#5bb6ff);color:white;font-weight:700}
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+    .header-actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--card);border:1px solid rgba(15,23,42,0.04);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn.secondary{background:transparent;border:1px solid rgba(15,23,42,0.06)}
+
+    /* --------- Hero / Profile --------- */
+    .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid rgba(15,23,42,0.05);box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+
+    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block}
+    .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
+    .name{font-size:20px;font-weight:700}
+    .title{color:var(--accent);font-weight:700}
+    .meta{color:var(--muted);font-size:13px}
+
+    .profile-right{display:flex;flex-direction:column;gap:10px}
+    .intro{font-size:15px;color:#0b1220;line-height:1.5}
+    .cta-row{display:flex;gap:10px;margin-top:6px}
+
+    /* --------- Tabs & panels --------- */
+    .tabs{display:flex;gap:8px;margin-top:18px}
+    .tab{padding:10px 14px;border-radius:10px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:600}
+    .tab.active{background:linear-gradient(180deg, rgba(3,102,214,0.08), rgba(3,102,214,0.02));border-color:rgba(3,102,214,0.12);color:var(--accent)}
+
+    .panels{margin-top:14px}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    /* --------- Tiles / Grid --------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .tile{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);cursor:pointer;transition:transform .22s ease,box-shadow .22s}
+    .tile:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.06)}
+    .tile h3{margin:0 0 8px 0}
+    .tile p{margin:0;color:var(--muted);font-size:14px}
+
+    /* progress */
+    .skill{display:flex;flex-direction:column;gap:6px}
+    .bar{height:10px;background:var(--glass);border-radius:999px;overflow:hidden}
+    .progress{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#7cd1ff);width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+
+    /* footer */
+    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .photo{width:160px;height:160px}
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="clock" aria-hidden="true">--:--:--</div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="profile-area">
-      <div class="profile-left">
-        <img src="1000099595.jpeg" alt="Rosaiah Chowdary" class="photo">
-        <div class="name-and-contacts">
-          <h1 class="name">Rosaiah Chowdary</h1>
-          <div class="contacts">
-            <a href="mailto:gummalla.ds@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-          </div>
+  <div class="site">
+    <header class="site-header">
+      <div class="brand">
+        <div class="logo">RC</div>
+        <div>
+          <h1>Rosaiah Chowdary</h1>
+          <p class="meta">Data Engineer • ETL Specialist — Hyderabad, India</p>
         </div>
       </div>
 
-      <div class="profile-right">
-        <div class="designation">Data Engineer &amp; ETL Specialist</div>
-        <div class="location">📍 Hyderabad, India</div>
+      <div class="header-actions">
+        <button class="btn" id="downloadResume"><i class="fa-regular fa-file-lines"></i>&nbsp;Download Resume</button>
+        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
       </div>
-    </section>
+    </header>
 
-    <nav class="tabs" role="tablist" aria-label="Profile sections">
-      <button role="tab" class="tab-btn" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
-      <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
-      <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
-    </nav>
+    <main>
+      <section class="hero">
+        <aside class="card profile-left">
+          <img src="1000099595.jpeg" alt="Rosaiah" class="photo">
+          <div class="name">Rosaiah Chowdary</div>
+          <div class="title">Data Engineer & ETL Specialist</div>
+          <div class="meta">IBM DataStage • Python • SQL • Kafka • Cloud (AWS/GCP)</div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <a class="btn" href="mailto:gummalla.ds@gmail.com"><i class="fa-regular fa-envelope"></i>&nbsp;Email</a>
+            <a class="btn secondary" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank"><i class="fa-brands fa-linkedin"></i>&nbsp;LinkedIn</a>
+          </div>
+        </aside>
 
-    <section class="panels">
-      <article id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
-        <h2>About Me</h2>
-        <p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
-        <ul>
-          <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
-          <li>Delivered end-to-end data warehousing and migration projects</li>
-          <li>Integrated data from relational DBs, files, and cloud</li>
-          <li>Problem-solving focus: data quality, governance, automation</li>
-          <li>Modernized legacy ETL &amp; migration to cloud</li>
-        </ul>
-      </article>
+        <section class="card profile-right">
+          <div class="intro">I build reliable, high-performance ETL pipelines and support large-scale data platforms. I specialise in IBM DataStage, operational support, performance tuning and migrations to cloud-based architectures.</div>
 
-      <article id="panel-roles" class="panel" role="tabpanel" aria-labelledby="tab-roles" hidden>
-        <h2>Roles &amp; Responsibilities</h2>
-        <div class="tiles">
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Production Support &amp; Operations</div>
-            <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs.</div>
+          <div class="cta-row">
+            <button class="btn" id="contactMe">Contact</button>
+            <button class="btn secondary" id="viewProjects">Projects</button>
           </div>
 
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Issue Resolution &amp; RCA</div>
-            <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity.</div>
+          <div class="tabs" role="tablist" aria-label="Sections">
+            <button class="tab active" data-target="about">About</button>
+            <button class="tab" data-target="roles">Roles</button>
+            <button class="tab" data-target="skills">Skills</button>
           </div>
 
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">DataStage Job Development</div>
-            <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality and speed.</div>
+          <div class="panels">
+            <div id="about" class="panel active">
+              <p style="margin-top:12px">Passionate Data Engineer with extensive hands-on experience designing, developing and operating ETL solutions. I focus on automation, observability and measurable performance improvements.</p>
+            </div>
+
+            <div id="roles" class="panel">
+              <div class="grid" style="margin-top:12px">
+                <div class="tile"><h3>Production Support</h3><p>Managed 90k+ scheduled jobs, incident triage, on-call and SLA-driven operations.</p></div>
+                <div class="tile"><h3>Job Development</h3><p>Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</p></div>
+                <div class="tile"><h3>Change Management</h3><p>Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</p></div>
+                <div class="tile"><h3>Documentation</h3><p>Clear KB articles, runbooks and onboarding guides to speed up team ramp-up.</p></div>
+              </div>
+            </div>
+
+            <div id="skills" class="panel">
+              <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>IBM DataStage</strong><small>95%</small></div><div class="bar"><div class="progress" data-val="95"></div></div></div>
+                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>SQL & PL/SQL</strong><small>90%</small></div><div class="bar"><div class="progress" data-val="90"></div></div></div>
+                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Python</strong><small>82%</small></div><div class="bar"><div class="progress" data-val="82"></div></div></div>
+                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Cloud (AWS/GCP)</strong><small>78%</small></div><div class="bar"><div class="progress" data-val="78"></div></div></div>
+              </div>
+            </div>
           </div>
 
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Data Extraction &amp; Integration</div>
-            <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration.</div>
-          </div>
+        </section>
+      </section>
 
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Documentation &amp; KM</div>
-            <div class="tile-body">Developed technical specifications, transformation/logic documentation, and user guides for efficient knowledge management.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Testing &amp; Quality Assurance</div>
-            <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Client &amp; Stakeholder Engagement</div>
-            <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Deployment &amp; Change Management</div>
-            <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams.</div>
-          </div>
-        </div>
-      </article>
-
-      <article id="panel-skills" class="panel" role="tabpanel" aria-labelledby="tab-skills" hidden>
-        <h2>Skills</h2>
-        <div class="tiles">
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">ETL Development &amp; Support</div>
-            <div class="tile-body">Designing, building, and managing Extract, Transform, Load (ETL) processes for reliable movement of data across systems. Ensuring high-quality and timely data delivery with minimal errors.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">IBM DataStage</div>
-            <div class="tile-body">Advanced skill in IBM DataStage, including scalable ETL job design, parallel processing, job tuning, troubleshooting, and ongoing operational support for data integration.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">SQL &amp; PL/SQL</div>
-            <div class="tile-body">Writing and optimizing queries, stored procedures, and data transformation scripts for secure, high-performance and accurate data processing in relational databases.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Python for Data Eng.</div>
-            <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Data Warehousing</div>
-            <div class="tile-body">Designing robust data models, developing data warehouses and data marts for business analytics, and supporting large-scale analytical workloads.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Apache Kafka &amp; MQ</div>
-            <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven, scalable architectures and fast data pipelines.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Cloud (AWS, GCP)</div>
-            <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
-          </div>
-
-          <div class="tile" tabindex="0" aria-expanded="false">
-            <div class="tile-title">Git, Jenkins, CI/CD</div>
-            <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with modern DevOps tools like Git and Jenkins.</div>
+      <section style="margin-top:18px">
+        <div class="card">
+          <h2 style="margin:0 0 12px 0">Selected Projects</h2>
+          <div class="grid">
+            <div class="tile"><h3>Data Warehouse Migration</h3><p>Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x.</p></div>
+            <div class="tile"><h3>Real-time Stream Integration</h3><p>Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</p></div>
+            <div class="tile"><h3>Operational Automation</h3><p>Automated recurring maintenance tasks and reduced manual intervention by 70%.</p></div>
           </div>
         </div>
-      </article>
-    </section>
-  </main>
+      </section>
 
-  <footer class="site-footer">
-    <small>© Rosaiah Chowdary — Data Engineering &amp; ETL Specialist</small>
-  </footer>
+    </main>
+
+    <footer>
+      <small>© Rosaiah Chowdary — Data Engineering & ETL Specialist</small>
+    </footer>
+  </div>
+
+  <script>
+    // Tabs
+    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', e => {
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+
+      // when switching to skills, animate bars
+      if(btn.dataset.target === 'skills') animateSkills();
+    }));
+
+    // Progress bar animation
+    function animateSkills(){
+      document.querySelectorAll('.progress').forEach(el => {
+        const val = el.dataset.val || 0;
+        el.style.width = val + '%';
+      });
+    }
+    // animate once on load if skills visible
+    if(document.querySelector('#skills').classList.contains('active')) animateSkills();
+
+    // Theme toggle (light/dark)
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if(!dark){
+        document.documentElement.setAttribute('data-theme','dark');
+        document.documentElement.style.setProperty('--bg','#0b1220');
+        document.documentElement.style.setProperty('--card','#071028');
+        document.documentElement.style.setProperty('--muted','#9aa6b2');
+        document.documentElement.style.setProperty('--accent','#7cc4ff');
+        themeBtn.setAttribute('aria-pressed','true');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        document.documentElement.style.removeProperty('--bg');
+        document.documentElement.style.removeProperty('--card');
+        document.documentElement.style.removeProperty('--muted');
+        document.documentElement.style.removeProperty('--accent');
+        themeBtn.setAttribute('aria-pressed','false');
+      }
+    });
+
+    // Download resume (simple PDF generator from page content)
+    document.getElementById('downloadResume').addEventListener('click', ()=>{
+      const data = {
+        name: 'Rosaiah Chowdary',
+        title: 'Data Engineer & ETL Specialist',
+        email: 'gummalla.ds@gmail.com'
+      };
+      // quick printable page: open a new window with trimmed profile
+      const win = window.open('', '_blank');
+      win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
+      win.document.close();
+    });
+
+    // Contact button
+    document.getElementById('contactMe').addEventListener('click', ()=>{
+      window.location.href = 'mailto:gummalla.ds@gmail.com?subject=Inquiry%20from%20portfolio';
+    });
+
+    // Small accessibility: keyboard open tiles
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.setAttribute('tabindex', '0');
+      tile.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') tile.click(); });
+    });
+
+    // Optional: show remote projects section when 'viewProjects' clicked
+    document.getElementById('viewProjects').addEventListener('click', ()=>{
+      document.querySelector('html').scrollTop = document.querySelector('section[style*="margin-top:18px"]').offsetTop - 20;
+    });
+  </script>
 </body>
 </html>
