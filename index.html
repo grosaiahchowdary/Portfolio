@@ -14,19 +14,25 @@
   <style>
     /* --------- Variables & Reset --------- */
     :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0366d6;
-      --glass: rgba(8,15,30,0.04);
+      --bg1: #0f172a;            /* deep navy */
+      --bg2: #071033;            /* dark gradient end */
+      --card:#0b1220;           /* card bg in dark theme */
+      --muted:#9aa6b2;
+      --accent:#39b6ff;         /* brighter cyan accent */
+      --accent-2:#60e2c6;       /* secondary accent */
+      --glass: rgba(255,255,255,0.04);
       --success:#16a34a;
-      --radius:14px;
-      color-scheme: light;
+      --radius:16px;
+      color-scheme: dark;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,#eef3fb 0%, #f6f8fb 100%);color:#0f172a;padding:28px}
+    body{margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(57,182,255,0.08), transparent 8%), radial-gradient(1000px 500px at 90% 90%, rgba(96,226,198,0.05), transparent 12%), linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);color:#e6eef6;padding:28px}
+
+    /* subtle floating SVG blobs */
+    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.14;pointer-events:none;transform:rotate(12deg)}
+    .floating-svg.left{left:-80px;right:auto;top:60vh;transform:rotate(-8deg)}
 
     /* --------- Page container --------- */
     .site{max-width:1100px;margin:0 auto}
@@ -34,31 +40,31 @@
     /* --------- Header --------- */
     header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#5bb6ff);color:white;font-weight:700}
-    .brand h1{font-size:16px;margin:0}
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#021025;font-weight:800;letter-spacing:0.6px}
+    .brand h1{font-size:18px;margin:0;color:#eaf6ff}
     .brand p{margin:0;font-size:13px;color:var(--muted)}
     .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--card);border:1px solid rgba(15,23,42,0.04);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-    .btn.secondary{background:transparent;border:1px solid rgba(15,23,42,0.06)}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700;color:#eaf6ff;backdrop-filter:blur(6px)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04)}
 
     /* --------- Hero / Profile --------- */
     .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
-    .card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid rgba(15,23,42,0.05);box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
 
-    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block}
+    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block;border:4px solid rgba(255,255,255,0.04)}
     .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .name{font-size:20px;font-weight:700}
+    .name{font-size:20px;font-weight:800;color:#fbfdff}
     .title{color:var(--accent);font-weight:700}
     .meta{color:var(--muted);font-size:13px}
 
     .profile-right{display:flex;flex-direction:column;gap:10px}
-    .intro{font-size:15px;color:#0b1220;line-height:1.5}
+    .intro{font-size:15px;color:#dfefff;line-height:1.6}
     .cta-row{display:flex;gap:10px;margin-top:6px}
 
     /* --------- Tabs & panels --------- */
     .tabs{display:flex;gap:8px;margin-top:18px}
-    .tab{padding:10px 14px;border-radius:10px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:600}
-    .tab.active{background:linear-gradient(180deg, rgba(3,102,214,0.08), rgba(3,102,214,0.02));border-color:rgba(3,102,214,0.12);color:var(--accent)}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:700;color:#dbefff}
+    .tab.active{background:linear-gradient(180deg, rgba(57,182,255,0.08), rgba(96,226,198,0.03));border-color:rgba(57,182,255,0.12);color:var(--accent)}
 
     .panels{margin-top:14px}
     .panel{display:none}
@@ -66,18 +72,31 @@
 
     /* --------- Tiles / Grid --------- */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .tile{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);cursor:pointer;transition:transform .22s ease,box-shadow .22s}
-    .tile:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.06)}
-    .tile h3{margin:0 0 8px 0}
+
+    /* card flip container */
+    .tile{perspective:1200px;background:transparent;border-radius:12px}
+    .tile-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.9,.2,1)}
+    .tile:hover .tile-inner{transform:rotateY(180deg) translateY(-6px)}
+
+    .tile-face{position:relative;border-radius:12px;backface-visibility:hidden;padding:16px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));min-height:120px;display:flex;flex-direction:column;justify-content:center}
+    .tile-face.back{position:absolute;top:0;left:0;right:0;bottom:0;transform:rotateY(180deg);}
+
+    .tile h3{margin:0 0 8px 0;color:#f8feff}
     .tile p{margin:0;color:var(--muted);font-size:14px}
 
+    /* hover effects for non-flip tiles */
+    .tile.simple .tile-face{transition:box-shadow .22s,transform .22s}
+    .tile.simple:hover .tile-face{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,6,23,0.6)}
+
     /* progress */
-    .skill{display:flex;flex-direction:column;gap:6px}
-    .bar{height:10px;background:var(--glass);border-radius:999px;overflow:hidden}
-    .progress{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#7cd1ff);width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+    .skill{display:flex;flex-direction:column;gap:8px}
+    .bar{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+
+    .skill-desc{font-size:13px;color:var(--muted);margin-top:6px}
 
     /* footer */
-    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}
+    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
 
     /* responsive */
     @media (max-width:900px){
@@ -87,6 +106,16 @@
   </style>
 </head>
 <body>
+  <!-- decorative SVGs -->
+  <svg class="floating-svg" width="420" height="420" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#39b6ff" stop-opacity="0.6"/><stop offset="1" stop-color="#60e2c6" stop-opacity="0.4"/></linearGradient></defs>
+    <g fill="url(#g1)"><circle cx="300" cy="300" r="220"/></g>
+  </svg>
+  <svg class="floating-svg left" width="360" height="360" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#7c9cff" stop-opacity="0.28"/><stop offset="1" stop-color="#60e2c6" stop-opacity="0.18"/></linearGradient></defs>
+    <g fill="url(#g2)"><rect x="50" y="50" width="500" height="500" rx="80"/></g>
+  </svg>
+
   <div class="site">
     <header class="site-header">
       <div class="brand">
@@ -99,7 +128,7 @@
 
       <div class="header-actions">
         <button class="btn" id="downloadResume"><i class="fa-regular fa-file-lines"></i>&nbsp;Download Resume</button>
-        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
       </div>
     </header>
 
@@ -117,7 +146,7 @@
         </aside>
 
         <section class="card profile-right">
-          <div class="intro">I build reliable, high-performance ETL pipelines and support large-scale data platforms. I specialise in IBM DataStage, operational support, performance tuning and migrations to cloud-based architectures.</div>
+          <div class="intro">I build reliable, high-performance ETL pipelines and support large-scale data platforms. I specialise in IBM DataStage, operational support, performance tuning and migrations to cloud-based architectures. I focus on automation, observability and measurable improvements that reduce cost and incident surface area.</div>
 
           <div class="cta-row">
             <button class="btn" id="contactMe">Contact</button>
@@ -132,24 +161,86 @@
 
           <div class="panels">
             <div id="about" class="panel active">
-              <p style="margin-top:12px">Passionate Data Engineer with extensive hands-on experience designing, developing and operating ETL solutions. I focus on automation, observability and measurable performance improvements.</p>
+              <p style="margin-top:12px">Passionate Data Engineer with extensive hands-on experience designing, developing and operating ETL solutions. I deliver robust production support, architect efficient dataflows and mentor teams on best practices around observability and deployment hygiene.</p>
             </div>
 
             <div id="roles" class="panel">
               <div class="grid" style="margin-top:12px">
-                <div class="tile"><h3>Production Support</h3><p>Managed 90k+ scheduled jobs, incident triage, on-call and SLA-driven operations.</p></div>
-                <div class="tile"><h3>Job Development</h3><p>Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</p></div>
-                <div class="tile"><h3>Change Management</h3><p>Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</p></div>
-                <div class="tile"><h3>Documentation</h3><p>Clear KB articles, runbooks and onboarding guides to speed up team ramp-up.</p></div>
+
+                <div class="tile simple">
+                  <div class="tile-inner">
+                    <div class="tile-face front">
+                      <h3>Production Support</h3>
+                      <p>Managed 90k+ scheduled jobs, incident triage, on-call rotations and SLA-driven operations.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tile">
+                  <div class="tile-inner">
+                    <div class="tile-face front">
+                      <h3>Job Development</h3>
+                      <p>Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</p>
+                    </div>
+                    <div class="tile-face back">
+                      <h3>Job Development — Details</h3>
+                      <p class="skill-desc">Create parameterised reusable components, use partitioning strategies (round-robin, modulus), and implement checkpointing and restartability. Familiar with both Server and IBM InfoSphere Parallel frameworks.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tile">
+                  <div class="tile-inner">
+                    <div class="tile-face front">
+                      <h3>Change Management</h3>
+                      <p>Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</p>
+                    </div>
+                    <div class="tile-face back">
+                      <h3>Change Management — Details</h3>
+                      <p class="skill-desc">Runbook-driven releases, impact analysis, stakeholder communication and automated smoke tests to validate critical paths post-deployment.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tile simple">
+                  <div class="tile-inner">
+                    <div class="tile-face front">
+                      <h3>Documentation & Onboarding</h3>
+                      <p>Clear KB articles, runbooks and onboarding guides to speed up team ramp-up and reduce knowledge debt.</p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
             <div id="skills" class="panel">
-              <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>IBM DataStage</strong><small>95%</small></div><div class="bar"><div class="progress" data-val="95"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>SQL & PL/SQL</strong><small>90%</small></div><div class="bar"><div class="progress" data-val="90"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Python</strong><small>82%</small></div><div class="bar"><div class="progress" data-val="82"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Cloud (AWS/GCP)</strong><small>78%</small></div><div class="bar"><div class="progress" data-val="78"></div></div></div>
+              <div style="margin-top:12px;display:flex;flex-direction:column;gap:14px">
+
+                <div class="skill">
+                  <div style="display:flex;justify-content:space-between"><strong>IBM DataStage</strong><small>95%</small></div>
+                  <div class="bar"><div class="progress" data-val="95"></div></div>
+                  <div class="skill-desc">Expert in parallel job design, performance tuning, and legacy migration to cloud-friendly architectures. Experience with complex layouts, custom stages and parameter sets.</div>
+                </div>
+
+                <div class="skill">
+                  <div style="display:flex;justify-content:space-between"><strong>SQL & PL/SQL</strong><small>90%</small></div>
+                  <div class="bar"><div class="progress" data-val="90"></div></div>
+                  <div class="skill-desc">Strong SQL tuning background: indexing strategies, explain plans, partition pruning and bulk-load patterns to accelerate ETL loads.</div>
+                </div>
+
+                <div class="skill">
+                  <div style="display:flex;justify-content:space-between"><strong>Python</strong><small>82%</small></div>
+                  <div class="bar"><div class="progress" data-val="82"></div></div>
+                  <div class="skill-desc">Scripting for automation, lightweight data transforms, and writing observability hooks for pipelines (logging, metrics, alerting).</div>
+                </div>
+
+                <div class="skill">
+                  <div style="display:flex;justify-content:space-between"><strong>Cloud (AWS/GCP)</strong><small>78%</small></div>
+                  <div class="bar"><div class="progress" data-val="78"></div></div>
+                  <div class="skill-desc">Architected pipeline components on S3, Glue, Cloud Storage and Pub/Sub/Kafka; cost-aware designs and infra-as-code practices.</div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -161,9 +252,13 @@
         <div class="card">
           <h2 style="margin:0 0 12px 0">Selected Projects</h2>
           <div class="grid">
-            <div class="tile"><h3>Data Warehouse Migration</h3><p>Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x.</p></div>
-            <div class="tile"><h3>Real-time Stream Integration</h3><p>Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</p></div>
-            <div class="tile"><h3>Operational Automation</h3><p>Automated recurring maintenance tasks and reduced manual intervention by 70%.</p></div>
+
+            <div class="tile simple"><div class="tile-inner"><div class="tile-face front"><h3>Data Warehouse Migration</h3><p>Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x and cut infra costs by 35%.</p></div></div></div>
+
+            <div class="tile"><div class="tile-inner"><div class="tile-face front"><h3>Real-time Stream Integration</h3><p>Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</p></div><div class="tile-face back"><h3>Streaming — Details</h3><p class="skill-desc">Deployed durable consumers, idempotent writes and partition-aware processing to ensure exactly-once semantics where required.</p></div></div></div>
+
+            <div class="tile simple"><div class="tile-inner"><div class="tile-face front"><h3>Operational Automation</h3><p>Automated recurring maintenance tasks and reduced manual intervention by 70% using scripts and scheduler orchestration.</p></div></div></div>
+
           </div>
         </div>
       </section>
@@ -197,24 +292,20 @@
     // animate once on load if skills visible
     if(document.querySelector('#skills').classList.contains('active')) animateSkills();
 
-    // Theme toggle (light/dark)
+    // Theme toggle: allow light fallback
     const themeBtn = document.getElementById('themeToggle');
     themeBtn.addEventListener('click', () => {
-      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if(!dark){
-        document.documentElement.setAttribute('data-theme','dark');
-        document.documentElement.style.setProperty('--bg','#0b1220');
-        document.documentElement.style.setProperty('--card','#071028');
-        document.documentElement.style.setProperty('--muted','#9aa6b2');
-        document.documentElement.style.setProperty('--accent','#7cc4ff');
-        themeBtn.setAttribute('aria-pressed','true');
-      } else {
+      const light = document.documentElement.getAttribute('data-theme') === 'light';
+      if(light){
         document.documentElement.removeAttribute('data-theme');
-        document.documentElement.style.removeProperty('--bg');
-        document.documentElement.style.removeProperty('--card');
-        document.documentElement.style.removeProperty('--muted');
-        document.documentElement.style.removeProperty('--accent');
-        themeBtn.setAttribute('aria-pressed','false');
+        document.documentElement.style.removeProperty('--bg1');
+      } else {
+        document.documentElement.setAttribute('data-theme','light');
+        // quick light override
+        document.documentElement.style.setProperty('--bg1','#f6f8fb');
+        document.documentElement.style.setProperty('--bg2','#ffffff');
+        document.documentElement.style.setProperty('--muted','#6b7280');
+        document.documentElement.style.setProperty('--accent','#0366d6');
       }
     });
 
@@ -225,7 +316,6 @@
         title: 'Data Engineer & ETL Specialist',
         email: 'gummalla.ds@gmail.com'
       };
-      // quick printable page: open a new window with trimmed profile
       const win = window.open('', '_blank');
       win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
       win.document.close();
@@ -236,13 +326,13 @@
       window.location.href = 'mailto:gummalla.ds@gmail.com?subject=Inquiry%20from%20portfolio';
     });
 
-    // Small accessibility: keyboard open tiles
+    // keyboard accessibility for tiles
     document.querySelectorAll('.tile').forEach(tile => {
       tile.setAttribute('tabindex', '0');
-      tile.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') tile.click(); });
+      tile.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') tile.querySelector('.tile-inner')?.classList.toggle('flipped'); });
     });
 
-    // Optional: show remote projects section when 'viewProjects' clicked
+    // scroll to projects
     document.getElementById('viewProjects').addEventListener('click', ()=>{
       document.querySelector('html').scrollTop = document.querySelector('section[style*="margin-top:18px"]').offsetTop - 20;
     });
