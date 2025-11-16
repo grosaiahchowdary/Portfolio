@@ -145,15 +145,16 @@
           </div>
 
           <nav class="tabs" role="tablist" aria-label="Profile sections" style="margin-bottom:12px">
-            <button role="tab" class="tab-btn tab active" id="tab-about" aria-controls="panel-about" aria-selected="false">Summary</button>
+            <button role="tab" class="tab-btn tab active" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
             <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
             <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
+            <button role="tab" class="tab-btn" id="tab-projects" aria-controls="panel-projects" aria-selected="false">Selected Projects</button>
           </nav>
 
           <section class="panels">
             <article id="panel-about" class="panel active" role="tabpanel" aria-labelledby="tab-about">
               <div class="card" style="padding:14px">
-               
+                <h3 style="margin-top:0">Summary</h3>
                 <p style="color:var(--muted)">Experienced in operational support, job development, migrations and building observable pipelines. I prefer automation-first approaches and clear runbooks to reduce toil.</p>
               </div>
             </article>
@@ -161,7 +162,7 @@
             <article id="panel-roles" class="panel" role="tabpanel" aria-labelledby="tab-roles" hidden>
               <div class="card" style="padding:14px">
                 <h3 style="margin-top:0">Roles &amp; Responsibilities</h3>
-                <div class="tiles" style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+                <div class="tiles" style="margin-top:10px">
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Production Support &amp; Operations</div>
@@ -210,7 +211,7 @@
             <article id="panel-skills" class="panel" role="tabpanel" aria-labelledby="tab-skills" hidden>
               <div class="card" style="padding:14px">
                 <h3 style="margin-top:0">Skills</h3>
-                <div class="tiles" style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+                <div class="tiles" style="margin-top:10px">
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">ETL Development &amp; Support</div>
@@ -255,71 +256,40 @@
                 </div>
               </div>
             </article>
+
+            <article id="panel-projects" class="panel" role="tabpanel" aria-labelledby="tab-projects" hidden>
+              <div class="card" style="padding:14px">
+                <h3 style="margin-top:0">Selected Projects</h3>
+                <div class="tiles" style="margin-top:10px">
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Data Warehouse Migration</div>
+                    <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes, created transformation specs and executed phased cutovers.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Real-time Stream Integration</div>
+                    <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing. Built idempotent consumers, schema evolution strategies, and monitoring dashboards for throughput and lag.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Operational Automation</div>
+                    <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability. Integrated alerting and auto-remediation scripts for common failure classes.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Data Quality &amp; Observability</div>
+                    <div class="tile-body">Designed and implemented data quality checks, drift detection, and lineage mapping. Built observability into pipelines using metrics, logs and dashboards to reduce silent failures and accelerate troubleshooting.</div>
+                  </div>
+
+                </div>
+              </div>
+            </article>
           </section>
         </section>
       </section>
 
-      <section style="margin-top:18px">
-        <div class="card">
-          <h2 style="margin:0 0 12px 0">Selected Projects</h2>
-          <div class="tiles" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
-
-            <div class="tile" tabindex="0" aria-expanded="false">
-              <div class="tile-inner">
-                <div class="tile-face front">
-                  <div class="tile-title">Data Warehouse Migration</div>
-                  <div style="color:var(--muted);font-size:13px">Click to view</div>
-                </div>
-                <div class="tile-face back">
-                  <div class="tile-title">Data Warehouse Migration</div>
-                  <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes, created transformation specs and executed phased cutovers.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="tile" tabindex="0" aria-expanded="false">
-              <div class="tile-inner">
-                <div class="tile-face front">
-                  <div class="tile-title">Real-time Stream Integration</div>
-                  <div style="color:var(--muted);font-size:13px">Click to view</div>
-                </div>
-                <div class="tile-face back">
-                  <div class="tile-title">Real-time Stream Integration</div>
-                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing. Built idempotent consumers, schema evolution strategies, and monitoring dashboards for throughput and lag.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="tile" tabindex="0" aria-expanded="false">
-              <div class="tile-inner">
-                <div class="tile-face front">
-                  <div class="tile-title">Operational Automation</div>
-                  <div style="color:var(--muted);font-size:13px">Click to view</div>
-                </div>
-                <div class="tile-face back">
-                  <div class="tile-title">Operational Automation</div>
-                  <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability. Integrated alerting and auto-remediation scripts for common failure classes.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="tile" tabindex="0" aria-expanded="false">
-              <div class="tile-inner">
-                <div class="tile-face front">
-                  <div class="tile-title">Data Quality &amp; Observability</div>
-                  <div style="color:var(--muted);font-size:13px">Click to view</div>
-                </div>
-                <div class="tile-face back">
-                  <div class="tile-title">Data Quality &amp; Observability</div>
-                  <div class="tile-body">Designed and implemented data quality checks, drift detection, and lineage mapping. Built observability into pipelines using metrics, logs and dashboards to reduce silent failures and accelerate troubleshooting.</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
+      
     </main>
 
     <footer>
@@ -328,10 +298,35 @@
   </div>
 
   <script>
-    // Tabs and tiles behaviour (kept from original, lightly adapted)
+    // Tabs and tiles behaviour (enhanced) + hover flip
     (function(){
       const tabs = Array.from(document.querySelectorAll('.tab-btn'));
       const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+
+      // add CSS for panel animation & tab subtle motion and hover flip
+      const animStyle = document.createElement('style');
+      animStyle.innerHTML = `
+        .tab-btn{transition:transform .26s cubic-bezier(.2,.9,.2,1), background .26s, color .18s}
+        .tab-btn:active{transform:translateY(1px)}
+        .panel{opacity:0;transform:translateY(6px);transition:opacity .36s ease, transform .36s ease}
+        .panel.active{opacity:1;transform:translateY(0)}
+
+        /* larger tiles and hover flip */
+        .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+        .tiles .tile{position:relative;perspective:1200px;background:var(--card);border-radius:12px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,0.04);min-height:220px}
+        .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.9,.2,1);height:100%}
+        .tiles .tile .tile-face{position:absolute;inset:0;padding:20px;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center}
+        .tiles .tile .tile-face.front{transform:rotateY(0deg);}
+        .tiles .tile .tile-face.back{transform:rotateY(180deg);}    
+        .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
+        .tiles .tile .tile-body{color:var(--muted);font-size:14px}
+        .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
+
+        /* hover / focus: flip on pointer hover or keyboard focus */
+        .tiles .tile:hover .tile-inner, .tiles .tile:focus-within .tile-inner{transform:rotateY(180deg) translateY(-6px)}
+      `;
+      document.head.appendChild(animStyle);
+
       function activateTab(index){
         tabs.forEach((t,i)=>{
           const selected = i === index;
@@ -341,32 +336,45 @@
           panels[i].hidden = !selected;
         });
       }
+
       if(tabs.length) tabs.forEach((t, i) => { t.addEventListener('click', ()=> activateTab(i)); t.addEventListener('keydown', (e)=>{ if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length); if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length); }); });
       activateTab(0);
 
-      // Flip tiles initialization
+      // Flip tiles initialization: wrap content if needed, attach keyboard toggle but rely on hover for mouse
       document.querySelectorAll('.tiles .tile').forEach(tile => {
-        // build flip structure only if not already
-        if(tile.querySelector('.tile-inner')) return;
-        const title = tile.querySelector('.tile-title')?.innerHTML || '';
-        const body = tile.querySelector('.tile-body')?.innerHTML || '';
-        tile.innerHTML = `
-          <div class="tile-inner" role="button" tabindex="0" aria-pressed="false">
-            <div class="tile-face front">
-              <div class="tile-title">${title}</div>
-              <div style="color:var(--muted);font-size:13px">Click to view</div>
+        // if inner not present, wrap existing content
+        if(!tile.querySelector('.tile-inner')){
+          const title = tile.querySelector('.tile-title')?.innerHTML || tile.querySelector('h3')?.innerHTML || '';
+          const body = tile.querySelector('.tile-body')?.innerHTML || '';
+          tile.innerHTML = `
+            <div class="tile-inner" role="button" tabindex="0" aria-pressed="false">
+              <div class="tile-face front">
+                <div class="tile-title">${title}</div>
+                <div style="color:var(--muted);font-size:13px">Hover to view</div>
+              </div>
+              <div class="tile-face back">
+                <div class="tile-title">${title}</div>
+                <div class="tile-body">${body}</div>
+              </div>
             </div>
-            <div class="tile-face back">
-              <div class="tile-title">${title}</div>
-              <div class="tile-body">${body}</div>
-            </div>
-          </div>
-        `;
+          `;
+        }
+
         const inner = tile.querySelector('.tile-inner');
-        const toggle = () => { const flipped = inner.classList.toggle('flipped'); inner.setAttribute('aria-pressed', flipped ? 'true' : 'false'); tile.setAttribute('aria-expanded', flipped ? 'true' : 'false'); };
-        tile.addEventListener('click', (e)=>{ if(e.target.closest('a')) return; toggle(); });
-        inner.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+        // ensure faces exist
+        if(!inner || !inner.querySelector('.tile-face.front') || !inner.querySelector('.tile-face.back')) return;
+
+        // accessibility
+        tile.setAttribute('role','group');
+        tile.setAttribute('aria-expanded', 'false');
+
+        // keyboard: toggle flip on Enter/Space for keyboard users
+        if(!inner.__hoverInit){
+          inner.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inner.classList.toggle('flipped'); const flipped = inner.classList.contains('flipped'); inner.setAttribute('aria-pressed', flipped ? 'true' : 'false'); tile.setAttribute('aria-expanded', flipped ? 'true' : 'false'); } });
+          inner.__hoverInit = true;
+        }
       });
+
     })();
 
     // Theme toggle (kept simple)
@@ -388,7 +396,7 @@
       win.document.close();
     });
 
-    /* ======== Background: Waves + Particles ========
+    /* ======== Background: Waves + Particles ======== (kept intact)
        Two canvas layers: waves-canvas draws sin-based flowing gradient ribbons (option 1) and
        particles-canvas draws glowing particles with soft trails (option 3). Designed to be
        performant: uses offscreen buffers and adapts to DPR. No external libs.
