@@ -12,53 +12,79 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    /* --------- Variables & Reset --------- */
+    /* --------- Variables & Reset (updated colors & background) --------- */
     :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0366d6;
-      --glass: rgba(8,15,30,0.04);
-      --success:#16a34a;
-      --radius:14px;
-      color-scheme: light;
+      --bg-gradient-1: #0b1220; /* deep navy */
+      --bg-gradient-2: #07182a; /* rich teal-blue */
+      --card: rgba(255,255,255,0.06); /* translucent card for contrast on dark bg */
+      --card-solid: #ffffff; /* used for light elements when needed */
+      --muted: rgba(255,255,255,0.72);
+      --accent: #00bcd4; /* vibrant teal */
+      --accent-2: #7be3ff;
+      --glass: rgba(255,255,255,0.04);
+      --success: #16a34a;
+      --radius:16px;
+      color-scheme: dark;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,#eef3fb 0%, #f6f8fb 100%);color:#0f172a;padding:28px}
+    body{
+      margin:0;
+      /* new diagonal gradient background with subtle noise overlay */
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,188,212,0.06), transparent 10%),
+                  linear-gradient(135deg,var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+      color:var(--card-solid);
+      padding:36px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* subtle animated floating shapes (pure CSS) */
+    .site::before{
+      content: '';
+      position: fixed;inset:0;pointer-events:none;z-index:0;
+      background: radial-gradient(circle at 85% 10%, rgba(123,227,255,0.04), transparent 8%),
+                  radial-gradient(circle at 20% 80%, rgba(0,188,212,0.03), transparent 10%);
+      mix-blend-mode: screen;
+      opacity:0.9;
+    }
 
     /* --------- Page container --------- */
-    .site{max-width:1100px;margin:0 auto}
+    .site{max-width:1100px;margin:0 auto;position:relative;z-index:1}
 
     /* --------- Header --------- */
-    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#5bb6ff);color:white;font-weight:700}
-    .brand h1{font-size:16px;margin:0}
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg-gradient-1);font-weight:800;font-size:18px;box-shadow:0 8px 30px rgba(3,12,30,0.6)}
+    .brand h1{font-size:18px;margin:0;color:var(--card-solid)}
     .brand p{margin:0;font-size:13px;color:var(--muted)}
+
     .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--card);border:1px solid rgba(15,23,42,0.04);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-    .btn.secondary{background:transparent;border:1px solid rgba(15,23,42,0.06)}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--card-solid);backdrop-filter: blur(6px)}
+    .btn:hover{transform:translateY(-3px)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021018;border:none;box-shadow:0 10px 30px rgba(0,188,212,0.12)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06)}
 
     /* --------- Hero / Profile --------- */
-    .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
-    .card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid rgba(15,23,42,0.05);box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+    .hero{display:grid;grid-template-columns:280px 1fr;gap:26px;margin-top:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:var(--radius);padding:22px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 40px rgba(2,6,23,0.5)}
 
-    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block}
+    .photo{width:230px;height:230px;border-radius:16px;object-fit:cover;display:block;border:3px solid rgba(255,255,255,0.04)}
     .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .name{font-size:20px;font-weight:700}
+    .name{font-size:20px;font-weight:800;color:var(--card-solid)}
     .title{color:var(--accent);font-weight:700}
     .meta{color:var(--muted);font-size:13px}
 
-    .profile-right{display:flex;flex-direction:column;gap:10px}
-    .intro{font-size:15px;color:#0b1220;line-height:1.5}
+    .profile-right{display:flex;flex-direction:column;gap:12px}
+    .intro{font-size:15px;color:rgba(255,255,255,0.92);line-height:1.6}
     .cta-row{display:flex;gap:10px;margin-top:6px}
 
     /* --------- Tabs & panels --------- */
     .tabs{display:flex;gap:8px;margin-top:18px}
-    .tab{padding:10px 14px;border-radius:10px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:600}
-    .tab.active{background:linear-gradient(180deg, rgba(3,102,214,0.08), rgba(3,102,214,0.02));border-color:rgba(3,102,214,0.12);color:var(--accent)}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:700;color:var(--muted)}
+    .tab.active{background:linear-gradient(90deg, rgba(0,188,212,0.10), rgba(123,227,255,0.04));border-color:rgba(0,188,212,0.08);color:var(--card-solid)}
 
     .panels{margin-top:14px}
     .panel{display:none}
@@ -66,27 +92,72 @@
 
     /* --------- Tiles / Grid --------- */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .tile{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);cursor:pointer;transition:transform .22s ease,box-shadow .22s}
-    .tile:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.06)}
-    .tile h3{margin:0 0 8px 0}
+    .tile{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;transition:transform .22s ease,box-shadow .22s;backdrop-filter:blur(6px)}
+    .tile:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(0,0,0,0.6)}
+    .tile h3{margin:0 0 8px 0;color:var(--card-solid)}
     .tile p{margin:0;color:var(--muted);font-size:14px}
 
     /* progress */
     .skill{display:flex;flex-direction:column;gap:6px}
-    .bar{height:10px;background:var(--glass);border-radius:999px;overflow:hidden}
-    .progress{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#7cd1ff);width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+    .bar{height:12px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
 
     /* footer */
-    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
 
     /* responsive */
     @media (max-width:900px){
       .hero{grid-template-columns:1fr;}
       .photo{width:160px;height:160px}
+      body{padding:18px}
+      .logo{width:52px;height:52px}
     }
+  
+
+    /* Floating SVG shapes (animated) */
+    .floating-svg-container{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .floating-svg{width:100%;height:100%;display:block}
+    .float{transform-origin:center;will-change:transform,opacity}
+    .float-1{animation:floatY 9s ease-in-out infinite;opacity:0.9}
+    .float-2{animation:floatY 12s ease-in-out infinite;animation-delay:2s;opacity:0.75}
+    .float-3{animation:floatY 15s ease-in-out infinite;animation-delay:4s;opacity:0.65}
+    .float-rotate{animation:rotateSlow 24s linear infinite}
+
+    @keyframes floatY{
+      0%{transform:translateY(0) translateX(0) rotate(0deg)}
+      50%{transform:translateY(-28px) translateX(12px) rotate(6deg)}
+      100%{transform:translateY(0) translateX(0) rotate(0deg)}
+    }
+    @keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
   </style>
 </head>
 <body>
+  <div class="floating-svg-container" aria-hidden="true">
+    <svg class="floating-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- soft teal blob -->
+      <g class="float float-1 float-rotate" transform="translate(100 80)">
+        <path d="M120 20c40-20 120-20 170 10s80 100 40 150-120 70-170 50S80 90 120 20z" fill="url(#g1)" opacity="0.18" />
+      </g>
+
+      <!-- circular halo -->
+      <g class="float float-2" transform="translate(980 120)">
+        <circle cx="0" cy="0" r="80" fill="url(#g2)" opacity="0.12" />
+      </g>
+
+      <!-- geometric hex -->
+      <g class="float float-3" transform="translate(900 600)">
+        <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="url(#g3)" opacity="0.10" />
+      </g>
+
+      <defs>
+        <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/><stop offset="100%" stop-color="var(--accent-2)" stop-opacity="1"/></linearGradient>
+        <radialGradient id="g2"><stop offset="0%" stop-color="var(--accent-2)" stop-opacity="1"/><stop offset="100%" stop-color="var(--bg-gradient-2)" stop-opacity="0"/></radialGradient>
+        <linearGradient id="g3" x1="0%" x2="100%"><stop offset="0%" stop-color="#7be3ff" stop-opacity="1"/><stop offset="100%" stop-color="#00bcd4" stop-opacity="1"/></linearGradient>
+      </defs>
+    </svg>
+  </div>
+
   <div class="site">
     <header class="site-header">
       <div class="brand">
