@@ -12,87 +12,98 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    /* --------- Variables & Reset (updated swag look) --------- */
+    /* --------- Variables & Reset --------- */
     :root{
-      --bg-a: #0b1020;   /* deep navy */
-      --bg-b: #181026;   /* darker indigo */
-      --accent: #ff6b6b; /* warm accent */
-      --accent-2: #7c5cff;/* purple accent */
-      --muted: #b7c1cf;
-      --card-a: #0f1724; /* card base */
-      --card-b: #0b1a2b; /* alternate card */
-      --glass: rgba(255,255,255,0.03);
-      --radius:6px; /* sharp-ish edges */
+      --bg1: #0f172a;            /* deep navy */
+      --bg2: #071033;            /* dark gradient end */
+      --card:#0b1220;           /* card bg in dark theme */
+      --muted:#9aa6b2;
+      --accent:#39b6ff;         /* brighter cyan accent */
+      --accent-2:#60e2c6;       /* secondary accent */
+      --glass: rgba(255,255,255,0.04);
+      --success:#16a34a;
+      --radius:16px;
       color-scheme: dark;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
-    /* animated background 'swag' effect */
-    body{
-      margin:0;padding:28px;color:#eaf3ff;background:linear-gradient(115deg,var(--bg-a) 0%,var(--bg-b) 50%);background-size:300% 300%;animation:bgShift 18s ease-in-out infinite;
-    }
-    @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    body{margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(57,182,255,0.08), transparent 8%), radial-gradient(1000px 500px at 90% 90%, rgba(96,226,198,0.05), transparent 12%), linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);color:#e6eef6;padding:28px}
 
-    /* floating decorative elements (kept but toned down) */
-    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.08;pointer-events:none;transform:rotate(12deg)}
+    /* subtle floating SVG blobs */
+    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.14;pointer-events:none;transform:rotate(12deg)}
     .floating-svg.left{left:-80px;right:auto;top:60vh;transform:rotate(-8deg)}
 
+    /* --------- Page container --------- */
     .site{max-width:1100px;margin:0 auto}
 
-    /* Header */
+    /* --------- Header --------- */
     header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#021025;font-weight:800}
-    .brand h1{font-size:18px;margin:0;color:#ffffff}
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#021025;font-weight:800;letter-spacing:0.6px}
+    .brand h1{font-size:18px;margin:0;color:#eaf6ff}
     .brand p{margin:0;font-size:13px;color:var(--muted)}
     .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700;color:#eaf6ff}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700;color:#eaf6ff;backdrop-filter:blur(6px)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04)}
 
-    /* Hero */
+    /* --------- Hero / Profile --------- */
     .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 28px rgba(2,6,23,0.6);transition:transform .22s ease,box-shadow .22s ease}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
 
-    /* sharper edges and stronger hover */
-    .card{border-radius:6px}
-    .card:hover{transform:translateY(-10px) scale(1.01);box-shadow:0 20px 60px rgba(2,6,23,0.75)}
+    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block;border:4px solid rgba(255,255,255,0.04)}
+    .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
+    .name{font-size:20px;font-weight:800;color:#fbfdff}
+    .title{color:var(--accent);font-weight:700}
+    .meta{color:var(--muted);font-size:13px}
 
-    /* per-section card colors for visual separation */
-    #panel-about .card{background:linear-gradient(180deg,#0f1622,#071025);border-color:rgba(124,92,255,0.12)}
-    #panel-roles .card{background:linear-gradient(180deg,#101826,#09121b);border-color:rgba(57,182,255,0.08)}
-    #panel-skills .card{background:linear-gradient(180deg,#111622,#08131a);border-color:rgba(255,107,107,0.08)}
-    .tiles .tile{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:6px}
+    .profile-right{display:flex;flex-direction:column;gap:10px}
+    .intro{font-size:15px;color:#dfefff;line-height:1.6}
+    .cta-row{display:flex;gap:10px;margin-top:6px}
 
-    /* Tile flip specifics */
-    .tiles .tile{position:relative;perspective:1200px;border:1px solid rgba(255,255,255,0.03);overflow:visible}
-    .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.2,.9,.2,1);height:160px}
-    .tiles .tile .tile-face{position:absolute;inset:0;padding:18px;backface-visibility:hidden;border-radius:6px;display:flex;flex-direction:column;justify-content:center}
-    .tiles .tile .tile-face.front{transform:rotateY(0deg);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
-    .tiles .tile .tile-face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
-    .tiles .tile .tile-title{font-weight:800;margin-bottom:8px;color:#ffffff}
-    .tiles .tile .tile-body{color:var(--muted);font-size:14px}
-    .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
+    /* --------- Tabs & panels --------- */
+    .tabs{display:flex;gap:8px;margin-top:18px}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:700;color:#dbefff}
+    .tab.active{background:linear-gradient(180deg, rgba(57,182,255,0.08), rgba(96,226,198,0.03));border-color:rgba(57,182,255,0.12);color:var(--accent)}
 
-    /* ensure no overlapping: each tile creates own stacking context */
-    .tiles .tile{isolation:isolate}
+    .panels{margin-top:14px}
+    .panel{display:none}
+    .panel.active{display:block}
 
-    /* tabs styled as radio buttons */
-    .tabs{display:flex;gap:8px;margin-top:12px}
-    .tab-btn{appearance:none;border:0;background:transparent;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;color:var(--muted);position:relative}
-    .tab-btn::before{content:'';width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.12);display:inline-block}
-    .tab-btn.active{color:#ffffff}
-    .tab-btn.active::before{background:linear-gradient(90deg,var(--accent),var(--accent-2));border-color:transparent}
-    .tab-btn:focus{outline:2px solid rgba(124,92,255,0.18);outline-offset:3px}
+    /* --------- Tiles / Grid --------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 
-    /* selected projects / role tiles specific tweaks */
-    section .tiles .tile:hover .tile-face.front{filter:brightness(1.02)}
+    /* card flip container */
+    .tile{perspective:1200px;background:transparent;border-radius:12px}
+    .tile-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.9,.2,1)}
+    .tile:hover .tile-inner{transform:rotateY(180deg) translateY(-6px)}
+    /* clicked / programmatic flip */
+    .tile-inner.flipped{transform:rotateY(180deg) translateY(-6px)}
+
+    .tile-face{position:relative;border-radius:12px;backface-visibility:hidden;padding:16px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));min-height:120px;display:flex;flex-direction:column;justify-content:center}
+    .tile-face.back{position:absolute;top:0;left:0;right:0;bottom:0;transform:rotateY(180deg);}
+
+    .tile h3{margin:0 0 8px 0;color:#f8feff}
+    .tile p{margin:0;color:var(--muted);font-size:14px}
+
+    /* hover effects for non-flip tiles */
+    .tile.simple .tile-face{transition:box-shadow .22s,transform .22s}
+    .tile.simple:hover .tile-face{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,6,23,0.6)}
+
+    /* progress */
+    .skill{display:flex;flex-direction:column;gap:8px}
+    .bar{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+
+    .skill-desc{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* footer */
+    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
 
     /* responsive */
     @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr;}
       .photo{width:160px;height:160px}
-      .tiles .tile .tile-inner{height:180px}
     }
   </style>
 </head>
@@ -280,7 +291,7 @@
                 </div>
                 <div class="tile-face back">
                   <div class="tile-title">Data Warehouse Migration</div>
-                  <div class="tile-body">Led migration of on‑prem ETL to cloud‑native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes.</div>
+                  <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes.</div>
                 </div>
               </div>
             </div>
@@ -288,12 +299,12 @@
             <div class="tile" tabindex="0" aria-expanded="false">
               <div class="tile-inner">
                 <div class="tile-face front">
-                  <div class="tile-title">Real‑time Stream Integration</div>
+                  <div class="tile-title">Real-time Stream Integration</div>
                   <div style="color:var(--muted);font-size:13px">Click to view</div>
                 </div>
                 <div class="tile-face back">
-                  <div class="tile-title">Real‑time Stream Integration</div>
-                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near‑real‑time analytics, alerts and event-driven processing with idempotent consumer patterns.</div>
+                  <div class="tile-title">Real-time Stream Integration</div>
+                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing with idempotent consumer patterns.</div>
                 </div>
               </div>
             </div>
