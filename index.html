@@ -12,98 +12,87 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    /* --------- Variables & Reset --------- */
+    /* --------- Variables & Reset (updated swag look) --------- */
     :root{
-      --bg1: #0f172a;            /* deep navy */
-      --bg2: #071033;            /* dark gradient end */
-      --card:#0b1220;           /* card bg in dark theme */
-      --muted:#9aa6b2;
-      --accent:#39b6ff;         /* brighter cyan accent */
-      --accent-2:#60e2c6;       /* secondary accent */
-      --glass: rgba(255,255,255,0.04);
-      --success:#16a34a;
-      --radius:16px;
+      --bg-a: #0b1020;   /* deep navy */
+      --bg-b: #181026;   /* darker indigo */
+      --accent: #ff6b6b; /* warm accent */
+      --accent-2: #7c5cff;/* purple accent */
+      --muted: #b7c1cf;
+      --card-a: #0f1724; /* card base */
+      --card-b: #0b1a2b; /* alternate card */
+      --glass: rgba(255,255,255,0.03);
+      --radius:6px; /* sharp-ish edges */
       color-scheme: dark;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(57,182,255,0.08), transparent 8%), radial-gradient(1000px 500px at 90% 90%, rgba(96,226,198,0.05), transparent 12%), linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);color:#e6eef6;padding:28px}
+    /* animated background 'swag' effect */
+    body{
+      margin:0;padding:28px;color:#eaf3ff;background:linear-gradient(115deg,var(--bg-a) 0%,var(--bg-b) 50%);background-size:300% 300%;animation:bgShift 18s ease-in-out infinite;
+    }
+    @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    /* subtle floating SVG blobs */
-    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.14;pointer-events:none;transform:rotate(12deg)}
+    /* floating decorative elements (kept but toned down) */
+    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.08;pointer-events:none;transform:rotate(12deg)}
     .floating-svg.left{left:-80px;right:auto;top:60vh;transform:rotate(-8deg)}
 
-    /* --------- Page container --------- */
     .site{max-width:1100px;margin:0 auto}
 
-    /* --------- Header --------- */
+    /* Header */
     header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#021025;font-weight:800;letter-spacing:0.6px}
-    .brand h1{font-size:18px;margin:0;color:#eaf6ff}
+    .logo{width:56px;height:56px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#021025;font-weight:800}
+    .brand h1{font-size:18px;margin:0;color:#ffffff}
     .brand p{margin:0;font-size:13px;color:var(--muted)}
     .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700;color:#eaf6ff;backdrop-filter:blur(6px)}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700;color:#eaf6ff}
 
-    /* --------- Hero / Profile --------- */
+    /* Hero */
     .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 28px rgba(2,6,23,0.6);transition:transform .22s ease,box-shadow .22s ease}
 
-    .photo{width:220px;height:220px;border-radius:14px;object-fit:cover;display:block;border:4px solid rgba(255,255,255,0.04)}
-    .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .name{font-size:20px;font-weight:800;color:#fbfdff}
-    .title{color:var(--accent);font-weight:700}
-    .meta{color:var(--muted);font-size:13px}
+    /* sharper edges and stronger hover */
+    .card{border-radius:6px}
+    .card:hover{transform:translateY(-10px) scale(1.01);box-shadow:0 20px 60px rgba(2,6,23,0.75)}
 
-    .profile-right{display:flex;flex-direction:column;gap:10px}
-    .intro{font-size:15px;color:#dfefff;line-height:1.6}
-    .cta-row{display:flex;gap:10px;margin-top:6px}
+    /* per-section card colors for visual separation */
+    #panel-about .card{background:linear-gradient(180deg,#0f1622,#071025);border-color:rgba(124,92,255,0.12)}
+    #panel-roles .card{background:linear-gradient(180deg,#101826,#09121b);border-color:rgba(57,182,255,0.08)}
+    #panel-skills .card{background:linear-gradient(180deg,#111622,#08131a);border-color:rgba(255,107,107,0.08)}
+    .tiles .tile{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:6px}
 
-    /* --------- Tabs & panels --------- */
-    .tabs{display:flex;gap:8px;margin-top:18px}
-    .tab{padding:10px 14px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:700;color:#dbefff}
-    .tab.active{background:linear-gradient(180deg, rgba(57,182,255,0.08), rgba(96,226,198,0.03));border-color:rgba(57,182,255,0.12);color:var(--accent)}
+    /* Tile flip specifics */
+    .tiles .tile{position:relative;perspective:1200px;border:1px solid rgba(255,255,255,0.03);overflow:visible}
+    .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.2,.9,.2,1);height:160px}
+    .tiles .tile .tile-face{position:absolute;inset:0;padding:18px;backface-visibility:hidden;border-radius:6px;display:flex;flex-direction:column;justify-content:center}
+    .tiles .tile .tile-face.front{transform:rotateY(0deg);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
+    .tiles .tile .tile-face.back{transform:rotateY(180deg);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+    .tiles .tile .tile-title{font-weight:800;margin-bottom:8px;color:#ffffff}
+    .tiles .tile .tile-body{color:var(--muted);font-size:14px}
+    .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
 
-    .panels{margin-top:14px}
-    .panel{display:none}
-    .panel.active{display:block}
+    /* ensure no overlapping: each tile creates own stacking context */
+    .tiles .tile{isolation:isolate}
 
-    /* --------- Tiles / Grid --------- */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    /* tabs styled as radio buttons */
+    .tabs{display:flex;gap:8px;margin-top:12px}
+    .tab-btn{appearance:none;border:0;background:transparent;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;color:var(--muted);position:relative}
+    .tab-btn::before{content:'';width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.12);display:inline-block}
+    .tab-btn.active{color:#ffffff}
+    .tab-btn.active::before{background:linear-gradient(90deg,var(--accent),var(--accent-2));border-color:transparent}
+    .tab-btn:focus{outline:2px solid rgba(124,92,255,0.18);outline-offset:3px}
 
-    /* card flip container */
-    .tile{perspective:1200px;background:transparent;border-radius:12px}
-    .tile-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.9,.2,1)}
-    .tile:hover .tile-inner{transform:rotateY(180deg) translateY(-6px)}
-    /* clicked / programmatic flip */
-    .tile-inner.flipped{transform:rotateY(180deg) translateY(-6px)}
-
-    .tile-face{position:relative;border-radius:12px;backface-visibility:hidden;padding:16px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));min-height:120px;display:flex;flex-direction:column;justify-content:center}
-    .tile-face.back{position:absolute;top:0;left:0;right:0;bottom:0;transform:rotateY(180deg);}
-
-    .tile h3{margin:0 0 8px 0;color:#f8feff}
-    .tile p{margin:0;color:var(--muted);font-size:14px}
-
-    /* hover effects for non-flip tiles */
-    .tile.simple .tile-face{transition:box-shadow .22s,transform .22s}
-    .tile.simple:hover .tile-face{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,6,23,0.6)}
-
-    /* progress */
-    .skill{display:flex;flex-direction:column;gap:8px}
-    .bar{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
-    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
-
-    .skill-desc{font-size:13px;color:var(--muted);margin-top:6px}
-
-    /* footer */
-    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
+    /* selected projects / role tiles specific tweaks */
+    section .tiles .tile:hover .tile-face.front{filter:brightness(1.02)}
 
     /* responsive */
     @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
+      .hero{grid-template-columns:1fr}
       .photo{width:160px;height:160px}
+      .tiles .tile .tile-inner{height:180px}
     }
   </style>
 </head>
@@ -148,163 +137,179 @@
         </aside>
 
         <section class="card profile-right">
-          <div class="intro"> <div class="cta-row">  <button class="tab active" data-target="about">About</button>
-  </div>
-
-              <div class="cta-row">
-  
-        </div>
-I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.
-  <div class="cta-row">
-    Expertise:
-        </div>
-    <div class="cta-row"> * IBM DataStage, performance tuning, troubleshooting, and admin
-    Delivered end-to-end data warehousing and migration projects     </div>
-     <div class="cta-row"> * Integrated data from relational DBs, files, and cloud </div>
-   <div class="cta-row"> * Problem-solving focus: data quality, governance, automation </div>
-  <div class="cta-row">  *  Modernized legacy ETL & migration to cloud </div>
-
-</div>
-
-          <div class="cta-row">
-          
+          <!-- About me card (separate) -->
+          <div class="card" style="margin-bottom:14px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));padding:14px;border-radius:12px">
+            <h2 style="margin:0 0 8px 0">About Me</h2>
+            <p class="intro">I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
+            <ul style="color:var(--muted);margin-top:8px">
+              <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
+              <li>Delivered end-to-end data warehousing and migration projects</li>
+              <li>Integrated data from relational DBs, files, and cloud</li>
+              <li>Problem-solving focus: data quality, governance, automation</li>
+              <li>Modernized legacy ETL & migration to cloud</li>
+            </ul>
           </div>
 
-          <div class="tabs" role="tablist" aria-label="Sections">
-           
-            <button class="tab" data-target="roles">Roles</button>
-            <button class="tab" data-target="skills">Skills</button>
-          </div>
+          <!-- Tabs nav -->
+          <nav class="tabs" role="tablist" aria-label="Profile sections" style="margin-bottom:12px">
+            <button role="tab" class="tab-btn tab active" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
+            <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
+            <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
+          </nav>
 
-          <div class="panels">
-            <div id="about" class="panel active">
-             
-            </div>
-
-            <div id="roles" class="panel">
-              <div class="grid" style="margin-top:12px">
-
-                <div class="tile simple">
-                  <div class="tile-inner">
-                    <div class="tile-face front">
-                      <h3>Production Support</h3>
-                      <p>Managed 90k+ scheduled jobs, incident triage, on-call rotations and SLA-driven operations.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tile">
-                  <div class="tile-inner">
-                    <div class="tile-face front">
-                      <h3>Job Development</h3>
-                      <p>Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</p>
-                    </div>
-                    <div class="tile-face back">
-                      <h3>Job Development — Details</h3>
-                      <p class="skill-desc">Create parameterised reusable components, use partitioning strategies (round-robin, modulus), and implement checkpointing and restartability. Familiar with both Server and IBM InfoSphere Parallel frameworks.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tile">
-                  <div class="tile-inner">
-                    <div class="tile-face front">
-                      <h3>Change Management</h3>
-                      <p>Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</p>
-                    </div>
-                    <div class="tile-face back">
-                      <h3>Change Management — Details</h3>
-                      <p class="skill-desc">Runbook-driven releases, impact analysis, stakeholder communication and automated smoke tests to validate critical paths post-deployment.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tile simple">
-                  <div class="tile-inner">
-                    <div class="tile-face front">
-                      <h3>Documentation & Onboarding</h3>
-                      <p>Clear KB articles, runbooks and onboarding guides to speed up team ramp-up and reduce knowledge debt.</p>
-                    </div>
-                  </div>
-                </div>
-
+          <!-- Panels (each panel is a separate card) -->
+          <section class="panels">
+            <article id="panel-about" class="panel active" role="tabpanel" aria-labelledby="tab-about">
+              <div class="card" style="padding:14px">
+                <h3 style="margin-top:0">Summary</h3>
+                <p style="color:var(--muted)">Experienced in operational support, job development, migrations and building observable pipelines. I prefer automation-first approaches and clear runbooks to reduce toil.</p>
               </div>
-            </div>
+            </article>
 
-            <div id="skills" class="panel">
-              <div style="margin-top:12px">
-                <div class="grid">
+            <article id="panel-roles" class="panel" role="tabpanel" aria-labelledby="tab-roles" hidden>
+              <div class="card" style="padding:14px">
+                <h3 style="margin-top:0">Roles &amp; Responsibilities</h3>
+                <div class="tiles" style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
 
-                  <div class="tile">
-                    <div class="tile-inner">
-                      <div class="tile-face front">
-                        <h3>IBM DataStage — 95%</h3>
-                        <p>Click to view details</p>
-                      </div>
-                      <div class="tile-face back">
-                        <h3>IBM DataStage — Details</h3>
-                        <p class="skill-desc">Expert in parallel job design, performance tuning, and legacy migration to cloud-friendly architectures. Experience with complex layouts, custom stages and parameter sets. Implement checkpointing and restartable jobs, optimise partitioning and memory usage for high throughput.</p>
-                      </div>
-                    </div>
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Production Support &amp; Operations</div>
+                    <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs.</div>
                   </div>
 
-                  <div class="tile">
-                    <div class="tile-inner">
-                      <div class="tile-face front">
-                        <h3>SQL &amp; PL/SQL — 90%</h3>
-                        <p>Click to view details</p>
-                      </div>
-                      <div class="tile-face back">
-                        <h3>SQL &amp; PL/SQL — Details</h3>
-                        <p class="skill-desc">Strong SQL tuning background: indexing strategies, explain plans, partition pruning and bulk-load patterns to accelerate ETL loads. Skilled at writing efficient stored procedures and optimizing long-running queries.</p>
-                      </div>
-                    </div>
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Issue Resolution &amp; RCA</div>
+                    <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity.</div>
                   </div>
 
-                  <div class="tile">
-                    <div class="tile-inner">
-                      <div class="tile-face front">
-                        <h3>Python — 82%</h3>
-                        <p>Click to view details</p>
-                      </div>
-                      <div class="tile-face back">
-                        <h3>Python — Details</h3>
-                        <p class="skill-desc">Scripting for automation, lightweight data transforms, and writing observability hooks for pipelines (logging, metrics, alerting). Built utilities for deployment and monitoring.</p>
-                      </div>
-                    </div>
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">DataStage Job Development</div>
+                    <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality and speed.</div>
                   </div>
 
-                  <div class="tile">
-                    <div class="tile-inner">
-                      <div class="tile-face front">
-                        <h3>Cloud (AWS/GCP) — 78%</h3>
-                        <p>Click to view details</p>
-                      </div>
-                      <div class="tile-face back">
-                        <h3>Cloud (AWS/GCP) — Details</h3>
-                        <p class="skill-desc">Architected pipeline components on S3, Glue, Cloud Storage and Pub/Sub/Kafka; cost-aware designs and infra-as-code practices. Experience migrating ETL workloads to cloud-managed services.</p>
-                      </div>
-                    </div>
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Data Extraction &amp; Integration</div>
+                    <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Documentation &amp; KM</div>
+                    <div class="tile-body">Developed technical specifications, transformation/logic documentation, and user guides for efficient knowledge management.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Testing &amp; Quality Assurance</div>
+                    <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Client &amp; Stakeholder Engagement</div>
+                    <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Deployment &amp; Change Management</div>
+                    <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams.</div>
                   </div>
 
                 </div>
               </div>
-            </div>
-          </div>
+            </article>
 
+            <article id="panel-skills" class="panel" role="tabpanel" aria-labelledby="tab-skills" hidden>
+              <div class="card" style="padding:14px">
+                <h3 style="margin-top:0">Skills</h3>
+                <div class="tiles" style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">ETL Development &amp; Support</div>
+                    <div class="tile-body">Designing, building, and managing Extract, Transform, Load (ETL) processes for reliable movement of data across systems. Ensuring high-quality and timely data delivery with minimal errors.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">IBM DataStage</div>
+                    <div class="tile-body">Advanced skill in IBM DataStage, including scalable ETL job design, parallel processing, job tuning, troubleshooting, and ongoing operational support for data integration.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">SQL &amp; PL/SQL</div>
+                    <div class="tile-body">Writing and optimizing queries, stored procedures, and data transformation scripts for secure, high-performance and accurate data processing in relational databases.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Python for Data Eng.</div>
+                    <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Data Warehousing</div>
+                    <div class="tile-body">Designing robust data models, developing data warehouses and data marts for business analytics, and supporting large-scale analytical workloads.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Apache Kafka &amp; MQ</div>
+                    <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven, scalable architectures and fast data pipelines.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Cloud (AWS, GCP)</div>
+                    <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
+                  </div>
+
+                  <div class="tile" tabindex="0" aria-expanded="false">
+                    <div class="tile-title">Git, Jenkins, CI/CD</div>
+                    <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with modern DevOps tools like Git and Jenkins.</div>
+                  </div>
+
+                </div>
+              </div>
+            </article>
+          </section>
         </section>
       </section>
 
       <section style="margin-top:18px">
         <div class="card">
           <h2 style="margin:0 0 12px 0">Selected Projects</h2>
-          <div class="grid">
+          <div class="tiles" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
 
-            <div class="tile simple"><div class="tile-inner"><div class="tile-face front"><h3>Data Warehouse Migration</h3><p>Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x and cut infra costs by 35%.</p></div></div></div>
+            <div class="tile" tabindex="0" aria-expanded="false">
+              <div class="tile-inner">
+                <div class="tile-face front">
+                  <div class="tile-title">Data Warehouse Migration</div>
+                  <div style="color:var(--muted);font-size:13px">Click to view</div>
+                </div>
+                <div class="tile-face back">
+                  <div class="tile-title">Data Warehouse Migration</div>
+                  <div class="tile-body">Led migration of on‑prem ETL to cloud‑native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes.</div>
+                </div>
+              </div>
+            </div>
 
-            <div class="tile"><div class="tile-inner"><div class="tile-face front"><h3>Real-time Stream Integration</h3><p>Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</p></div><div class="tile-face back"><h3>Streaming — Details</h3><p class="skill-desc">Deployed durable consumers, idempotent writes and partition-aware processing to ensure exactly-once semantics where required.</p></div></div></div>
+            <div class="tile" tabindex="0" aria-expanded="false">
+              <div class="tile-inner">
+                <div class="tile-face front">
+                  <div class="tile-title">Real‑time Stream Integration</div>
+                  <div style="color:var(--muted);font-size:13px">Click to view</div>
+                </div>
+                <div class="tile-face back">
+                  <div class="tile-title">Real‑time Stream Integration</div>
+                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near‑real‑time analytics, alerts and event-driven processing with idempotent consumer patterns.</div>
+                </div>
+              </div>
+            </div>
 
-            <div class="tile simple"><div class="tile-inner"><div class="tile-face front"><h3>Operational Automation</h3><p>Automated recurring maintenance tasks and reduced manual intervention by 70% using scripts and scheduler orchestration.</p></div></div></div>
+            <div class="tile" tabindex="0" aria-expanded="false">
+              <div class="tile-inner">
+                <div class="tile-face front">
+                  <div class="tile-title">Operational Automation</div>
+                  <div style="color:var(--muted);font-size:13px">Click to view</div>
+                </div>
+                <div class="tile-face back">
+                  <div class="tile-title">Operational Automation</div>
+                  <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability.</div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -318,28 +323,85 @@ I am a passionate Data Engineer and ETL DataStage consultant with extensive hand
   </div>
 
   <script>
-    // Tabs
-    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', e => {
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
+    // Accessible tabs (works with keyboard and updates aria-selected/hidden)
+    (function(){
+      const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
 
-      // when switching to skills, animate bars
-      if(btn.dataset.target === 'skills') animateSkills();
-    }));
+      function activateTab(index){
+        tabs.forEach((t,i)=>{
+          const selected = i === index;
+          t.classList.toggle('active', selected);
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          panels[i].classList.toggle('active', selected);
+          panels[i].hidden = !selected;
+        });
+      }
 
-    // Progress bar animation
-    function animateSkills(){
-      document.querySelectorAll('.progress').forEach(el => {
-        const val = el.dataset.val || 0;
-        el.style.width = val + '%';
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', ()=> activateTab(i));
+        t.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length);
+          if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
+        });
       });
-    }
-    // animate once on load if skills visible
-    if(document.querySelector('#skills').classList.contains('active')) animateSkills();
 
-    // Theme toggle: allow light fallback
+      // ensure initial state
+      activateTab(0);
+    })();
+
+    // Replace expandable behaviour with click-to-flip for tiles (no transparency, no overlap)
+    (function(){
+      // add styles for flip tiles and non-transparent cards
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .tiles .tile{position:relative;perspective:1200px;background:var(--card);border-radius:12px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,0.04)}
+        .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.2,1);height:160px}
+        .tiles .tile .tile-face{position:absolute;inset:0;padding:16px;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center}
+        .tiles .tile .tile-face.front{transform:rotateY(0deg);}
+        .tiles .tile .tile-face.back{transform:rotateY(180deg);}
+        .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
+        .tiles .tile .tile-body{color:var(--muted);font-size:14px}
+        .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
+        /* ensure back face sits correctly and no overlap with other tiles */
+        .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+      `;
+      document.head.appendChild(style);
+
+      // transform each simple tile into a flip structure if not already
+      document.querySelectorAll('.tiles .tile').forEach(tile => {
+        // avoid double-wrapping
+        if(tile.querySelector('.tile-inner')) return;
+        const title = tile.querySelector('.tile-title')?.innerHTML || tile.querySelector('h3')?.innerHTML || '';
+        const body = tile.querySelector('.tile-body')?.innerHTML || '';
+        tile.innerHTML = `
+          <div class="tile-inner" role="button" tabindex="0" aria-pressed="false">
+            <div class="tile-face front">
+              <div class="tile-title">${title}</div>
+              <div style="color:var(--muted);font-size:13px">Click to view</div>
+            </div>
+            <div class="tile-face back">
+              <div class="tile-title">${title}</div>
+              <div class="tile-body">${body}</div>
+            </div>
+          </div>
+        `;
+
+        const inner = tile.querySelector('.tile-inner');
+
+        // click/keyboard toggles flip
+        const toggle = () => {
+          const flipped = inner.classList.toggle('flipped');
+          inner.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+          tile.setAttribute('aria-expanded', flipped ? 'true' : 'false');
+        };
+        tile.addEventListener('click', (e)=>{ if(e.target.closest('a')) return; toggle(); });
+        inner.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+      });
+
+    })();
+
+    // Theme toggle (keep existing behaviour)
     const themeBtn = document.getElementById('themeToggle');
     themeBtn.addEventListener('click', () => {
       const light = document.documentElement.getAttribute('data-theme') === 'light';
@@ -348,7 +410,6 @@ I am a passionate Data Engineer and ETL DataStage consultant with extensive hand
         document.documentElement.style.removeProperty('--bg1');
       } else {
         document.documentElement.setAttribute('data-theme','light');
-        // quick light override
         document.documentElement.style.setProperty('--bg1','#f6f8fb');
         document.documentElement.style.setProperty('--bg2','#ffffff');
         document.documentElement.style.setProperty('--muted','#6b7280');
@@ -356,41 +417,12 @@ I am a passionate Data Engineer and ETL DataStage consultant with extensive hand
       }
     });
 
-    // Download resume (simple PDF generator from page content)
+    // Download resume (kept)
     document.getElementById('downloadResume').addEventListener('click', ()=>{
-      const data = {
-        name: 'Rosaiah Chowdary',
-        title: 'Data Engineer & ETL Specialist',
-        email: 'gummalla.ds@gmail.com'
-      };
+      const data = { name: 'Rosaiah Chowdary', title: 'Data Engineer & ETL Specialist', email: 'gummalla.ds@gmail.com' };
       const win = window.open('', '_blank');
       win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
       win.document.close();
-    });
-
-    // Contact button
-    document.getElementById('contactMe').addEventListener('click', ()=>{
-      window.location.href = 'mailto:gummalla.ds@gmail.com?subject=Inquiry%20from%20portfolio';
-    });
-
-    // keyboard accessibility for tiles
-    document.querySelectorAll('.tile').forEach(tile => {
-      tile.setAttribute('tabindex', '0');
-      const inner = tile.querySelector('.tile-inner');
-      tile.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { inner?.classList.toggle('flipped'); const expanded = inner?.classList.contains('flipped'); tile.setAttribute('aria-expanded', expanded ? 'true' : 'false'); } });
-      // click to flip
-      tile.addEventListener('click', (e) => {
-        // prevent clicks on links inside tile from toggling
-        if(e.target.closest('a')) return;
-        inner?.classList.toggle('flipped');
-        const expanded = inner?.classList.contains('flipped');
-        tile.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      });
-    });
-
-    // scroll to projects
-    document.getElementById('viewProjects').addEventListener('click', ()=>{
-      document.querySelector('html').scrollTop = document.querySelector('section[style*="margin-top:18px"]').offsetTop - 20;
     });
   </script>
 </body>
