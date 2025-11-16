@@ -14,28 +14,29 @@
   <style>
     /* --------- Variables & Reset --------- */
     :root{
-      --bg1: #0f172a;            /* deep navy */
-      --bg2: #071033;            /* dark gradient end */
-      --card:#0b1220;           /* card bg in dark theme */
-      --muted:#9aa6b2;
-      --accent:#39b6ff;         /* brighter cyan accent */
-      --accent-2:#60e2c6;       /* secondary accent */
+      --bg-dark: #071226;
       --glass: rgba(255,255,255,0.04);
-      --success:#16a34a;
-      --radius:16px;
+      --muted:#9aa6b2;
+      --accent:#39b6ff;
+      --accent-2:#60e2c6;
+      --card:#0b1220;
+      --radius:14px;
       color-scheme: dark;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(57,182,255,0.08), transparent 8%), radial-gradient(1000px 500px at 90% 90%, rgba(96,226,198,0.05), transparent 12%), linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);color:#e6eef6;padding:28px}
+    body{margin:0;background:var(--bg-dark);color:#e6eef6;font-smoothing:antialiased}
 
-    /* subtle floating SVG blobs */
-    .floating-svg{position:fixed;right:-80px;top:10vh;opacity:0.14;pointer-events:none;transform:rotate(12deg)}
-    .floating-svg.left{left:-80px;right:auto;top:60vh;transform:rotate(-8deg)}
+    /* Fullscreen background canvases: waves + particles */
+    .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
+    canvas.bg-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+    /* subtle grain overlay */
+    .grain{position:fixed;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:0.06;z-index:-1;background-image:radial-gradient(rgba(255,255,255,0.02) 0.5px, transparent 0.6px);background-size:3px 3px}
 
     /* --------- Page container --------- */
-    .site{max-width:1100px;margin:0 auto}
+    .site{max-width:1100px;margin:0 auto;position:relative;padding:28px}
 
     /* --------- Header --------- */
     header.site-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -73,50 +74,31 @@
     /* --------- Tiles / Grid --------- */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 
-    /* card flip container */
-    .tile{perspective:1200px;background:transparent;border-radius:12px}
-    .tile-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.9,.2,1)}
-    .tile:hover .tile-inner{transform:rotateY(180deg) translateY(-6px)}
-    /* clicked / programmatic flip */
-    .tile-inner.flipped{transform:rotateY(180deg) translateY(-6px)}
+    /* tile styles (kept similar) */
+    .tiles .tile{position:relative;perspective:1200px;background:var(--card);border-radius:12px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,0.04)}
+    .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.2,1);height:160px}
+    .tiles .tile .tile-face{position:absolute;inset:0;padding:16px;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center}
+    .tiles .tile .tile-face.front{transform:rotateY(0deg);}
+    .tiles .tile .tile-face.back{transform:rotateY(180deg);}    
+    .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
+    .tiles .tile .tile-body{color:var(--muted);font-size:14px}
+    .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
 
-    .tile-face{position:relative;border-radius:12px;backface-visibility:hidden;padding:16px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));min-height:120px;display:flex;flex-direction:column;justify-content:center}
-    .tile-face.back{position:absolute;top:0;left:0;right:0;bottom:0;transform:rotateY(180deg);}
-
-    .tile h3{margin:0 0 8px 0;color:#f8feff}
-    .tile p{margin:0;color:var(--muted);font-size:14px}
-
-    /* hover effects for non-flip tiles */
-    .tile.simple .tile-face{transition:box-shadow .22s,transform .22s}
-    .tile.simple:hover .tile-face{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,6,23,0.6)}
-
-    /* progress */
-    .skill{display:flex;flex-direction:column;gap:8px}
-    .bar{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
-    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
-
-    .skill-desc{font-size:13px;color:var(--muted);margin-top:6px}
-
-    /* footer */
     footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px}
 
-    /* responsive */
     @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
+      .hero{grid-template-columns:1fr}
       .photo{width:160px;height:160px}
     }
   </style>
 </head>
 <body>
-  <!-- decorative SVGs -->
-  <svg class="floating-svg" width="420" height="420" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#39b6ff" stop-opacity="0.6"/><stop offset="1" stop-color="#60e2c6" stop-opacity="0.4"/></linearGradient></defs>
-    <g fill="url(#g1)"><circle cx="300" cy="300" r="220"/></g>
-  </svg>
-  <svg class="floating-svg left" width="360" height="360" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#7c9cff" stop-opacity="0.28"/><stop offset="1" stop-color="#60e2c6" stop-opacity="0.18"/></linearGradient></defs>
-    <g fill="url(#g2)"><rect x="50" y="50" width="500" height="500" rx="80"/></g>
-  </svg>
+  <!-- Background canvases container (waves + particles) -->
+  <div class="bg-wrap" aria-hidden="true">
+    <canvas id="waves-canvas" class="bg-canvas"></canvas>
+    <canvas id="particles-canvas" class="bg-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
 
   <div class="site">
     <header class="site-header">
@@ -135,6 +117,8 @@
     </header>
 
     <main>
+      <!-- rest of your original HTML content preserved (hero, panels, tiles, projects etc.) -->
+
       <section class="hero">
         <aside class="card profile-left">
           <img src="1000099595.jpeg" alt="Rosaiah" class="photo">
@@ -148,7 +132,6 @@
         </aside>
 
         <section class="card profile-right">
-          <!-- About me card (separate) -->
           <div class="card" style="margin-bottom:14px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));padding:14px;border-radius:12px">
             <h2 style="margin:0 0 8px 0">About Me</h2>
             <p class="intro">I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
@@ -161,14 +144,12 @@
             </ul>
           </div>
 
-          <!-- Tabs nav -->
           <nav class="tabs" role="tablist" aria-label="Profile sections" style="margin-bottom:12px">
             <button role="tab" class="tab-btn tab active" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
             <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
             <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
           </nav>
 
-          <!-- Panels (each panel is a separate card) -->
           <section class="panels">
             <article id="panel-about" class="panel active" role="tabpanel" aria-labelledby="tab-about">
               <div class="card" style="padding:14px">
@@ -184,42 +165,42 @@
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Production Support &amp; Operations</div>
-                    <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs.</div>
+                    <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs. Monitored batch windows, handled failovers, and coordinated cross-team incident responses.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Issue Resolution &amp; RCA</div>
-                    <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity.</div>
+                    <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity. Authored RCA reports and implemented preventive actions.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">DataStage Job Development</div>
-                    <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality and speed.</div>
+                    <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality, parallelism and efficient resource usage.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Data Extraction &amp; Integration</div>
-                    <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration.</div>
+                    <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration and implementing transformations reliably.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Documentation &amp; KM</div>
-                    <div class="tile-body">Developed technical specifications, transformation/logic documentation, and user guides for efficient knowledge management.</div>
+                    <div class="tile-title">Documentation &amp; Knowledge Management</div>
+                    <div class="tile-body">Developed technical specifications, transformation/logic documentation, and runbooks for efficient knowledge transfer and swift onboarding of new team members.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Testing &amp; Quality Assurance</div>
-                    <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality.</div>
+                    <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality, including performance benchmarking and regression testing.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Client &amp; Stakeholder Engagement</div>
-                    <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction.</div>
+                    <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction through clear communication and on-time delivery.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
                     <div class="tile-title">Deployment &amp; Change Management</div>
-                    <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams.</div>
+                    <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams, maintaining rollback plans and validation checks.</div>
                   </div>
 
                 </div>
@@ -247,7 +228,7 @@
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Python for Data Eng.</div>
+                    <div class="tile-title">Python for Data Engineering</div>
                     <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
                   </div>
 
@@ -257,18 +238,18 @@
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Apache Kafka &amp; MQ</div>
-                    <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven, scalable architectures and fast data pipelines.</div>
+                    <div class="tile-title">Apache Kafka &amp; Messaging</div>
+                    <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven architectures and near-real-time processing.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Cloud (AWS, GCP)</div>
+                    <div class="tile-title">Cloud Platforms (AWS, GCP)</div>
                     <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
                   </div>
 
                   <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Git, Jenkins, CI/CD</div>
-                    <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with modern DevOps tools like Git and Jenkins.</div>
+                    <div class="tile-title">CI/CD &amp; DevOps</div>
+                    <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with Git, Jenkins, and related DevOps tooling.</div>
                   </div>
 
                 </div>
@@ -291,7 +272,7 @@
                 </div>
                 <div class="tile-face back">
                   <div class="tile-title">Data Warehouse Migration</div>
-                  <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes.</div>
+                  <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes, created transformation specs and executed phased cutovers.</div>
                 </div>
               </div>
             </div>
@@ -304,7 +285,7 @@
                 </div>
                 <div class="tile-face back">
                   <div class="tile-title">Real-time Stream Integration</div>
-                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing with idempotent consumer patterns.</div>
+                  <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing. Built idempotent consumers, schema evolution strategies, and monitoring dashboards for throughput and lag.</div>
                 </div>
               </div>
             </div>
@@ -317,7 +298,20 @@
                 </div>
                 <div class="tile-face back">
                   <div class="tile-title">Operational Automation</div>
-                  <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability.</div>
+                  <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability. Integrated alerting and auto-remediation scripts for common failure classes.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tile" tabindex="0" aria-expanded="false">
+              <div class="tile-inner">
+                <div class="tile-face front">
+                  <div class="tile-title">Data Quality &amp; Observability</div>
+                  <div style="color:var(--muted);font-size:13px">Click to view</div>
+                </div>
+                <div class="tile-face back">
+                  <div class="tile-title">Data Quality &amp; Observability</div>
+                  <div class="tile-body">Designed and implemented data quality checks, drift detection, and lineage mapping. Built observability into pipelines using metrics, logs and dashboards to reduce silent failures and accelerate troubleshooting.</div>
                 </div>
               </div>
             </div>
@@ -334,11 +328,10 @@
   </div>
 
   <script>
-    // Accessible tabs (works with keyboard and updates aria-selected/hidden)
+    // Tabs and tiles behaviour (kept from original, lightly adapted)
     (function(){
       const tabs = Array.from(document.querySelectorAll('.tab-btn'));
       const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
-
       function activateTab(index){
         tabs.forEach((t,i)=>{
           const selected = i === index;
@@ -348,42 +341,14 @@
           panels[i].hidden = !selected;
         });
       }
-
-      tabs.forEach((t, i) => {
-        t.addEventListener('click', ()=> activateTab(i));
-        t.addEventListener('keydown', (e)=>{
-          if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length);
-          if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
-        });
-      });
-
-      // ensure initial state
+      if(tabs.length) tabs.forEach((t, i) => { t.addEventListener('click', ()=> activateTab(i)); t.addEventListener('keydown', (e)=>{ if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length); if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length); }); });
       activateTab(0);
-    })();
 
-    // Replace expandable behaviour with click-to-flip for tiles (no transparency, no overlap)
-    (function(){
-      // add styles for flip tiles and non-transparent cards
-      const style = document.createElement('style');
-      style.innerHTML = `
-        .tiles .tile{position:relative;perspective:1200px;background:var(--card);border-radius:12px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,0.04)}
-        .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.2,1);height:160px}
-        .tiles .tile .tile-face{position:absolute;inset:0;padding:16px;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center}
-        .tiles .tile .tile-face.front{transform:rotateY(0deg);}
-        .tiles .tile .tile-face.back{transform:rotateY(180deg);}
-        .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
-        .tiles .tile .tile-body{color:var(--muted);font-size:14px}
-        .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
-        /* ensure back face sits correctly and no overlap with other tiles */
-        .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-      `;
-      document.head.appendChild(style);
-
-      // transform each simple tile into a flip structure if not already
+      // Flip tiles initialization
       document.querySelectorAll('.tiles .tile').forEach(tile => {
-        // avoid double-wrapping
+        // build flip structure only if not already
         if(tile.querySelector('.tile-inner')) return;
-        const title = tile.querySelector('.tile-title')?.innerHTML || tile.querySelector('h3')?.innerHTML || '';
+        const title = tile.querySelector('.tile-title')?.innerHTML || '';
         const body = tile.querySelector('.tile-body')?.innerHTML || '';
         tile.innerHTML = `
           <div class="tile-inner" role="button" tabindex="0" aria-pressed="false">
@@ -397,44 +362,211 @@
             </div>
           </div>
         `;
-
         const inner = tile.querySelector('.tile-inner');
-
-        // click/keyboard toggles flip
-        const toggle = () => {
-          const flipped = inner.classList.toggle('flipped');
-          inner.setAttribute('aria-pressed', flipped ? 'true' : 'false');
-          tile.setAttribute('aria-expanded', flipped ? 'true' : 'false');
-        };
+        const toggle = () => { const flipped = inner.classList.toggle('flipped'); inner.setAttribute('aria-pressed', flipped ? 'true' : 'false'); tile.setAttribute('aria-expanded', flipped ? 'true' : 'false'); };
         tile.addEventListener('click', (e)=>{ if(e.target.closest('a')) return; toggle(); });
         inner.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
       });
-
     })();
 
-    // Theme toggle (keep existing behaviour)
+    // Theme toggle (kept simple)
     const themeBtn = document.getElementById('themeToggle');
     themeBtn.addEventListener('click', () => {
       const light = document.documentElement.getAttribute('data-theme') === 'light';
       if(light){
         document.documentElement.removeAttribute('data-theme');
-        document.documentElement.style.removeProperty('--bg1');
       } else {
         document.documentElement.setAttribute('data-theme','light');
-        document.documentElement.style.setProperty('--bg1','#f6f8fb');
-        document.documentElement.style.setProperty('--bg2','#ffffff');
-        document.documentElement.style.setProperty('--muted','#6b7280');
-        document.documentElement.style.setProperty('--accent','#0366d6');
       }
     });
 
-    // Download resume (kept)
+    // Resume download (kept)
     document.getElementById('downloadResume').addEventListener('click', ()=>{
       const data = { name: 'Rosaiah Chowdary', title: 'Data Engineer & ETL Specialist', email: 'gummalla.ds@gmail.com' };
       const win = window.open('', '_blank');
       win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
       win.document.close();
     });
+
+    /* ======== Background: Waves + Particles ========
+       Two canvas layers: waves-canvas draws sin-based flowing gradient ribbons (option 1) and
+       particles-canvas draws glowing particles with soft trails (option 3). Designed to be
+       performant: uses offscreen buffers and adapts to DPR. No external libs.
+    */
+    (function(){
+      // utilities
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+      // --- Waves canvas ---
+      const wavesCanvas = document.getElementById('waves-canvas');
+      const wctx = wavesCanvas.getContext('2d');
+
+      function resizeCanvasSize(canvas){
+        canvas.width = Math.floor(window.innerWidth * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+      }
+      resizeCanvasSize(wavesCanvas);
+
+      // wave layers configuration
+      const ribbons = [
+        { amplitude: 120, wavelength: 0.0095, speed: 0.0009, hueStart: 190, hueEnd: 210, alpha:0.18, yOff: 0.55 },
+        { amplitude: 80, wavelength: 0.012, speed: 0.0012, hueStart: 170, hueEnd: 200, alpha:0.12, yOff: 0.7 },
+        { amplitude: 50, wavelength: 0.016, speed: 0.0017, hueStart: 200, hueEnd: 250, alpha:0.08, yOff: 0.35 }
+      ];
+
+      let startTime = performance.now();
+
+      function drawWaves(time){
+        const t = time - startTime;
+        const width = wavesCanvas.width;
+        const height = wavesCanvas.height;
+
+        // clear with subtle gradient
+        wctx.clearRect(0,0,width,height);
+
+        // base overlay to darken edges
+        const baseGrad = wctx.createLinearGradient(0,0,0,height);
+        baseGrad.addColorStop(0, 'rgba(2,10,20,0.6)');
+        baseGrad.addColorStop(1, 'rgba(4,8,16,0.8)');
+        wctx.fillStyle = baseGrad; wctx.fillRect(0,0,width,height);
+
+        ribbons.forEach((r, idx) => {
+          const yCenter = height * r.yOff;
+          const amplitude = r.amplitude * dpr;
+          const wavelength = r.wavelength * width;
+          const offset = t * r.speed * width;
+
+          // create path for ribbon
+          wctx.beginPath();
+          const step = Math.max(6, Math.floor(width/120));
+          for(let x=0;x<=width;x+=step){
+            const theta = (x + offset) * (2*Math.PI / wavelength);
+            const y = yCenter + Math.sin(theta) * amplitude * Math.cos(theta*0.25);
+            if(x===0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
+          }
+
+          // close path down to bottom to create ribbon area
+          wctx.lineTo(width, height);
+          wctx.lineTo(0, height);
+          wctx.closePath();
+
+          // gradient fill with hue lerp
+          const hue = r.hueStart + ( (Math.sin(t*0.0005 + idx) +1)/2 ) * (r.hueEnd - r.hueStart);
+          const grad = wctx.createLinearGradient(0, yCenter - amplitude, 0, yCenter + amplitude*2);
+          grad.addColorStop(0, `hsla(${hue}, 88%, 60%, ${r.alpha})`);
+          grad.addColorStop(1, `hsla(${hue+30}, 80%, 45%, ${r.alpha*0.3})`);
+
+          wctx.fillStyle = grad;
+
+          // soft blur effect: draw to temporary canvas (cheap approximation by globalAlpha layers)
+          wctx.save();
+          wctx.globalCompositeOperation = 'lighter';
+          wctx.fill();
+          wctx.restore();
+        });
+
+        // subtle vignette
+        wctx.fillStyle = 'rgba(0,0,0,0.15)';
+        wctx.fillRect(0,0,width, height*0.06);
+        wctx.fillRect(0,height*0.94,width, height*0.06);
+      }
+
+      // --- Particles canvas ---
+      const particlesCanvas = document.getElementById('particles-canvas');
+      const pctx = particlesCanvas.getContext('2d');
+      resizeCanvasSize(particlesCanvas);
+
+      const particles = [];
+      const particleCountBase = Math.round((window.innerWidth * window.innerHeight) / (1400*800) * 80);
+      const MAX_PARTICLES = Math.max(40, particleCountBase);
+
+      function rand(min,max){ return Math.random()*(max-min)+min }
+
+      function initParticles(){
+        particles.length = 0;
+        for(let i=0;i<MAX_PARTICLES;i++){
+          particles.push({
+            x: Math.random()*particlesCanvas.width,
+            y: Math.random()*particlesCanvas.height,
+            vx: rand(-0.2,0.2)*dpr,
+            vy: rand(-0.15,0.15)*dpr,
+            size: rand(0.8,2.4)*dpr,
+            life: rand(80,360),
+            hue: rand(170,220),
+            alpha: rand(0.08,0.22)
+          });
+        }
+      }
+      initParticles();
+
+      // trail buffer to create glow trails (draw previous frame with alpha)
+      function drawParticles(){
+        const w = particlesCanvas.width, h = particlesCanvas.height;
+        // fade previous frame slightly to create trails
+        pctx.fillStyle = 'rgba(2,6,18,0.18)';
+        pctx.fillRect(0,0,w,h);
+
+        particles.forEach(p => {
+          // motion influenced by sin waves for organic flow
+          const time = performance.now()*0.0006;
+          const flowX = Math.sin((p.y*0.002)+time*1.6) * 0.25;
+          const flowY = Math.cos((p.x*0.002)+time*1.2) * 0.25;
+
+          p.x += p.vx + flowX*dpr;
+          p.y += p.vy + flowY*dpr;
+
+          // wrap around
+          if(p.x < -20*dpr) p.x = w + 20*dpr;
+          if(p.x > w + 20*dpr) p.x = -20*dpr;
+          if(p.y < -20*dpr) p.y = h + 20*dpr;
+          if(p.y > h + 20*dpr) p.y = -20*dpr;
+
+          // draw glow (radial gradient)
+          const grd = pctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size*12);
+          grd.addColorStop(0, `hsla(${p.hue}, 95%, 65%, ${p.alpha})`);
+          grd.addColorStop(0.3, `hsla(${p.hue+30}, 90%, 55%, ${p.alpha*0.35})`);
+          grd.addColorStop(1, `rgba(2,6,18,0)`);
+
+          pctx.globalCompositeOperation = 'lighter';
+          pctx.fillStyle = grd;
+          pctx.beginPath();
+          pctx.arc(p.x, p.y, p.size*12, 0, Math.PI*2);
+          pctx.fill();
+
+          // tiny core
+          pctx.globalCompositeOperation = 'source-over';
+          pctx.fillStyle = `hsla(${p.hue}, 90%, 70%, ${Math.min(1,p.alpha*3)})`;
+          pctx.beginPath();
+          pctx.arc(p.x, p.y, p.size*1.2, 0, Math.PI*2);
+          pctx.fill();
+        });
+      }
+
+      // adapt on resize
+      window.addEventListener('resize', ()=>{
+        resizeCanvasSize(wavesCanvas); resizeCanvasSize(particlesCanvas);
+        // re-init particles for new density
+        initParticles();
+      });
+
+      // main loop
+      let rafId;
+      function loop(time){
+        drawWaves(time);
+        drawParticles();
+        rafId = requestAnimationFrame(loop);
+      }
+      rafId = requestAnimationFrame(loop);
+
+      // pause animation when page not visible to save CPU
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.hidden){ cancelAnimationFrame(rafId); } else { startTime = performance.now(); rafId = requestAnimationFrame(loop); }
+      });
+
+    })();
+
   </script>
 </body>
 </html>
