@@ -7,220 +7,119 @@
   <meta name="author" content="Rosaiah Chowdary">
   <meta name="description" content="Portfolio — Data Engineer & ETL Specialist">
 
-  <!-- Fonts & icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <style>
-    /* --------- Variables & Reset (updated colors & background) --------- */
-    :root{
-      --bg-gradient-1: #0b1220; /* deep navy */
-      --bg-gradient-2: #07182a; /* rich teal-blue */
-      --card: rgba(255,255,255,0.06); /* translucent card for contrast on dark bg */
-      --card-solid: #ffffff; /* used for light elements when needed */
-      --muted: rgba(255,255,255,0.72);
-      --accent: #00bcd4; /* vibrant teal */
-      --accent-2: #7be3ff;
-      --glass: rgba(255,255,255,0.04);
-      --success: #16a34a;
-      --radius:16px;
-      color-scheme: dark;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      /* new diagonal gradient background with subtle noise overlay */
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,188,212,0.06), transparent 10%),
-                  linear-gradient(135deg,var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
-      color:var(--card-solid);
-      padding:36px;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    /* subtle animated floating shapes (pure CSS) */
-    .site::before{
-      content: '';
-      position: fixed;inset:0;pointer-events:none;z-index:0;
-      background: radial-gradient(circle at 85% 10%, rgba(123,227,255,0.04), transparent 8%),
-                  radial-gradient(circle at 20% 80%, rgba(0,188,212,0.03), transparent 10%);
-      mix-blend-mode: screen;
-      opacity:0.9;
-    }
-
-    /* --------- Page container --------- */
-    .site{max-width:1100px;margin:0 auto;position:relative;z-index:1}
-
-    /* --------- Header --------- */
-    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;gap:14px;align-items:center}
-    .logo{width:64px;height:64px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg-gradient-1);font-weight:800;font-size:18px;box-shadow:0 8px 30px rgba(3,12,30,0.6)}
-    .brand h1{font-size:18px;margin:0;color:var(--card-solid)}
-    .brand p{margin:0;font-size:13px;color:var(--muted)}
-
-    .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--card-solid);backdrop-filter: blur(6px)}
-    .btn:hover{transform:translateY(-3px)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021018;border:none;box-shadow:0 10px 30px rgba(0,188,212,0.12)}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06)}
-
-    /* --------- Hero / Profile --------- */
-    .hero{display:grid;grid-template-columns:280px 1fr;gap:26px;margin-top:28px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:var(--radius);padding:22px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 12px 40px rgba(2,6,23,0.5)}
-
-    .photo{width:230px;height:230px;border-radius:16px;object-fit:cover;display:block;border:3px solid rgba(255,255,255,0.04)}
-    .profile-left{display:flex;flex-direction:column;gap:12px;align-items:center}
-    .name{font-size:20px;font-weight:800;color:var(--card-solid)}
-    .title{color:var(--accent);font-weight:700}
-    .meta{color:var(--muted);font-size:13px}
-
-    .profile-right{display:flex;flex-direction:column;gap:12px}
-    .intro{font-size:15px;color:rgba(255,255,255,0.92);line-height:1.6}
-    .cta-row{display:flex;gap:10px;margin-top:6px}
-
-    /* --------- Tabs & panels --------- */
-    .tabs{display:flex;gap:8px;margin-top:18px}
-    .tab{padding:10px 14px;border-radius:12px;border:1px solid transparent;background:transparent;cursor:pointer;font-weight:700;color:var(--muted)}
-    .tab.active{background:linear-gradient(90deg, rgba(0,188,212,0.10), rgba(123,227,255,0.04));border-color:rgba(0,188,212,0.08);color:var(--card-solid)}
-
-    .panels{margin-top:14px}
-    .panel{display:none}
-    .panel.active{display:block}
-
-    /* --------- Tiles / Grid --------- */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .tile{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;transition:transform .22s ease,box-shadow .22s;backdrop-filter:blur(6px)}
-    .tile:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(0,0,0,0.6)}
-    .tile h3{margin:0 0 8px 0;color:var(--card-solid)}
-    .tile p{margin:0;color:var(--muted);font-size:14px}
-
-    /* progress */
-    .skill{display:flex;flex-direction:column;gap:6px}
-    .bar{height:12px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
-    .progress{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
-
-    /* footer */
-    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
-
-    /* responsive */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .photo{width:160px;height:160px}
-      body{padding:18px}
-      .logo{width:52px;height:52px}
-    }
-  
-
-    /* Floating SVG shapes (animated) */
-    .floating-svg-container{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .floating-svg{width:100%;height:100%;display:block}
-    .float{transform-origin:center;will-change:transform,opacity}
-    .float-1{animation:floatY 9s ease-in-out infinite;opacity:0.9}
-    .float-2{animation:floatY 12s ease-in-out infinite;animation-delay:2s;opacity:0.75}
-    .float-3{animation:floatY 15s ease-in-out infinite;animation-delay:4s;opacity:0.65}
-    .float-rotate{animation:rotateSlow 24s linear infinite}
-
-    @keyframes floatY{
-      0%{transform:translateY(0) translateX(0) rotate(0deg)}
-      50%{transform:translateY(-28px) translateX(12px) rotate(6deg)}
-      100%{transform:translateY(0) translateX(0) rotate(0deg)}
-    }
-    @keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-  </style>
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Floating SVGs (decorative) -->
   <div class="floating-svg-container" aria-hidden="true">
     <svg class="floating-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- soft teal blob -->
       <g class="float float-1 float-rotate" transform="translate(100 80)">
         <path d="M120 20c40-20 120-20 170 10s80 100 40 150-120 70-170 50S80 90 120 20z" fill="url(#g1)" opacity="0.18" />
       </g>
-
-      <!-- circular halo -->
       <g class="float float-2" transform="translate(980 120)">
         <circle cx="0" cy="0" r="80" fill="url(#g2)" opacity="0.12" />
       </g>
-
-      <!-- geometric hex -->
       <g class="float float-3" transform="translate(900 600)">
         <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="url(#g3)" opacity="0.10" />
       </g>
-
       <defs>
-        <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/><stop offset="100%" stop-color="var(--accent-2)" stop-opacity="1"/></linearGradient>
-        <radialGradient id="g2"><stop offset="0%" stop-color="var(--accent-2)" stop-opacity="1"/><stop offset="100%" stop-color="var(--bg-gradient-2)" stop-opacity="0"/></radialGradient>
+        <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-color="#00bcd4" stop-opacity="1"/><stop offset="100%" stop-color="#7be3ff" stop-opacity="1"/></linearGradient>
+        <radialGradient id="g2"><stop offset="0%" stop-color="#7be3ff" stop-opacity="1"/><stop offset="100%" stop-color="#07182a" stop-opacity="0"/></radialGradient>
         <linearGradient id="g3" x1="0%" x2="100%"><stop offset="0%" stop-color="#7be3ff" stop-opacity="1"/><stop offset="100%" stop-color="#00bcd4" stop-opacity="1"/></linearGradient>
       </defs>
     </svg>
   </div>
 
-  <div class="site">
+  <div class="site container">
     <header class="site-header">
-      <div class="brand">
-        <div class="logo">RC</div>
-        <div>
+      <div class="logo">
+        <div class="mark">RC</div>
+        <div class="brand-text">
           <h1>Rosaiah Chowdary</h1>
-          <p class="meta">Data Engineer • ETL Specialist — Hyderabad, India</p>
+          <p class="small">Data Engineer • ETL Specialist — Hyderabad, India</p>
         </div>
       </div>
 
       <div class="header-actions">
-        <button class="btn" id="downloadResume"><i class="fa-regular fa-file-lines"></i>&nbsp;Download Resume</button>
-        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        <button class="btn primary" id="downloadResume"><i class="fa-regular fa-file-lines"></i>&nbsp;Download Resume</button>
+        <button class="btn" id="themeToggle" aria-pressed="false" title="Toggle theme">Theme</button>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <aside class="card profile-left">
-          <img src="1000099595.jpeg" alt="Rosaiah" class="photo">
+      <section class="profile-area fade-in">
+        <aside class="profile-left">
+          <img src="assets/photo.jpg" alt="Rosaiah" class="photo" id="profilePhoto">
           <div class="name">Rosaiah Chowdary</div>
-          <div class="title">Data Engineer & ETL Specialist</div>
+          <div class="designation">Data Engineer & ETL Specialist</div>
           <div class="meta">IBM DataStage • Python • SQL • Kafka • Cloud (AWS/GCP)</div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <a class="btn" href="mailto:gummalla.ds@gmail.com"><i class="fa-regular fa-envelope"></i>&nbsp;Email</a>
-            <a class="btn secondary" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank"><i class="fa-brands fa-linkedin"></i>&nbsp;LinkedIn</a>
+          <div class="contact-row">
+            <a class="link-btn" href="mailto:gummalla.ds@gmail.com">Email</a>
+            <a class="link-btn" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank">LinkedIn</a>
           </div>
         </aside>
 
-        <section class="card profile-right">
+        <section class="profile-right">
           <div class="intro">I build reliable, high-performance ETL pipelines and support large-scale data platforms. I specialise in IBM DataStage, operational support, performance tuning and migrations to cloud-based architectures.</div>
 
           <div class="cta-row">
-            <button class="btn" id="contactMe">Contact</button>
-            <button class="btn secondary" id="viewProjects">Projects</button>
+            <button class="btn primary" id="contactMe">Contact</button>
+            <button class="btn" id="viewProjects">Projects</button>
           </div>
 
           <div class="tabs" role="tablist" aria-label="Sections">
-            <button class="tab active" data-target="about">About</button>
-            <button class="tab" data-target="roles">Roles</button>
-            <button class="tab" data-target="skills">Skills</button>
+            <button class="tab-btn" data-target="about" aria-selected="true">About</button>
+            <button class="tab-btn" data-target="roles" aria-selected="false">Roles</button>
+            <button class="tab-btn" data-target="skills" aria-selected="false">Skills</button>
           </div>
 
           <div class="panels">
-            <div id="about" class="panel active">
-              <p style="margin-top:12px">Passionate Data Engineer with extensive hands-on experience designing, developing and operating ETL solutions. I focus on automation, observability and measurable performance improvements.</p>
+            <div id="about" class="panel" data-panel>
+              <p>Passionate Data Engineer with extensive hands-on experience designing, developing and operating ETL solutions. I focus on automation, observability and measurable performance improvements.</p>
             </div>
 
-            <div id="roles" class="panel">
-              <div class="grid" style="margin-top:12px">
-                <div class="tile"><h3>Production Support</h3><p>Managed 90k+ scheduled jobs, incident triage, on-call and SLA-driven operations.</p></div>
-                <div class="tile"><h3>Job Development</h3><p>Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</p></div>
-                <div class="tile"><h3>Change Management</h3><p>Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</p></div>
-                <div class="tile"><h3>Documentation</h3><p>Clear KB articles, runbooks and onboarding guides to speed up team ramp-up.</p></div>
+            <div id="roles" class="panel" data-panel hidden>
+              <div class="tiles">
+                <div class="tile" tabindex="0">
+                  <div class="tile-title">Production Support</div>
+                  <div class="tile-body">Managed 90k+ scheduled jobs, incident triage, on-call and SLA-driven operations.</div>
+                  <div class="meta-row"><div class="chip">Operations</div><div class="small">SLA-driven</div></div>
+                </div>
+                <div class="tile" tabindex="0">
+                  <div class="tile-title">Job Development</div>
+                  <div class="tile-body">Design and build resilient DataStage jobs with emphasis on parallelism and tuning.</div>
+                  <div class="meta-row"><div class="chip">Development</div><div class="small">Performance</div></div>
+                </div>
+                <div class="tile" tabindex="0">
+                  <div class="tile-title">Change Management</div>
+                  <div class="tile-body">Coordinate deployments, migrations and thorough rollbacks with minimal downtime.</div>
+                  <div class="meta-row"><div class="chip">Deploy</div><div class="small">Low Downtime</div></div>
+                </div>
+                <div class="tile" tabindex="0">
+                  <div class="tile-title">Documentation</div>
+                  <div class="tile-body">Clear KB articles, runbooks and onboarding guides to speed up team ramp-up.</div>
+                  <div class="meta-row"><div class="chip">Docs</div><div class="small">Onboarding</div></div>
+                </div>
               </div>
             </div>
 
-            <div id="skills" class="panel">
-              <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>IBM DataStage</strong><small>95%</small></div><div class="bar"><div class="progress" data-val="95"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>SQL & PL/SQL</strong><small>90%</small></div><div class="bar"><div class="progress" data-val="90"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Python</strong><small>82%</small></div><div class="bar"><div class="progress" data-val="82"></div></div></div>
-                <div class="skill"><div style="display:flex;justify-content:space-between"><strong>Cloud (AWS/GCP)</strong><small>78%</small></div><div class="bar"><div class="progress" data-val="78"></div></div></div>
+            <div id="skills" class="panel" data-panel hidden>
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between"><strong>IBM DataStage</strong><small>95%</small></div>
+                <div class="bar"><div class="progress" data-val="95"></div></div>
+              </div>
+              <div class="skill" style="margin-top:10px">
+                <div style="display:flex;justify-content:space-between"><strong>SQL & PL/SQL</strong><small>90%</small></div>
+                <div class="bar"><div class="progress" data-val="90"></div></div>
+              </div>
+              <div class="skill" style="margin-top:10px">
+                <div style="display:flex;justify-content:space-between"><strong>Python</strong><small>82%</small></div>
+                <div class="bar"><div class="progress" data-val="82"></div></div>
+              </div>
+              <div class="skill" style="margin-top:10px">
+                <div style="display:flex;justify-content:space-between"><strong>Cloud (AWS/GCP)</strong><small>78%</small></div>
+                <div class="bar"><div class="progress" data-val="78"></div></div>
               </div>
             </div>
           </div>
@@ -229,94 +128,20 @@
       </section>
 
       <section style="margin-top:18px">
-        <div class="card">
-          <h2 style="margin:0 0 12px 0">Selected Projects</h2>
-          <div class="grid">
-            <div class="tile"><h3>Data Warehouse Migration</h3><p>Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x.</p></div>
-            <div class="tile"><h3>Real-time Stream Integration</h3><p>Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</p></div>
-            <div class="tile"><h3>Operational Automation</h3><p>Automated recurring maintenance tasks and reduced manual intervention by 70%.</p></div>
+        <div class="panel">
+          <h2>Selected Projects</h2>
+          <div class="tiles">
+            <div class="tile" tabindex="0"><div class="tile-title">Data Warehouse Migration</div><div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improved load times by 4x.</div></div>
+            <div class="tile" tabindex="0"><div class="tile-title">Real-time Stream Integration</div><div class="tile-body">Implemented Kafka-based streaming to enable near-real-time analytics and alerts.</div></div>
+            <div class="tile" tabindex="0"><div class="tile-title">Operational Automation</div><div class="tile-body">Automated recurring maintenance tasks and reduced manual intervention by 70%.</div></div>
           </div>
         </div>
       </section>
-
     </main>
 
-    <footer>
-      <small>© Rosaiah Chowdary — Data Engineering & ETL Specialist</small>
-    </footer>
+    <footer class="site-footer small center">© Rosaiah Chowdary — Data Engineering & ETL Specialist</footer>
   </div>
 
-  <script>
-    // Tabs
-    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', e => {
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
-
-      // when switching to skills, animate bars
-      if(btn.dataset.target === 'skills') animateSkills();
-    }));
-
-    // Progress bar animation
-    function animateSkills(){
-      document.querySelectorAll('.progress').forEach(el => {
-        const val = el.dataset.val || 0;
-        el.style.width = val + '%';
-      });
-    }
-    // animate once on load if skills visible
-    if(document.querySelector('#skills').classList.contains('active')) animateSkills();
-
-    // Theme toggle (light/dark)
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if(!dark){
-        document.documentElement.setAttribute('data-theme','dark');
-        document.documentElement.style.setProperty('--bg','#0b1220');
-        document.documentElement.style.setProperty('--card','#071028');
-        document.documentElement.style.setProperty('--muted','#9aa6b2');
-        document.documentElement.style.setProperty('--accent','#7cc4ff');
-        themeBtn.setAttribute('aria-pressed','true');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        document.documentElement.style.removeProperty('--bg');
-        document.documentElement.style.removeProperty('--card');
-        document.documentElement.style.removeProperty('--muted');
-        document.documentElement.style.removeProperty('--accent');
-        themeBtn.setAttribute('aria-pressed','false');
-      }
-    });
-
-    // Download resume (simple PDF generator from page content)
-    document.getElementById('downloadResume').addEventListener('click', ()=>{
-      const data = {
-        name: 'Rosaiah Chowdary',
-        title: 'Data Engineer & ETL Specialist',
-        email: 'gummalla.ds@gmail.com'
-      };
-      // quick printable page: open a new window with trimmed profile
-      const win = window.open('', '_blank');
-      win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
-      win.document.close();
-    });
-
-    // Contact button
-    document.getElementById('contactMe').addEventListener('click', ()=>{
-      window.location.href = 'mailto:gummalla.ds@gmail.com?subject=Inquiry%20from%20portfolio';
-    });
-
-    // Small accessibility: keyboard open tiles
-    document.querySelectorAll('.tile').forEach(tile => {
-      tile.setAttribute('tabindex', '0');
-      tile.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') tile.click(); });
-    });
-
-    // Optional: show remote projects section when 'viewProjects' clicked
-    document.getElementById('viewProjects').addEventListener('click', ()=>{
-      document.querySelector('html').scrollTop = document.querySelector('section[style*="margin-top:18px"]').offsetTop - 20;
-    });
-  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
