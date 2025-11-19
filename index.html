@@ -139,9 +139,11 @@
               <a class="btn secondary" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank"><i class="fa-brands fa-linkedin"></i>&nbsp;LinkedIn</a>
             </div>
             <!-- Timer-bomb style current time widget below the email button -->
-            <div id="email-clock" style="margin-top:72px;display:inline-flex;align-items:center;gap:12px;white-space:nowrap">
-            <canvas id="analog-clock" width="96" height="96" aria-label="Analog clock" role="img" style="width:96px;height:96px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 28px rgba(2,10,30,0.6);background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.02), transparent 40%);"></canvas>
-            <div id="clock-text" style="font-size:13px;color:var(--muted);min-width:80px;text
+            <div id="email-timer" style="margin-top:72px;display:inline-flex;flex-direction:row;align-items:center;gap:12px;white-space:nowrap"display:flex;align-items:center;gap:8px">
+              <div class="bomb" aria-hidden="true">
+                <div class="bomb-core">⏱</div>
+                <div class="fuse" id="fuse"></div>
+              </div>
               <div style="font-size:13px;color:var(--muted)" id="current-time">--:--:--</div>
             </div>
           </div>
