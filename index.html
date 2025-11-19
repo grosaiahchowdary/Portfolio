@@ -139,7 +139,7 @@
               <a class="btn secondary" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank"><i class="fa-brands fa-linkedin"></i>&nbsp;LinkedIn</a>
             </div>
             <!-- Timer-bomb style current time widget below the email button -->
-            <div id="email-timer" style="margin-top:72px;display:inline-flex;flex-direction:row;align-items:center;gap:12px;white-space:nowrap"display:flex;align-items:center;gap:8px">
+            <div id="email-timer" style="margin-top:72px;display:flex;align-items:center;gap:8px;"display:flex;align-items:center;gap:8px">
               <div class="bomb" aria-hidden="true">
                 <div class="bomb-core">⏱</div>
                 <div class="fuse" id="fuse"></div>
@@ -410,34 +410,7 @@
     document.getElementById('downloadResume').addEventListener('click', ()=>{
       const data = { name: 'Rosaiah Chowdary', title: 'Data Engineer & ETL Specialist', email: 'gummalla.ds@gmail.com' };
       const win = window.open('', '_blank');
-      win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p>  <script>
-    // Timer + blast logic: update time every second, trigger a 3s blast on minute or on click
-    (function(){
-      const el = document.getElementById('current-time');
-      const bomb = document.querySelector('#email-timer .bomb');
-      const fuse = document.getElementById('fuse');
-      let blasting = false;
-      function pad(n){ return n<10? '0'+n : ''+n }
-      function triggerBlast(){
-        if(!bomb || blasting) return;
-        blasting = true;
-        bomb.classList.add('blast');
-        const ring = document.createElement('span'); ring.className = 'blast-ring'; bomb.appendChild(ring);
-        if(fuse) fuse.style.animationDuration = '0.28s';
-        setTimeout(()=>{ if(fuse) fuse.style.animationDuration = '1s'; bomb.classList.remove('blast'); ring.remove(); blasting=false; }, 3000);
-      }
-      function update(){
-        const now = new Date();
-        el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-        if(fuse) fuse.style.animationDuration = (1 + (now.getSeconds()%4)*0.25) + 's';
-        if(now.getSeconds() === 0){ triggerBlast(); }
-      }
-      if(bomb) bomb.addEventListener('click', triggerBlast);
-      update();
-      setInterval(update, 1000);
-    })();
-  </script>
-</body></html>`);
+      win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
       win.document.close();
     });
 
