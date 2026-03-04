@@ -1,799 +1,759 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rosaiah Chowdary — Data Engineer</title>
   <meta name="author" content="Rosaiah Chowdary">
   <meta name="description" content="Portfolio — Data Engineer & ETL Specialist">
-
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
+  
   <style>
-    /* --------- Variables & Reset --------- */
-    :root{
-      --bg-dark: #071226;
-      --glass: rgba(255,255,255,0.04);
-      --muted:#9aa6b2;
-      --accent:#39b6ff;
-      --accent-2:#60e2c6;
-      --card:#0b1220;
-      --radius:14px;
-      color-scheme: dark;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg-dark);color:#e6eef6;font-smoothing:antialiased;overflow-x:hidden}
-
-
-    /* ===== FLASH ENTRANCE ANIMATIONS ===== */
-    @keyframes slideInFromLeft{
-      0%{opacity:0;transform:translateX(-100px)}
-      100%{opacity:1;transform:translateX(0)}
-    }
-    
-    @keyframes slideInFromRight{
-      0%{opacity:0;transform:translateX(100px)}
-      100%{opacity:1;transform:translateX(0)}
-    }
-    
-    @keyframes slideInFromTop{
-      0%{opacity:0;transform:translateY(-50px)}
-      100%{opacity:1;transform:translateY(0)}
-    }
-    
-    @keyframes slideInFromBottom{
-      0%{opacity:0;transform:translateY(50px)}
-      100%{opacity:1;transform:translateY(0)}
-    }
-    
-    @keyframes zoomIn{
-      0%{opacity:0;transform:scale(0.8)}
-      100%{opacity:1;transform:scale(1)}
-    }
-    
-    @keyframes glowPulse{
-      0%, 100%{box-shadow:0 8px 40px rgba(2,6,23,0.6)}
-      50%{box-shadow:0 8px 60px rgba(57,182,255,0.4), 0 0 80px rgba(96,226,198,0.3)}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    @keyframes tileFlashIn{
-      0%{opacity:0;transform:translateY(30px) scale(0.9);filter:brightness(0.5)}
-      50%{filter:brightness(1.3)}
-      100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1)}
+    :root {
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
     }
 
-    @keyframes fadeInUp{
-      0%{opacity:0;transform:translateY(20px)}
-      100%{opacity:1;transform:translateY(0)}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0c29;
+      background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Fullscreen background canvases: waves + particles */
-    .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
-    canvas.bg-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-
-    /* subtle grain overlay */
-    .grain{position:fixed;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:0.06;z-index:-1;background-image:radial-gradient(rgba(255,255,255,0.02) 0.5px, transparent 0.6px);background-size:3px 3px}
-
-    /* --------- Page container --------- */
-    .site{max-width:1100px;margin:0 auto;position:relative;padding:28px}
-
-    /* --------- Header --------- */
-    header.site-header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      animation:slideInFromTop 0.8s cubic-bezier(0.2,0.9,0.2,1) both;
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:56px;height:56px;border-radius:12px;display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#021025;font-weight:800;letter-spacing:0.6px;
-      transition:transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .logo:hover{
-      transform:rotate(360deg) scale(1.1);
-      box-shadow:0 0 40px rgba(57,182,255,0.6);
-    }
-    .brand h1{font-size:18px;margin:0;color:#eaf6ff}
-    .brand p{margin:0;font-size:13px;color:var(--muted)}
-    .header-actions{display:flex;gap:10px;align-items:center}
-    .btn{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);
-      padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700;
-      color:#eaf6ff;backdrop-filter:blur(6px);
-      transition:all 0.3s cubic-bezier(0.2,0.9,0.2,1);
-      position:relative;overflow:hidden;
-    }
-    .btn::before{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
-      transform:translateX(-100%);transition:transform 0.6s ease;
-    }
-    .btn:hover::before{transform:translateX(100%)}
-    .btn:hover{
-      transform:translateY(-3px);
-      box-shadow:0 10px 30px rgba(57,182,255,0.3);
-      border-color:rgba(57,182,255,0.4);
-    }
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04)}
-
-    /* --------- Hero / Profile --------- */
-    .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:20px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--radius);padding:18px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow:0 8px 40px rgba(2,6,23,0.6);
-      animation:glowPulse 4s ease-in-out infinite;
+    /* Animated Gradient Background */
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
     }
 
-    .photo{
-      width:220px;height:220px;border-radius:14px;object-fit:cover;
-      display:block;border:4px solid rgba(255,255,255,0.04);
-      transition:all 0.5s cubic-bezier(0.2,0.9,0.2,1);
-      animation:zoomIn 1s cubic-bezier(0.2,0.9,0.2,1) 0.4s both;
-    }
-    .photo:hover{
-      transform:scale(1.05) rotate(2deg);
-      box-shadow:0 20px 60px rgba(57,182,255,0.4);
-      border-color:rgba(57,182,255,0.3);
-    }
-    .profile-left{
-      display:flex;flex-direction:column;gap:12px;align-items:center;
-      animation:slideInFromLeft 1s cubic-bezier(0.2,0.9,0.2,1) 0.2s both;
-    }
-    .name{font-size:20px;font-weight:800;color:#fbfdff}
-    .title{color:var(--accent);font-weight:700}
-    .meta{color:var(--muted);font-size:13px}
-
-    .profile-right{
-      display:flex;flex-direction:column;gap:10px;
-      animation:slideInFromRight 1s cubic-bezier(0.2,0.9,0.2,1) 0.3s both;
-    }
-    .intro{font-size:15px;color:#dfefff;line-height:1.6}
-    .cta-row{display:flex;gap:10px;margin-top:6px}
-
-    /* --------- Tabs & panels --------- */
-    .tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-    .tab{
-      padding:10px 14px;border-radius:12px;border:1px solid transparent;
-      background:transparent;cursor:pointer;font-weight:700;color:#dbefff;
-      transition:all 0.3s cubic-bezier(0.2,0.9,0.2,1);
-      position:relative;
-    }
-    .tab::after{
-      content:'';position:absolute;bottom:0;left:50%;
-      width:0;height:2px;background:var(--accent);
-      transition:all 0.3s ease;transform:translateX(-50%);
-    }
-    .tab:hover::after{width:80%}
-    .tab.active{
-      background:linear-gradient(180deg, rgba(57,182,255,0.08), rgba(96,226,198,0.03));
-      border-color:rgba(57,182,255,0.12);color:var(--accent);
-      transform:translateY(-2px);
-    }
-    .tab.active::after{width:80%}
-
-    .panels{margin-top:14px}
-    .panel{display:none;animation:fadeInUp 0.6s ease both}
-    .panel.active{display:block}
-
-    /* --------- Tiles / Grid --------- */
-    .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
-    .tiles .tile{
-      position:relative;perspective:1400px;background:var(--card);
-      border-radius:18px;padding:0;overflow:visible;min-height:240px;
-      border:1px solid rgba(255,255,255,0.12);
-      box-shadow:0 0 25px rgba(0,0,0,0.4);backdrop-filter:blur(8px);
-      opacity:0;animation:tileFlashIn 0.6s cubic-bezier(0.2,0.9,0.2,1) both;
-    }
-    
-    /* Stagger animation for tiles */
-    .tiles .tile:nth-child(1){animation-delay:0.1s}
-    .tiles .tile:nth-child(2){animation-delay:0.2s}
-    .tiles .tile:nth-child(3){animation-delay:0.3s}
-    .tiles .tile:nth-child(4){animation-delay:0.4s}
-    .tiles .tile:nth-child(5){animation-delay:0.5s}
-    .tiles .tile:nth-child(6){animation-delay:0.6s}
-    .tiles .tile:nth-child(7){animation-delay:0.7s}
-    .tiles .tile:nth-child(8){animation-delay:0.8s}
-    .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform 1.6s cubic-bezier(.2,.8,.2,1);height:100%;}
-    .tiles .tile .tile-face{position:absolute;inset:0;padding:22px;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(255,255,255,0.1);}
-    .tiles .tile .tile-face.front{transform:rotateY(0deg);}
-    .tiles .tile .tile-face.back{transform:rotateY(180deg);}    
-    .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
-    .tiles .tile .tile-body{color:var(--muted);font-size:14px}
-    .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
-
-    /* Enhanced hover with glow effect */
-    .tiles .tile:hover .tile-inner, .tiles .tile:focus-within .tile-inner{
-      transform:rotateY(180deg) translateY(-6px);
-    }
-    .tiles .tile:hover{
-      box-shadow:0 0 60px rgba(57,182,255,0.4), 0 20px 80px rgba(0,0,0,0.6);
-      border-color:rgba(57,182,255,0.3);
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* Timer bomb styles */
-    #email-timer .bomb{
-      width:72px;height:72px;border-radius:999px;
-      background:linear-gradient(180deg,#332a3a,#1b1220);
-      display:grid;place-items:center;position:relative;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:0 6px 18px rgba(0,0,0,0.5);
-      animation:bombPulse 2s ease-in-out infinite;
-    }
-    
-    @keyframes bombPulse{
-      0%, 100%{transform:scale(1)}
-      50%{transform:scale(1.05)}
-    }
-    
-    #email-timer .bomb-core{font-size:28px;}
-    #email-timer .fuse{
-      position:absolute;top:-10px;left:50%;transform:translateX(-50%);
-      width:2px;height:18px;
-      background:linear-gradient(90deg,#ffcf6b,#ff6b6b);
-      border-radius:2px;box-shadow:0 0 8px rgba(255,110,110,0.9);
-      animation:burn 1s linear infinite;
-    }
-    @keyframes burn{
-      0%{height:18px;opacity:1}
-      50%{height:10px;opacity:0.6}
-      100%{height:18px;opacity:1}
+    /* Floating Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+      z-index: -1;
     }
 
-    /* ===== SCROLL REVEAL ANIMATIONS ===== */
-    .scroll-reveal{
-      opacity:0;transform:translateY(30px);
-      transition:all 0.8s cubic-bezier(0.2,0.9,0.2,1);
-    }
-    .scroll-reveal.revealed{
-      opacity:1;transform:translateY(0);
-    }
-
-    footer{
-      margin-top:34px;text-align:center;color:var(--muted);font-size:13px;
-      animation:slideInFromBottom 1s cubic-bezier(0.2,0.9,0.2,1) 1s both;
+    .orb1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #667eea, transparent);
+      top: -200px;
+      left: -200px;
+      animation-delay: 0s;
     }
 
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .photo{width:160px;height:160px}
-      .tiles .tile{min-height:200px}
+    .orb2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #f093fb, transparent);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: 5s;
+    }
+
+    .orb3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #4facfe, transparent);
+      top: 50%;
+      left: 50%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(100px, -100px) scale(1.1); }
+      66% { transform: translate(-100px, 100px) scale(0.9); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      animation: slideDown 0.8s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      background: var(--gradient-3);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 10px 40px rgba(79, 172, 254, 0.4);
+      animation: rotate3d 10s infinite linear;
+      position: relative;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: var(--gradient-3);
+      border-radius: 20px;
+      z-index: -1;
+      filter: blur(10px);
+      opacity: 0.7;
+    }
+
+    @keyframes rotate3d {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .logo-text h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient-5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--gradient-2);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 40px;
+      margin-top: 60px;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent 30%);
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    .profile-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      margin: 0 auto 30px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .profile-name {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: var(--gradient-4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .profile-title {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+    }
+
+    .profile-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .skill-tag {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: var(--gradient-3);
+      transform: translateY(-2px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .social-btn:hover {
+      background: var(--gradient-2);
+      transform: translateY(-5px) rotate(360deg);
+      box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+    }
+
+    /* Content Section */
+    .content-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .about-box h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-box p {
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+    }
+
+    .about-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-box li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .about-box li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: #4facfe;
+      font-size: 18px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      background: var(--gradient-3);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Panels */
+    .panel {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Tiles Grid */
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .tile {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .tile:hover::before {
+      left: 100%;
+    }
+
+    .tile:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .tile-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: var(--gradient-5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tile-body {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 60px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      
+      .tiles {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .logo-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .tiles {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Background canvases container (waves + particles) -->
-  <div class="bg-wrap" aria-hidden="true">
-    <canvas id="waves-canvas" class="bg-canvas"></canvas>
-    <canvas id="particles-canvas" class="bg-canvas"></canvas>
-    <div class="grain"></div>
-  </div>
+  <!-- Animated Background -->
+  <div class="gradient-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-  <div class="site">
-    <header class="site-header">
-      <div class="brand">
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
         <div class="logo">RC</div>
-        <div>
+        <div class="logo-text">
           <h1>Rosaiah Chowdary</h1>
-          <p class="meta">Data Engineer • ETL Specialist — Hyderabad, India</p>
+          <p>Data Engineer • ETL Specialist</p>
         </div>
       </div>
-
       <div class="header-actions">
-        <button class="btn" id="downloadResume"><i class="fa-regular fa-file-lines"></i>&nbsp;Download Resume</button>
-        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
+        <button class="btn btn-primary" id="downloadResume">
+          <i class="fa-solid fa-download"></i> Resume
+        </button>
+        <button class="btn btn-secondary" id="themeToggle">
+          <i class="fa-solid fa-sun"></i>
+        </button>
       </div>
     </header>
 
-    <main>
-      <!-- rest of your original HTML content preserved (hero, panels, tiles, projects etc.) -->
+    <!-- Hero Section -->
+    <section class="hero">
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <img src="1000099595.jpeg" alt="Rosaiah Chowdary" class="profile-img">
+        <h2 class="profile-name">Rosaiah Chowdary</h2>
+        <p class="profile-title">Data Engineer & ETL Specialist</p>
+        
+        <div class="profile-skills">
+          <span class="skill-tag">IBM DataStage</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Kafka</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">GCP</span>
+        </div>
 
-      <section class="hero">
-        <aside class="card profile-left">
-          <img src="1000099595.jpeg" alt="Rosaiah" class="photo">
-          <div class="name">Rosaiah Chowdary</div>
-          <div class="title">Data Engineer & ETL Specialist</div>
-          <div class="meta">IBM DataStage • Python • SQL • Kafka • Cloud (AWS/GCP)</div>
-          <div style="display:flex;gap:8px;margin-top:8px;flex-direction:column;align-items:center">
-            <div style="display:flex;gap:8px">
-              <a class="btn" href="mailto:gummalla.ds@gmail.com"><i class="fa-regular fa-envelope"></i>&nbsp;Email</a>
-              <a class="btn secondary" href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank"><i class="fa-brands fa-linkedin"></i>&nbsp;LinkedIn</a>
-            </div>
-            <!-- Timer-bomb style current time widget below the email button -->
-            <div id="email-timer" style="margin-top:72px;display:flex;align-items:center;gap:8px;"display:flex;align-items:center;gap:8px">
-              <div class="bomb" aria-hidden="true">
-                <div class="bomb-core">⏱</div>
-                <div class="fuse" id="fuse"></div>
+        <div class="social-links">
+          <a href="mailto:gummalla.ds@gmail.com" class="social-btn">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="https://linkedin.com/in/gummallarosaiahchowdary" target="_blank" class="social-btn">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="#" class="social-btn">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="content-section">
+        <div class="about-box">
+          <h2>About Me</h2>
+          <p>I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
+          <ul>
+            <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
+            <li>Delivered end-to-end data warehousing and migration projects</li>
+            <li>Integrated data from relational DBs, files, and cloud</li>
+            <li>Problem-solving focus: data quality, governance, automation</li>
+            <li>Modernized legacy ETL & migration to cloud</li>
+          </ul>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" data-tab="roles">Roles & Responsibilities</button>
+          <button class="tab" data-tab="skills">Skills</button>
+          <button class="tab" data-tab="projects">Projects</button>
+        </div>
+
+        <!-- Panels -->
+        <div class="panels">
+          <!-- Roles Panel -->
+          <div class="panel active" id="roles-panel">
+            <div class="tiles">
+              <div class="tile">
+                <div class="tile-title">Production Support & Operations</div>
+                <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs. Monitored batch windows, handled failovers, and coordinated cross-team incident responses.</div>
               </div>
-              <div style="font-size:13px;color:var(--muted)" id="current-time">--:--:--</div>
+              <div class="tile">
+                <div class="tile-title">Issue Resolution & RCA</div>
+                <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity. Authored RCA reports and implemented preventive actions.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">DataStage Job Development</div>
+                <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality, parallelism and efficient resource usage.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Data Extraction & Integration</div>
+                <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration and implementing transformations reliably.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Documentation & Knowledge Management</div>
+                <div class="tile-body">Developed technical specifications, transformation/logic documentation, and runbooks for efficient knowledge transfer and swift onboarding of new team members.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Testing & Quality Assurance</div>
+                <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality, including performance benchmarking and regression testing.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Client & Stakeholder Engagement</div>
+                <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction through clear communication and on-time delivery.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Deployment & Change Management</div>
+                <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams, maintaining rollback plans and validation checks.</div>
+              </div>
             </div>
           </div>
-        </aside>
 
-        <section class="card profile-right">
-          <div class="card" style="margin-bottom:14px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.008));padding:14px;border-radius:12px">
-            <h2 style="margin:0 0 8px 0">About Me</h2>
-            <p class="intro">I am a passionate Data Engineer and ETL DataStage consultant with extensive hands-on experience in designing, developing, and optimizing data integration solutions. Over my career, I have worked on projects spanning performance tuning, operational support and migrations.</p>
-            <ul style="color:var(--muted);margin-top:8px">
-              <li>Expertise: IBM DataStage, performance tuning, troubleshooting, and admin</li>
-              <li>Delivered end-to-end data warehousing and migration projects</li>
-              <li>Integrated data from relational DBs, files, and cloud</li>
-              <li>Problem-solving focus: data quality, governance, automation</li>
-              <li>Modernized legacy ETL & migration to cloud</li>
-            </ul>
+          <!-- Skills Panel -->
+          <div class="panel" id="skills-panel">
+            <div class="tiles">
+              <div class="tile">
+                <div class="tile-title">ETL Development & Support</div>
+                <div class="tile-body">Designing, building, and managing Extract, Transform, Load (ETL) processes for reliable movement of data across systems. Ensuring high-quality and timely data delivery with minimal errors.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">IBM DataStage</div>
+                <div class="tile-body">Advanced skill in IBM DataStage, including scalable ETL job design, parallel processing, job tuning, troubleshooting, and ongoing operational support for data integration.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">SQL & PL/SQL</div>
+                <div class="tile-body">Writing and optimizing queries, stored procedures, and data transformation scripts for secure, high-performance and accurate data processing in relational databases.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Python for Data Engineering</div>
+                <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Data Warehousing</div>
+                <div class="tile-body">Designing robust data models, developing data warehouses and data marts for business analytics, and supporting large-scale analytical workloads.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Apache Kafka & Messaging</div>
+                <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven architectures and near-real-time processing.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">Cloud Platforms (AWS, GCP)</div>
+                <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
+              </div>
+              <div class="tile">
+                <div class="tile-title">CI/CD & DevOps</div>
+                <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with Git, Jenkins, and related DevOps tooling.</div>
+              </div>
+            </div>
           </div>
 
-          <nav class="tabs" role="tablist" aria-label="Profile sections" style="margin-bottom:12px">
-            <button role="tab" class="tab-btn tab active" id="tab-about" aria-controls="panel-about" aria-selected="true">About Me</button>
-            <button role="tab" class="tab-btn" id="tab-roles" aria-controls="panel-roles" aria-selected="false">Roles</button>
-            <button role="tab" class="tab-btn" id="tab-skills" aria-controls="panel-skills" aria-selected="false">Skills</button>
-            <button role="tab" class="tab-btn" id="tab-projects" aria-controls="panel-projects" aria-selected="false">Selected Projects</button>
-          </nav>
-
-          <section class="panels">
-            <article id="panel-about" class="panel active" role="tabpanel" aria-labelledby="tab-about">
-              <div class="card" style="padding:14px">
-                <h3 style="margin-top:0">Summary</h3>
-                <p style="color:var(--muted)">Experienced in operational support, job development, migrations and building observable pipelines. I prefer automation-first approaches and clear runbooks to reduce toil.</p>
+          <!-- Projects Panel -->
+          <div class="panel" id="projects-panel">
+            <div class="tiles">
+              <div class="tile">
+                <div class="tile-title">Data Warehouse Migration</div>
+                <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes, created transformation specs and executed phased cutovers.</div>
               </div>
-            </article>
-
-            <article id="panel-roles" class="panel" role="tabpanel" aria-labelledby="tab-roles" hidden>
-              <div class="card" style="padding:14px">
-                <h3 style="margin-top:0">Roles &amp; Responsibilities</h3>
-                <div class="tiles" style="margin-top:10px">
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Production Support &amp; Operations</div>
-                    <div class="tile-body">Managed over 90,000 automated and scheduled jobs, ensuring smooth operations, minimal downtime and meeting strict SLAs. Monitored batch windows, handled failovers, and coordinated cross-team incident responses.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Issue Resolution &amp; RCA</div>
-                    <div class="tile-body">Conducted in-depth root cause analysis and quickly resolved critical incidents and change requests to maintain business continuity. Authored RCA reports and implemented preventive actions.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">DataStage Job Development</div>
-                    <div class="tile-body">Designed robust, high-performing ETL jobs per mapping documents and business requirements, ensuring quality, parallelism and efficient resource usage.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Data Extraction &amp; Integration</div>
-                    <div class="tile-body">Orchestrated data flows from various sources (databases, Excel, CSV, flat files), ensuring data accuracy throughout integration and implementing transformations reliably.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Documentation &amp; Knowledge Management</div>
-                    <div class="tile-body">Developed technical specifications, transformation/logic documentation, and runbooks for efficient knowledge transfer and swift onboarding of new team members.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Testing &amp; Quality Assurance</div>
-                    <div class="tile-body">Defined and executed comprehensive system, integration, and UAT test plans to ensure data and process quality, including performance benchmarking and regression testing.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Client &amp; Stakeholder Engagement</div>
-                    <div class="tile-body">Managed client incidents, led regular status reviews, initiated automation projects, and ensured stakeholder satisfaction through clear communication and on-time delivery.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Deployment &amp; Change Management</div>
-                    <div class="tile-body">Coordinated code migrations, job scheduling, and production cutover in collaboration with cross-functional teams, maintaining rollback plans and validation checks.</div>
-                  </div>
-
-                </div>
+              <div class="tile">
+                <div class="tile-title">Real-time Stream Integration</div>
+                <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing. Built idempotent consumers, schema evolution strategies, and monitoring dashboards for throughput and lag.</div>
               </div>
-            </article>
-
-            <article id="panel-skills" class="panel" role="tabpanel" aria-labelledby="tab-skills" hidden>
-              <div class="card" style="padding:14px">
-                <h3 style="margin-top:0">Skills</h3>
-                <div class="tiles" style="margin-top:10px">
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">ETL Development &amp; Support</div>
-                    <div class="tile-body">Designing, building, and managing Extract, Transform, Load (ETL) processes for reliable movement of data across systems. Ensuring high-quality and timely data delivery with minimal errors.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">IBM DataStage</div>
-                    <div class="tile-body">Advanced skill in IBM DataStage, including scalable ETL job design, parallel processing, job tuning, troubleshooting, and ongoing operational support for data integration.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">SQL &amp; PL/SQL</div>
-                    <div class="tile-body">Writing and optimizing queries, stored procedures, and data transformation scripts for secure, high-performance and accurate data processing in relational databases.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Python for Data Engineering</div>
-                    <div class="tile-body">Automating data workflows, custom ETL scripting, and integrating Python into broader data engineering projects to improve speed and flexibility.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Data Warehousing</div>
-                    <div class="tile-body">Designing robust data models, developing data warehouses and data marts for business analytics, and supporting large-scale analytical workloads.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Apache Kafka &amp; Messaging</div>
-                    <div class="tile-body">Integrating real-time data streams with Apache Kafka and message queues, enabling event-driven architectures and near-real-time processing.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Cloud Platforms (AWS, GCP)</div>
-                    <div class="tile-body">Migrating on-premise data solutions to the cloud, leveraging AWS and GCP managed services for ETL, data storage, automation, and scalability.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">CI/CD &amp; DevOps</div>
-                    <div class="tile-body">Managing source code, automating deployments and streamlining development pipelines with Git, Jenkins, and related DevOps tooling.</div>
-                  </div>
-
-                </div>
+              <div class="tile">
+                <div class="tile-title">Operational Automation</div>
+                <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability. Integrated alerting and auto-remediation scripts for common failure classes.</div>
               </div>
-            </article>
-
-            <article id="panel-projects" class="panel" role="tabpanel" aria-labelledby="tab-projects" hidden>
-              <div class="card" style="padding:14px">
-                <h3 style="margin-top:0">Selected Projects</h3>
-                <div class="tiles" style="margin-top:10px">
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Data Warehouse Migration</div>
-                    <div class="tile-body">Led migration of on-prem ETL to cloud-native pipelines, improving load times by 4x and cutting infra costs by 35%. Designed resilient data flows and optimised batch runtimes, created transformation specs and executed phased cutovers.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Real-time Stream Integration</div>
-                    <div class="tile-body">Implemented Kafka-based streaming pipelines enabling near-real-time analytics, alerts and event-driven processing. Built idempotent consumers, schema evolution strategies, and monitoring dashboards for throughput and lag.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Operational Automation</div>
-                    <div class="tile-body">Automated daily maintenance, log cleanup, job restart checks and validation workflows — reducing manual intervention by 70% and improving SLA stability. Integrated alerting and auto-remediation scripts for common failure classes.</div>
-                  </div>
-
-                  <div class="tile" tabindex="0" aria-expanded="false">
-                    <div class="tile-title">Data Quality &amp; Observability</div>
-                    <div class="tile-body">Designed and implemented data quality checks, drift detection, and lineage mapping. Built observability into pipelines using metrics, logs and dashboards to reduce silent failures and accelerate troubleshooting.</div>
-                  </div>
-
-                </div>
+              <div class="tile">
+                <div class="tile-title">Data Quality & Observability</div>
+                <div class="tile-body">Designed and implemented data quality checks, drift detection, and lineage mapping. Built observability into pipelines using metrics, logs and dashboards to reduce silent failures and accelerate troubleshooting.</div>
               </div>
-            </article>
-          </section>
-        </section>
-      </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      
-    </main>
-
+    <!-- Footer -->
     <footer>
-      <small>© Rosaiah Chowdary — Data Engineering & ETL Specialist</small>
+      <p>© 2024 Rosaiah Chowdary — Data Engineering & ETL Specialist</p>
     </footer>
   </div>
 
   <script>
-    // ===== CURRENT TIME UPDATE =====
-    function updateTime() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-US', { 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
+    // Tab Switching
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetPanel = tab.getAttribute('data-tab') + '-panel';
+        
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        
+        tab.classList.add('active');
+        document.getElementById(targetPanel).classList.add('active');
       });
-      const timeEl = document.getElementById('current-time');
-      if(timeEl) timeEl.textContent = timeStr;
-    }
-    updateTime();
-    setInterval(updateTime, 1000);
-
-    // ===== SCROLL REVEAL ANIMATIONS =====
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      observer.observe(el);
     });
 
-    // Tabs and tiles behaviour (enhanced) + hover flip
-    (function(){
-      const tabs = Array.from(document.querySelectorAll('.tab-btn'));
-      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
-
-      // add CSS for panel animation & tab subtle motion and hover flip
-      const animStyle = document.createElement('style');
-      animStyle.innerHTML = `
-        .tab-btn{transition:transform .26s cubic-bezier(.2,.9,.2,1), background .26s, color .18s}
-        .tab-btn:active{transform:translateY(1px)}
-        .panel{opacity:0;transform:translateY(6px);transition:opacity .36s ease, transform .36s ease}
-        .panel.active{opacity:1;transform:translateY(0)}
-
-        /* larger tiles and hover flip */
-        .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
-        .tiles .tile{position:relative;perspective:1200px;background:var(--card);border-radius:12px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,0.04);min-height:220px}
-        .tiles .tile .tile-inner{position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.9,.2,1);height:100%}
-        .tiles .tile .tile-face{position:absolute;inset:0;padding:20px;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center}
-        .tiles .tile .tile-face.front{transform:rotateY(0deg);}
-        .tiles .tile .tile-face.back{transform:rotateY(180deg);}    
-        .tiles .tile .tile-title{font-weight:700;margin-bottom:8px;color:#eaf6ff}
-        .tiles .tile .tile-body{color:var(--muted);font-size:14px}
-        .tiles .tile .tile-inner.flipped{transform:rotateY(180deg)}
-
-        /* hover / focus: flip on pointer hover or keyboard focus */
-        .tiles .tile:hover .tile-inner, .tiles .tile:focus-within .tile-inner{transform:rotateY(180deg) translateY(-6px)}
-      `;
-      document.head.appendChild(animStyle);
-
-      function activateTab(index){
-        tabs.forEach((t,i)=>{
-          const selected = i === index;
-          t.classList.toggle('active', selected);
-          t.setAttribute('aria-selected', selected ? 'true' : 'false');
-          panels[i].classList.toggle('active', selected);
-          panels[i].hidden = !selected;
-        });
-      }
-
-      if(tabs.length) tabs.forEach((t, i) => { t.addEventListener('click', ()=> activateTab(i)); t.addEventListener('keydown', (e)=>{ if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length); if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length); }); });
-      activateTab(0);
-
-      // Flip tiles initialization: wrap content if needed, attach keyboard toggle but rely on hover for mouse
-      document.querySelectorAll('.tiles .tile').forEach(tile => {
-        // if inner not present, wrap existing content
-        if(!tile.querySelector('.tile-inner')){
-          const title = tile.querySelector('.tile-title')?.innerHTML || tile.querySelector('h3')?.innerHTML || '';
-          const body = tile.querySelector('.tile-body')?.innerHTML || '';
-          tile.innerHTML = `
-            <div class="tile-inner" role="button" tabindex="0" aria-pressed="false">
-              <div class="tile-face front">
-                <div class="tile-title">${title}</div>
-                <div style="color:var(--muted);font-size:13px">Hover to view</div>
-              </div>
-              <div class="tile-face back">
-                <div class="tile-title">${title}</div>
-                <div class="tile-body">${body}</div>
-              </div>
-            </div>
-          `;
-        }
-
-        const inner = tile.querySelector('.tile-inner');
-        // ensure faces exist
-        if(!inner || !inner.querySelector('.tile-face.front') || !inner.querySelector('.tile-face.back')) return;
-
-        // accessibility
-        tile.setAttribute('role','group');
-        tile.setAttribute('aria-expanded', 'false');
-
-        // keyboard: toggle flip on Enter/Space for keyboard users
-        if(!inner.__hoverInit){
-          inner.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inner.classList.toggle('flipped'); const flipped = inner.classList.contains('flipped'); inner.setAttribute('aria-pressed', flipped ? 'true' : 'false'); tile.setAttribute('aria-expanded', flipped ? 'true' : 'false'); } });
-          inner.__hoverInit = true;
-        }
-      });
-
-    })();
-
-    // Theme toggle (kept simple)
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      const light = document.documentElement.getAttribute('data-theme') === 'light';
-      if(light){
-        document.documentElement.removeAttribute('data-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme','light');
-      }
+    // Download Resume
+    document.getElementById('downloadResume').addEventListener('click', () => {
+      window.open('Rosaiah_Chowdary_Resume.pdf', '_blank');
     });
 
-    // Resume download (kept)
-    document.getElementById('downloadResume').addEventListener('click', ()=>{
-      const data = { name: 'Rosaiah Chowdary', title: 'Data Engineer & ETL Specialist', email: 'gummalla.ds@gmail.com' };
-      const win = window.open('', '_blank');
-      win.document.write(`<html><head><title>${data.name} — Resume</title></head><body style="font-family:Inter,Arial;padding:32px"><h1>${data.name}</h1><h3>${data.title}</h3><p>Email: ${data.email}</p><hr><p>Resume generated from portfolio — replace with your real PDF.</p></body></html>`);
-      win.document.close();
+    // Theme Toggle (placeholder)
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      alert('Theme toggle feature coming soon!');
     });
 
-    /* ======== Background: Waves + Particles ======== (kept intact)
-       Two canvas layers: waves-canvas draws sin-based flowing gradient ribbons (option 1) and
-       particles-canvas draws glowing particles with soft trails (option 3). Designed to be
-       performant: uses offscreen buffers and adapts to DPR. No external libs.
-    */
-    (function(){
-      // utilities
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-
-      // --- Waves canvas ---
-      const wavesCanvas = document.getElementById('waves-canvas');
-      const wctx = wavesCanvas.getContext('2d');
-
-      function resizeCanvasSize(canvas){
-        canvas.width = Math.floor(window.innerWidth * dpr);
-        canvas.height = Math.floor(window.innerHeight * dpr);
-        canvas.style.width = window.innerWidth + 'px';
-        canvas.style.height = window.innerHeight + 'px';
-      }
-      resizeCanvasSize(wavesCanvas);
-
-      // wave layers configuration
-      const ribbons = [
-        { amplitude: 120, wavelength: 0.0095, speed: 0.0009, hueStart: 190, hueEnd: 210, alpha:0.18, yOff: 0.55 },
-        { amplitude: 80, wavelength: 0.012, speed: 0.0012, hueStart: 170, hueEnd: 200, alpha:0.12, yOff: 0.7 },
-        { amplitude: 50, wavelength: 0.016, speed: 0.0017, hueStart: 200, hueEnd: 250, alpha:0.08, yOff: 0.35 }
-      ];
-
-      let startTime = performance.now();
-
-      function drawWaves(time){
-        const t = time - startTime;
-        const width = wavesCanvas.width;
-        const height = wavesCanvas.height;
-
-        // clear with subtle gradient
-        wctx.clearRect(0,0,width,height);
-
-        // base overlay to darken edges
-        const baseGrad = wctx.createLinearGradient(0,0,0,height);
-        baseGrad.addColorStop(0, 'rgba(2,10,20,0.6)');
-        baseGrad.addColorStop(1, 'rgba(4,8,16,0.8)');
-        wctx.fillStyle = baseGrad; wctx.fillRect(0,0,width,height);
-
-        ribbons.forEach((r, idx) => {
-          const yCenter = height * r.yOff;
-          const amplitude = r.amplitude * dpr;
-          const wavelength = r.wavelength * width;
-          const offset = t * r.speed * width;
-
-          // create path for ribbon
-          wctx.beginPath();
-          const step = Math.max(6, Math.floor(width/120));
-          for(let x=0;x<=width;x+=step){
-            const theta = (x + offset) * (2*Math.PI / wavelength);
-            const y = yCenter + Math.sin(theta) * amplitude * Math.cos(theta*0.25);
-            if(x===0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
-          }
-
-          // close path down to bottom to create ribbon area
-          wctx.lineTo(width, height);
-          wctx.lineTo(0, height);
-          wctx.closePath();
-
-          // gradient fill with hue lerp
-          const hue = r.hueStart + ( (Math.sin(t*0.0005 + idx) +1)/2 ) * (r.hueEnd - r.hueStart);
-          const grad = wctx.createLinearGradient(0, yCenter - amplitude, 0, yCenter + amplitude*2);
-          grad.addColorStop(0, `hsla(${hue}, 88%, 60%, ${r.alpha})`);
-          grad.addColorStop(1, `hsla(${hue+30}, 80%, 45%, ${r.alpha*0.3})`);
-
-          wctx.fillStyle = grad;
-
-          // soft blur effect: draw to temporary canvas (cheap approximation by globalAlpha layers)
-          wctx.save();
-          wctx.globalCompositeOperation = 'lighter';
-          wctx.fill();
-          wctx.restore();
-        });
-
-        // subtle vignette
-        wctx.fillStyle = 'rgba(0,0,0,0.15)';
-        wctx.fillRect(0,0,width, height*0.06);
-        wctx.fillRect(0,height*0.94,width, height*0.06);
-      }
-
-      // --- Particles canvas ---
-      const particlesCanvas = document.getElementById('particles-canvas');
-      const pctx = particlesCanvas.getContext('2d');
-      resizeCanvasSize(particlesCanvas);
-
-      const particles = [];
-      const particleCountBase = Math.round((window.innerWidth * window.innerHeight) / (1400*800) * 80);
-      const MAX_PARTICLES = Math.max(40, particleCountBase);
-
-      function rand(min,max){ return Math.random()*(max-min)+min }
-
-      function initParticles(){
-        particles.length = 0;
-        for(let i=0;i<MAX_PARTICLES;i++){
-          particles.push({
-            x: Math.random()*particlesCanvas.width,
-            y: Math.random()*particlesCanvas.height,
-            vx: rand(-0.2,0.2)*dpr,
-            vy: rand(-0.15,0.15)*dpr,
-            size: rand(0.8,2.4)*dpr,
-            life: rand(80,360),
-            hue: rand(170,220),
-            alpha: rand(0.08,0.22)
-          });
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
-      }
-      initParticles();
-
-      // trail buffer to create glow trails (draw previous frame with alpha)
-      function drawParticles(){
-        const w = particlesCanvas.width, h = particlesCanvas.height;
-        // fade previous frame slightly to create trails
-        pctx.fillStyle = 'rgba(2,6,18,0.18)';
-        pctx.fillRect(0,0,w,h);
-
-        particles.forEach(p => {
-          // motion influenced by sin waves for organic flow
-          const time = performance.now()*0.0006;
-          const flowX = Math.sin((p.y*0.002)+time*1.6) * 0.25;
-          const flowY = Math.cos((p.x*0.002)+time*1.2) * 0.25;
-
-          p.x += p.vx + flowX*dpr;
-          p.y += p.vy + flowY*dpr;
-
-          // wrap around
-          if(p.x < -20*dpr) p.x = w + 20*dpr;
-          if(p.x > w + 20*dpr) p.x = -20*dpr;
-          if(p.y < -20*dpr) p.y = h + 20*dpr;
-          if(p.y > h + 20*dpr) p.y = -20*dpr;
-
-          // draw glow (radial gradient)
-          const grd = pctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size*12);
-          grd.addColorStop(0, `hsla(${p.hue}, 95%, 65%, ${p.alpha})`);
-          grd.addColorStop(0.3, `hsla(${p.hue+30}, 90%, 55%, ${p.alpha*0.35})`);
-          grd.addColorStop(1, `rgba(2,6,18,0)`);
-
-          pctx.globalCompositeOperation = 'lighter';
-          pctx.fillStyle = grd;
-          pctx.beginPath();
-          pctx.arc(p.x, p.y, p.size*12, 0, Math.PI*2);
-          pctx.fill();
-
-          // tiny core
-          pctx.globalCompositeOperation = 'source-over';
-          pctx.fillStyle = `hsla(${p.hue}, 90%, 70%, ${Math.min(1,p.alpha*3)})`;
-          pctx.beginPath();
-          pctx.arc(p.x, p.y, p.size*1.2, 0, Math.PI*2);
-          pctx.fill();
-        });
-      }
-
-      // adapt on resize
-      window.addEventListener('resize', ()=>{
-        resizeCanvasSize(wavesCanvas); resizeCanvasSize(particlesCanvas);
-        // re-init particles for new density
-        initParticles();
       });
-
-      // main loop
-      let rafId;
-      function loop(time){
-        drawWaves(time);
-        drawParticles();
-        rafId = requestAnimationFrame(loop);
-      }
-      rafId = requestAnimationFrame(loop);
-
-      // pause animation when page not visible to save CPU
-      document.addEventListener('visibilitychange', ()=>{
-        if(document.hidden){ cancelAnimationFrame(rafId); } else { startTime = performance.now(); rafId = requestAnimationFrame(loop); }
-      });
-
-    })();
-
+    });
   </script>
 </body>
 </html>
