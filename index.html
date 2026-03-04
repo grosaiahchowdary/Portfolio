@@ -28,59 +28,6 @@
     html,body{height:100%}
     body{margin:0;background:var(--bg-dark);color:#e6eef6;font-smoothing:antialiased;overflow-x:hidden}
 
-    /* ===== LOADING SCREEN WITH FLASH EFFECT ===== */
-    .loader-screen{
-      position:fixed;inset:0;z-index:9999;
-      background:linear-gradient(135deg, #071226, #0a1a2e);
-      display:flex;align-items:center;justify-content:center;
-      transition:opacity 0.6s ease, visibility 0.6s ease;
-    }
-    .loader-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-    
-    .loader-content{text-align:center;position:relative}
-    .loader-logo{
-      width:120px;height:120px;margin:0 auto 20px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      border-radius:24px;display:grid;place-items:center;
-      font-size:48px;font-weight:800;color:#021025;
-      animation:flashPulse 1.5s ease-in-out infinite, float 3s ease-in-out infinite;
-      box-shadow:0 0 60px rgba(57,182,255,0.6), 0 0 120px rgba(96,226,198,0.4);
-    }
-    
-    @keyframes flashPulse{
-      0%, 100%{transform:scale(1);box-shadow:0 0 60px rgba(57,182,255,0.6), 0 0 120px rgba(96,226,198,0.4)}
-      50%{transform:scale(1.05);box-shadow:0 0 100px rgba(57,182,255,0.9), 0 0 180px rgba(96,226,198,0.7)}
-    }
-    
-    @keyframes float{
-      0%, 100%{transform:translateY(0px)}
-      50%{transform:translateY(-10px)}
-    }
-    
-    .loader-text{
-      font-size:24px;font-weight:700;color:#eaf6ff;
-      animation:fadeInOut 2s ease-in-out infinite;
-    }
-    
-    @keyframes fadeInOut{
-      0%, 100%{opacity:0.5}
-      50%{opacity:1}
-    }
-    
-    .loader-bar{
-      width:200px;height:4px;background:rgba(255,255,255,0.1);
-      border-radius:999px;margin:20px auto 0;overflow:hidden;
-    }
-    .loader-progress{
-      height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border-radius:999px;animation:loading 2s ease-in-out infinite;
-    }
-    
-    @keyframes loading{
-      0%{width:0%;transform:translateX(0)}
-      50%{width:70%;transform:translateX(0)}
-      100%{width:100%;transform:translateX(0)}
-    }
 
     /* ===== FLASH ENTRANCE ANIMATIONS ===== */
     @keyframes slideInFromLeft{
@@ -320,17 +267,6 @@
     }
   </style>
 </head>
-  <!-- Loading Screen -->
-  <div class="loader-screen" id="loaderScreen">
-    <div class="loader-content">
-      <div class="loader-logo">RC</div>
-      <div class="loader-text">Loading Portfolio...</div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
-    </div>
-  </div>
-
 <body>
   <!-- Background canvases container (waves + particles) -->
   <div class="bg-wrap" aria-hidden="true">
@@ -547,13 +483,6 @@
   </div>
 
   <script>
-    // ===== LOADING SCREEN =====
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('loaderScreen').classList.add('hidden');
-      }, 2000); // 2 second delay
-    });
-
     // ===== CURRENT TIME UPDATE =====
     function updateTime() {
       const now = new Date();
