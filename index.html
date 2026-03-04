@@ -27,137 +27,6 @@
       --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
     }
 
-    /* ===== WELCOME LOADING SCREEN ===== */
-    .welcome-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
-
-    .welcome-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .welcome-content {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .welcome-logo {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 30px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: welcomePulse 2s ease-in-out infinite, welcomeFloat 3s ease-in-out infinite;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-    }
-
-    @keyframes welcomePulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
-      50% { transform: scale(1.05); box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5); }
-    }
-
-    @keyframes welcomeFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .welcome-text {
-      font-size: 48px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 15px;
-      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      animation: fadeInScale 1s ease 0.3s both;
-    }
-
-    .welcome-subtitle {
-      font-size: 24px;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 40px;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      animation: fadeInScale 1s ease 0.5s both;
-    }
-
-    @keyframes fadeInScale {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .loading-bar {
-      width: 300px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      margin: 0 auto;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .loading-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
-      border-radius: 10px;
-      animation: loadingProgress 2.5s ease-in-out forwards;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    }
-
-    @keyframes loadingProgress {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
-
-    .loading-text {
-      margin-top: 20px;
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.8);
-      animation: fadeInOut 1.5s ease-in-out infinite;
-    }
-
-    @keyframes fadeInOut {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    /* Sparkles */
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #fff;
-      border-radius: 50%;
-      animation: sparkleFloat 3s ease-in-out infinite;
-      box-shadow: 0 0 10px #fff;
-    }
-
-    @keyframes sparkleFloat {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0; }
-      50% { transform: translateY(-100px) scale(1.5); opacity: 1; }
-    }
-
-    .sparkle:nth-child(1) { left: 20%; animation-delay: 0s; }
-    .sparkle:nth-child(2) { left: 40%; animation-delay: 0.5s; }
-    .sparkle:nth-child(3) { left: 60%; animation-delay: 1s; }
-    .sparkle:nth-child(4) { left: 80%; animation-delay: 1.5s; }
 
     body {
       font-family: 'Poppins', sans-serif;
@@ -662,23 +531,6 @@
     }
   </style>
 </head>
-  <!-- Welcome Loading Screen -->
-  <div class="welcome-screen" id="welcomeScreen">
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="welcome-content">
-      <div class="welcome-logo">RC</div>
-      <h1 class="welcome-text">Welcome!</h1>
-      <p class="welcome-subtitle">Rosaiah Chowdary</p>
-      <div class="loading-bar">
-        <div class="loading-progress"></div>
-      </div>
-      <p class="loading-text">Loading Portfolio...</p>
-    </div>
-  </div>
-
 <body>
   <!-- Animated Background -->
   <div class="gradient-bg"></div>
@@ -867,13 +719,6 @@
   </div>
 
   <script>
-    // Welcome Screen - Hide after loading
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('welcomeScreen').classList.add('hidden');
-      }, 3000); // 3 seconds
-    });
-
     // Tab Switching
     const tabs = document.querySelectorAll('.tab');
     const panels = document.querySelectorAll('.panel');
